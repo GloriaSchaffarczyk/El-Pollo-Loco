@@ -1,11 +1,10 @@
 let canvas;
-let ctx; // Benennung ist Standard bei 2D-Canvas
-let world = new World();
-
+let world;
+// Variable ctx wurde gelöscht
 
 function init() {
-    canvas = document.getElementById('canvas');
-    ctx = canvas.getContext('2d');
+    canvas = document.getElementById('canvas'); // hier ist das HTML des Canvas gespeichert
+    world = new World(canvas);
 
 console.log('My character is', world['character']);
 }
