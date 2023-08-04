@@ -1,9 +1,9 @@
 class MovableObject {
-    x = 120;
-    y = 100;
+    x = 60;
+    y = 160;
     img;
     height = 300;
-    width = 200;
+    width = 150;
 
     loadImage(path) {
         this.img = new Image();// this.img = document.getElementById('image'); <img id="image" src="http://>
