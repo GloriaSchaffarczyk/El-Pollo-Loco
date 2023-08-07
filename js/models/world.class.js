@@ -1,11 +1,16 @@
 class World {
     character = new Character(); 
     // wenn wir auf die Variablen aus dieser Klasse zugreifen wollen, brauchen wir "this"
-    enemies = [
-        new Chicken(),
-        new Chicken(),
-        new Chicken(),
+    zombies = [
+        new Zombie(),
+        new Zombie(),
+        new Zombie(),
     ];
+    monsters = [
+        new Monster(),
+        new Monster(),
+        new Monster(),
+    ]
     clouds =  [
         new Cloud()
     ];
@@ -30,7 +35,8 @@ class World {
         this.addObjectsToMap(this.backgroundObjects);
         this.addObjectsToMap(this.clouds);
         this.addToMap(this.character); 
-        this.addObjectsToMap(this.enemies);
+        this.addObjectsToMap(this.zombies);
+        this.addObjectsToMap(this.monsters);
 
         requestAnimationFrame(() => this.draw()); 
     }

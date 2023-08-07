@@ -1,4 +1,4 @@
-class Chicken extends MovableObject {
+class Zombie extends MovableObject {
     constructor() {
         super().loadImage('../img2/3_enemies/zombie/1_walk/zombie_walk_01.png');
 
