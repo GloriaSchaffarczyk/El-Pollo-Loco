@@ -23,7 +23,7 @@ class MovableObject {
             // Lade das Bild von dem angegebenen Pfad
             img.src = path;
             // Speichere den Pfad in einer Liste namens 'imageCache', sowohl als Schlüssel als auch als Wert
-            this.imageCache[path] = path;
+            this.imageCache[path] = img; // hier muss image und nicht pfad reingeladen werden
         });
     }
 
