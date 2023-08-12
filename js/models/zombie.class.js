@@ -2,7 +2,6 @@ class Zombie extends MovableObject {
     y = 305;
     height = 80;
     width = 80;
-    speed = 0.10;
     IMAGES_WALKING = [
         '../img2/3_enemies/zombie/1_walk/zombie_walk_01.png',
         '../img2/3_enemies/zombie/1_walk/zombie_walk_02.png',
@@ -13,10 +12,10 @@ class Zombie extends MovableObject {
     ];
 
     constructor() {
-        
         super().loadImage('../img2/3_enemies/zombie/1_walk/zombie_walk_01.png');
         this.loadImages(this.IMAGES_WALKING);
         this.x = 270 + Math.random() * 500;
+        this.speed = 0.08 + Math.random() * 0.25;
         this.animate();
     }
 
