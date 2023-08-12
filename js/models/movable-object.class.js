@@ -4,6 +4,7 @@ class MovableObject {
     img;
     height = 100;
     width = 100;
+    speed = 0.15;
     imageCache = {};
     currentImage = 0;
 
@@ -33,6 +34,8 @@ class MovableObject {
     };
 
     moveLeft() {
-
+        setInterval(() => {
+            this.x -= this.speed; //Pixel werden abgezogen
+        }, 1000 / 60); // 60 fps
     }
 }
