@@ -1,11 +1,12 @@
-class KeyBoard {
-    left = false;
-    right = false;
-    space = false;
-    q = false;
-    w = false;
-    e = false;
-    r = false;
+class Keyboard {
+    LEFT = false;
+    UP = false;
+    RIGHT = false;
+    DOWN = false;
+    SPACE = false;
+    Q = false;
+    W = false;
+    E = false;
 
     moveLeftonKeypress() {
     }
