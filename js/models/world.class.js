@@ -29,6 +29,11 @@ class World {
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.draw();
+        this.setWorld();
+    }
+
+    setWorld() {
+        this.character.world = this;
     }
 
     draw() {
