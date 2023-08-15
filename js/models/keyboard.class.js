@@ -8,6 +8,6 @@ class Keyboard {
     W = false;
     E = false;
 
-    moveLeftonKeypress() {
+    moveLeftOnKeypress() {
     }
 }
