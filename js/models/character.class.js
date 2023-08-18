@@ -29,8 +29,7 @@ class Character extends MovableObject {
 
                 let i = this.currentImage % this.IMAGES_WALK.length; // Index wird nie so groß wie die Anzahl der Bilder im Array, also Array.Länge -1
                 // let i = this.currentImage % this.IMAGES_IDLE.length; // Index wird nie so groß wie die Anzahl der Bilder im Array, also Array.Länge -1
-                // durch Modulo steht hier i = 0, 1, 2, 3, 0, 1, 2, 3, 0,... und so weiter
-            
+                // durch Modulo steht hier i = 0, 1, 2, 3, 0, 1, 2, 3, 0,...
                 let path = this.IMAGES_WALK[i];
                 this.img = this.imageCache[path];
                 this.currentImage++
