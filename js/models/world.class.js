@@ -33,7 +33,8 @@ class World {
     }
 
     setWorld() {
-        this.character.world = this;
+        this.character.world = this; // wird nur an den Character übergeben
+        // nur Character muss nach rechts und links gesteuert werden
     }
 
     draw() {
