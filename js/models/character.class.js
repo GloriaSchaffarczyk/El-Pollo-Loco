@@ -8,10 +8,16 @@ class Character extends MovableObject {
     ]
     IMAGES_WALK = [
         '../img2/2_character/2_walk/biker_walk_01.png',
+        '../img2/2_character/2_walk/biker_walk_01.png',
+        '../img2/2_character/2_walk/biker_walk_02.png',
         '../img2/2_character/2_walk/biker_walk_02.png',
         '../img2/2_character/2_walk/biker_walk_03.png',
+        '../img2/2_character/2_walk/biker_walk_03.png',
+        '../img2/2_character/2_walk/biker_walk_04.png',
         '../img2/2_character/2_walk/biker_walk_04.png',
         '../img2/2_character/2_walk/biker_walk_05.png',
+        '../img2/2_character/2_walk/biker_walk_05.png',
+        '../img2/2_character/2_walk/biker_walk_06.png',
         '../img2/2_character/2_walk/biker_walk_06.png',
     ]
     world;
@@ -35,7 +41,7 @@ class Character extends MovableObject {
                 this.otherDirection = true;
             }
 
-        }, 3000 / 60);
+        }, 5000 / 60);
 
         setInterval(() => {
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
@@ -46,7 +52,7 @@ class Character extends MovableObject {
                 this.img = this.imageCache[path];
                 this.currentImage++
             }
-        }, 50);
+        }, 60);
     }
 
     jump() {
