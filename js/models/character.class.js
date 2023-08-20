@@ -23,10 +23,20 @@ class Character extends MovableObject {
     }
 
     animate() {
+
         setInterval(() => {
             if (this.world.keyboard.RIGHT) {
                 this.x += this.speed;
+            }
 
+            if (this.world.keyboard.LEFT) {
+                this.x -= this.speed;
+            }
+
+        }, 500 / 60);
+
+        setInterval(() => {
+            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 let i = this.currentImage % this.IMAGES_WALK.length; // Index wird nie so groß wie die Anzahl der Bilder im Array, also Array.Länge -1
                 // let i = this.currentImage % this.IMAGES_IDLE.length; // Index wird nie so groß wie die Anzahl der Bilder im Array, also Array.Länge -1
                 // durch Modulo steht hier i = 0, 1, 2, 3, 0, 1, 2, 3, 0,...
@@ -34,7 +44,7 @@ class Character extends MovableObject {
                 this.img = this.imageCache[path];
                 this.currentImage++
             }
-        }, 430);
+        }, 330);
     }
 
     jump() {
