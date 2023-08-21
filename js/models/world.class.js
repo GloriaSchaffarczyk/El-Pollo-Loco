@@ -18,11 +18,18 @@ class World {
         new BackgroundObject('../img2/5_background/layers/cemetary_background_night.png', 0, 0),
         new BackgroundObject('../img2/5_background/layers/3_third_layer/cemetary_thirdlayer_night.png', 0, 0),
         new BackgroundObject('../img2/5_background/layers/2_second_layer/cemetary_secondlayer_night.png', 0, 0),
-        new BackgroundObject('../img2/5_background/layers/1_first_layer/cemetary_firstlayer_night.png', 0, 0)
+        new BackgroundObject('../img2/5_background/layers/1_first_layer/cemetary_firstlayer_night.png', 0, 0),
+        new BackgroundObject('../img2/5_background/layers/cemetary_background_night_02.png', 853, 0),
+        new BackgroundObject('../img2/5_background/layers/3_third_layer/cemetary_thirdlayer_night_02.png', 853, 0),
+        new BackgroundObject('../img2/5_background/layers/2_second_layer/cemetary_secondlayer_night_02.png', 853, 0),
+        new BackgroundObject('../img2/5_background/layers/1_first_layer/cemetary_firstlayer_night_02.png', 853, 0),
+
+
     ];
     canvas;
     ctx;
     keyboard;
+    camera_x = 0;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -39,12 +46,14 @@ class World {
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
+        this.ctx.translate(this.camera_x, 0); // Kamera wird nach links verschoben
         this.addObjectsToMap(this.backgroundObjects);
         this.addObjectsToMap(this.clouds);
         this.addToMap(this.character); 
         this.addObjectsToMap(this.zombies);
         this.addObjectsToMap(this.monsters);
+
+        this.ctx.translate(-this.camera_x, 0); // Kamera wird zurückgesetzt
 
         requestAnimationFrame(() => this.draw()); 
     }

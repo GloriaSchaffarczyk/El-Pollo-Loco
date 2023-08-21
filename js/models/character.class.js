@@ -1,5 +1,5 @@
 class Character extends MovableObject {
-    speed = 10;
+    speed = 100;
     IMAGES_IDLE = [
         '../img2/2_character/1_idle/idle/biker_idle_01.png',
         '../img2/2_character/1_idle/idle/biker_idle_02.png',
@@ -40,7 +40,7 @@ class Character extends MovableObject {
                 this.x -= this.speed;
                 this.otherDirection = true;
             }
-
+            this.world.camera_x = -this.x;
         }, 5000 / 60);
 
         setInterval(() => {
@@ -52,7 +52,7 @@ class Character extends MovableObject {
                 this.img = this.imageCache[path];
                 this.currentImage++
             }
-        }, 60);
+        }, 45);
     }
 
     jump() {
