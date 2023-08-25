@@ -1,45 +1,10 @@
 class World {
     character = new Character(); 
     // wenn wir auf die Variablen aus dieser Klasse zugreifen wollen, brauchen wir "this"
-    zombies = [
-        new Zombie(),
-        new Zombie(),
-        new Zombie(),
-    ];
-    monsters = [
-        new Monster(),
-        new Monster(),
-        new Monster(),
-    ]
-    clouds =  [
-        new Cloud()
-    ];
-    backgroundObjects = [
-        new BackgroundObject('../img2/5_background/layers/cemetary_background_night_02.png', -1706, 0),
-        new BackgroundObject('../img2/5_background/layers/3_third_layer/cemetary_thirdlayer_night_02.png', -1706, 0),
-        new BackgroundObject('../img2/5_background/layers/2_second_layer/cemetary_secondlayer_night_02.png', -1706, 0),
-        new BackgroundObject('../img2/5_background/layers/1_first_layer/cemetary_firstlayer_night_02.png', -1706, 0),
-        new BackgroundObject('../img2/5_background/layers/cemetary_background_night_02.png', -853, 0),
-        new BackgroundObject('../img2/5_background/layers/3_third_layer/cemetary_thirdlayer_night_02.png', -853, 0),
-        new BackgroundObject('../img2/5_background/layers/2_second_layer/cemetary_secondlayer_night_02.png', -853, 0),
-        new BackgroundObject('../img2/5_background/layers/1_first_layer/cemetary_firstlayer_night_02.png', -853, 0),
-        new BackgroundObject('../img2/5_background/layers/cemetary_background_night.png', 0, 0),
-        new BackgroundObject('../img2/5_background/layers/3_third_layer/cemetary_thirdlayer_night.png', 0, 0),
-        new BackgroundObject('../img2/5_background/layers/2_second_layer/cemetary_secondlayer_night.png', 0, 0),
-        new BackgroundObject('../img2/5_background/layers/1_first_layer/cemetary_firstlayer_night.png', 0, 0),
-        new BackgroundObject('../img2/5_background/layers/cemetary_background_night_02.png', 853, 0),
-        new BackgroundObject('../img2/5_background/layers/3_third_layer/cemetary_thirdlayer_night_02.png', 853, 0),
-        new BackgroundObject('../img2/5_background/layers/2_second_layer/cemetary_secondlayer_night_02.png', 853, 0),
-        new BackgroundObject('../img2/5_background/layers/1_first_layer/cemetary_firstlayer_night_02.png', 853, 0),
-        new BackgroundObject('../img2/5_background/layers/cemetary_background_night.png', 0, 0),
-        new BackgroundObject('../img2/5_background/layers/3_third_layer/cemetary_thirdlayer_night.png', 0, 0),
-        new BackgroundObject('../img2/5_background/layers/2_second_layer/cemetary_secondlayer_night.png', 0, 0),
-        new BackgroundObject('../img2/5_background/layers/1_first_layer/cemetary_firstlayer_night.png', 0, 0),
-        new BackgroundObject('../img2/5_background/layers/cemetary_background_night_02.png', 853, 0),
-        new BackgroundObject('../img2/5_background/layers/3_third_layer/cemetary_thirdlayer_night_02.png', 853, 0),
-        new BackgroundObject('../img2/5_background/layers/2_second_layer/cemetary_secondlayer_night_02.png', 853, 0),
-        new BackgroundObject('../img2/5_background/layers/1_first_layer/cemetary_firstlayer_night_02.png', 853, 0),
-    ];
+    zombies = LEVEL1.zombies;
+    monsters = LEVEL1.monsters;
+    clouds = LEVEL1.clouds;
+    backgroundObjects = LEVEL1.backgroundObjects;
     canvas;
     ctx;
     keyboard;
