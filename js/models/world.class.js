@@ -30,7 +30,7 @@ class World {
         this.addObjectsToMap(this.clouds);
         this.addToMap(this.character); 
         this.addObjectsToMap(this.zombies);
-        this.addObjectsToMap(this.monsters);
+        this.addObjectsToMap(this.monsters); // Monster werden eingefügt
 
         this.ctx.translate(-this.camera_x, 0); // Kamera wird zurückgesetzt
 
