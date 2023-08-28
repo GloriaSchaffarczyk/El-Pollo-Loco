@@ -36,7 +36,7 @@ class Character extends MovableObject {
                 this.otherDirection = false;
             }
 
-            if (this.world.keyboard.LEFT && this.x > -650) {
+            if (this.world.keyboard.LEFT && this.x > -650) { // -650, damit der Charakter nicht aus dem Canvas rausläuft
                 this.x -= this.speed;
                 this.otherDirection = true;
             }
