@@ -3,7 +3,7 @@ class Level {
     monsters;
     clouds;
     backgroundObjects;
-    level_end_x = 2000;
+    level_end_x = 2700;
 
     constructor(zombies, monsters, clouds, backgroundObjects) {
         this.zombies = zombies;
