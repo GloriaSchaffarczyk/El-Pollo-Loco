@@ -21,6 +21,7 @@ class Character extends MovableObject {
         '../img2/2_character/2_walk/biker_walk_06.png',
     ]
     world;
+    walking_sound = new Audio('audio/659370__matrixxx__retro-footsteps.wav')
 
     constructor() {
         super().loadImage('../img2/2_character/2_walk/biker_walk_01.png')
