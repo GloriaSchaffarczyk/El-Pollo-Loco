@@ -35,14 +35,14 @@ class Character extends MovableObject {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.x += this.speed;
                 this.otherDirection = false;
-                this.walking_sound.playbackRate = 3; // hier ändern
+                this.walking_sound.playbackRate = 6; // hier ändern
                 this.walking_sound.play();
             }
 
             if (this.world.keyboard.LEFT && this.x > -650) { 
                 this.x -= this.speed;
                 this.otherDirection = true;
-                this.walking_sound.playbackRate = 3; // hier ändern
+                this.walking_sound.playbackRate = 6; // hier ändern
                 this.walking_sound.play();
             }
             this.world.camera_x = -this.x + 100;
