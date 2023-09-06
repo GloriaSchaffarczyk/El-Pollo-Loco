@@ -21,11 +21,14 @@ class Character extends MovableObject {
         '../img2/2_character/2_walk/biker_walk_06.png',
     ]
     world;
-    walking_sound = new Audio('audio/659370__matrixxx__retro-footsteps.wav')
+    walking_sound = new Audio('audio/659370__matrixxx__retro-footsteps.wav');
+    background_music = new Audio('audio/363164__adnova__spooker.wav');
 
     constructor() {
         super().loadImage('../img2/2_character/2_walk/biker_walk_01.png')
         this.loadImages(this.IMAGES_WALK);
+        this.background_music.play();
+        this.background_music.loop = true;
         this.animate();
     }
 
