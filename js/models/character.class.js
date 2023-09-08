@@ -65,4 +65,22 @@ class Character extends MovableObject {
 
     jump() {
     }
+
+    initBackgroundMusic() {
+        document.addEventListener('click', () => {
+            this.playBackgroundMusic();
+        });
+    }
+    
+    playBackgroundMusic() {
+        if (this.background_music.paused) {
+            this.background_music.play()
+            .then(() => {
+                this.background_music.loop = true;
+            })
+            .catch((error) => {
+                console.log('Playback failed:', error);
+            });
+        }
+    }
 }
