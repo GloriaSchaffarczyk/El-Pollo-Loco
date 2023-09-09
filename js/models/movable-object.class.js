@@ -1,6 +1,6 @@
 class MovableObject {
     x = 40;
-    y = 285;
+    y = 185;
     img;
     height = 100;
     width = 100;
@@ -8,6 +8,15 @@ class MovableObject {
     imageCache = {};
     currentImage = 0;
     otherDirection = false;
+    speedY = 0;
+    accelerationY = 1;
+
+    applyGravity() {
+        setInterval(() => {
+            this.y -= this.speedY;
+            this.speedY -= this.accelerationY; 
+        }, 1000 / 25);
+    }
 
     loadImage(path) {
         this.img = new Image();// this.img = document.getElementById('image'); <img id="image" src="http://>

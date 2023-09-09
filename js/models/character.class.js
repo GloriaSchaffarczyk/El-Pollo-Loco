@@ -30,6 +30,7 @@ class Character extends MovableObject {
         this.background_music.play();
         this.background_music.loop = true;
         this.animate();
+        this.applyGravity();
     }
 
     animate() {
