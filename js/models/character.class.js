@@ -20,6 +20,12 @@ class Character extends MovableObject {
         '../img2/2_character/2_walk/biker_walk_06.png',
         '../img2/2_character/2_walk/biker_walk_06.png',
     ]
+    IMAGES_JUMP = [
+        '..img2/2_character/3_jump/biker_jump_01.png',
+        '..img2/2_character/3_jump/biker_jump_02.png',
+        '..img2/2_character/3_jump/biker_jump_03.png',
+        '..img2/2_character/3_jump/biker_jump_04.png',
+    ]
     world;
     walking_sound = new Audio('audio/659370__matrixxx__retro-footsteps.wav');
     background_music = new Audio('audio/363164__adnova__spooker.wav');
@@ -27,6 +33,7 @@ class Character extends MovableObject {
     constructor() {
         super().loadImage('../img2/2_character/2_walk/biker_walk_01.png')
         this.loadImages(this.IMAGES_WALK);
+        this.loadImages(this.IMAGES_JUMP);
         this.background_music.play();
         this.background_music.loop = true;
         this.animate();
@@ -41,6 +48,12 @@ class Character extends MovableObject {
                 this.otherDirection = false;
                 this.walking_sound.playbackRate = 6; // hier ändern
                 this.walking_sound.play();
+            }
+
+            if (this.isAboveGround()) {
+                this.playAnimation(this.IMAGES_JUMP);
+            } else {
+                
             }
 
             if (this.world.keyboard.LEFT && this.x > -650) { 
