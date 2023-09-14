@@ -50,12 +50,6 @@ class Character extends MovableObject {
                 this.walking_sound.play();
             }
 
-            if (this.isAboveGround()) {
-                this.playAnimation(this.IMAGES_JUMP);
-            } else {
-                
-            }
-
             if (this.world.keyboard.LEFT && this.x > -650) { 
                 this.x -= this.speed;
                 this.otherDirection = true;
