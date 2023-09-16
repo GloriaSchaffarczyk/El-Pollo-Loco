@@ -21,10 +21,10 @@ class Character extends MovableObject {
         '../img2/2_character/2_walk/biker_walk_06.png',
     ]
     IMAGES_JUMP = [
-        '..img2/2_character/3_jump/biker_jump_01.png',
-        '..img2/2_character/3_jump/biker_jump_02.png',
-        '..img2/2_character/3_jump/biker_jump_03.png',
-        '..img2/2_character/3_jump/biker_jump_04.png',
+        '../img2/2_character/3_jump/biker_jump_01.png',
+        '../img2/2_character/3_jump/biker_jump_02.png',
+        '../img2/2_character/3_jump/biker_jump_03.png',
+        '../img2/2_character/3_jump/biker_jump_04.png',
     ]
     world;
     walking_sound = new Audio('audio/659370__matrixxx__retro-footsteps.wav');
