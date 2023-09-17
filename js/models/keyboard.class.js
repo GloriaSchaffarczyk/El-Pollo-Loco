@@ -7,7 +7,4 @@ class Keyboard {
     Q = false;
     W = false;
     E = false;
-
-    moveLeftOnKeypress() {
-    }
 }

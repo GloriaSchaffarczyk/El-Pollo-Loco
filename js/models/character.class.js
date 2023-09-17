@@ -25,6 +25,10 @@ class Character extends MovableObject {
         '../img2/2_character/3_jump/biker_jump_02.png',
         '../img2/2_character/3_jump/biker_jump_03.png',
         '../img2/2_character/3_jump/biker_jump_04.png',
+        '../img2/2_character/3_jump/biker_jump_04.png',
+        '../img2/2_character/3_jump/biker_jump_03.png',
+        '../img2/2_character/3_jump/biker_jump_02.png',
+        '../img2/2_character/3_jump/biker_jump_01.png',
     ]
     world;
     walking_sound = new Audio('audio/659370__matrixxx__retro-footsteps.wav');
@@ -63,16 +67,11 @@ class Character extends MovableObject {
             if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMP);
             }
-        }, 5000 / 69)
+        }, 5000 / 60)
 
         setInterval(() => {
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                let i = this.currentImage % this.IMAGES_WALK.length; // Index wird nie so groß wie die Anzahl der Bilder im Array, also Array.Länge -1
-                // let i = this.currentImage % this.IMAGES_IDLE.length; // Index wird nie so groß wie die Anzahl der Bilder im Array, also Array.Länge -1
-                // durch Modulo steht hier i = 0, 1, 2, 3, 0, 1, 2, 3, 0,...
-                let path = this.IMAGES_WALK[i];
-                this.img = this.imageCache[path];
-                this.currentImage++
+                this.playAnimation(this.IMAGES_WALK);
             }
         }, 45);
     }

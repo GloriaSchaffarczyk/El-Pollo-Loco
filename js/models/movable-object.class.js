@@ -45,6 +45,13 @@ class MovableObject {
         });
     }
 
+    playAnimation(images) {
+        let i = this.currentImage % images.length;
+        let path = images[i];
+        this.img = this.imageCache[path];
+        this.currentImage++
+    }
+
     moveRight() {
         console.log('Moving right');
     };
@@ -55,3 +62,4 @@ class MovableObject {
         }, 1000 / 60); // 60 fps
     }
 }
+
