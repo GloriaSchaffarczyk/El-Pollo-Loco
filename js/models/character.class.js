@@ -25,10 +25,6 @@ class Character extends MovableObject {
         '../img2/2_character/3_jump/biker_jump_02.png',
         '../img2/2_character/3_jump/biker_jump_03.png',
         '../img2/2_character/3_jump/biker_jump_04.png',
-        '../img2/2_character/3_jump/biker_jump_04.png',
-        '../img2/2_character/3_jump/biker_jump_03.png',
-        '../img2/2_character/3_jump/biker_jump_02.png',
-        '../img2/2_character/3_jump/biker_jump_01.png',
     ]
     world;
     walking_sound = new Audio('audio/659370__matrixxx__retro-footsteps.wav');
@@ -54,26 +50,30 @@ class Character extends MovableObject {
                 this.walking_sound.play();
             }
 
-            if (this.world.keyboard.LEFT && this.x > -650) { 
+            if (this.world.keyboard.LEFT && this.x > -650) {
                 this.x -= this.speed;
                 this.otherDirection = true;
                 this.walking_sound.playbackRate = 6; // hier ändern
                 this.walking_sound.play();
             }
+
+            if(this.world.keyboard.UP) {
+                this.speedY = 20;
+            }
+
+
             this.world.camera_x = -this.x + 100;
         }, 5000 / 60);
 
         setInterval(() => {
             if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMP);
+            } else {
+                if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+                    this.playAnimation(this.IMAGES_WALK);
+                }
             }
-        }, 5000 / 60)
-
-        setInterval(() => {
-            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                this.playAnimation(this.IMAGES_WALK);
-            }
-        }, 45);
+        }, 45)
     }
 
     jump() {
@@ -84,16 +84,16 @@ class Character extends MovableObject {
             this.playBackgroundMusic();
         });
     }
-    
+
     playBackgroundMusic() {
         if (this.background_music.paused) {
             this.background_music.play()
-            .then(() => {
-                this.background_music.loop = true;
-            })
-            .catch((error) => {
-                console.log('Playback failed:', error);
-            });
+                .then(() => {
+                    this.background_music.loop = true;
+                })
+                .catch((error) => {
+                    console.log('Playback failed:', error);
+                });
         }
     }
 }

@@ -12,20 +12,24 @@ class MovableObject {
     accelerationY = 3.5;
 
     applyGravity() {
+        let groundLevel = 290;
         setInterval(() => {
-            if (this.isAboveGround()) {
+            if (this.isAboveGround() || this.speedY > 0) {
                 this.y -= this.speedY;
                 this.speedY -= this.accelerationY;
+            } else {
+                this.y = 0;
+                this.y = groundLevel;
             }
         }, 1000 / 25);
     }
 
     isAboveGround() {
-        return this.y < 276;
+        return this.y < 290;
     }
 
     loadImage(path) {
-        this.img = new Image();// this.img = document.getElementById('image'); <img id="image" src="http://>
+        this.img = new Image();
         this.img.src = path;
     }
 
@@ -34,14 +38,10 @@ class MovableObject {
      * @param {Array} arr - ['img/image1.png', 'img/image2.png', 'img/image3.png', ...] 
      */
     loadImages(arr) {
-        // Gehe durch alle Bildpfade im Array 'arr'
         arr.forEach((path) => {
-            // Erstelle ein neues Bild
             let img = new Image();
-            // Lade das Bild von dem angegebenen Pfad
             img.src = path;
-            // Speichere den Pfad in einer Liste namens 'imageCache', sowohl als Schlüssel als auch als Wert
-            this.imageCache[path] = img; // hier muss image und nicht pfad reingeladen werden
+            this.imageCache[path] = img;
         });
     }
 
@@ -58,8 +58,8 @@ class MovableObject {
 
     moveLeft() {
         setInterval(() => {
-            this.x -= this.speed; //Pixel werden abgezogen
-        }, 1000 / 60); // 60 fps
+            this.x -= this.speed;
+        }, 1000 / 60);
     }
 }
 
