@@ -30,7 +30,7 @@ class Endboss extends MovableObject {
         this.animate();
     }
 
-    animate() {
+    animate() { // Animate-Funktion in der Endboss-Klasse
         setInterval(() => {
             this.playAnimation(this.ENDBOSS_IMAGES_WALKING);
         }, 200);
