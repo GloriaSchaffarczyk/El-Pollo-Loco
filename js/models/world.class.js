@@ -44,7 +44,6 @@ class World {
                     console.log('is colliding with endboss', this.character.energy);
                 }
             });
-
         }, 500)
     }
 

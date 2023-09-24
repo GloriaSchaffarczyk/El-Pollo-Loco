@@ -26,6 +26,10 @@ class Character extends MovableObject {
         '../img2/2_character/3_jump/biker_jump_03.png',
         '../img2/2_character/3_jump/biker_jump_04.png',
     ];
+    IMAGES_HURT = [
+        '../img2/2_character/4_hurt/biker_hurt_01.png',
+        '../img2/2_character/4_hurt/biker_hurt_02.png',
+    ];
     IMAGES_DEAD = [
         '../img2/2_character/5_dead/biker_death_01.png',
         '../img2/2_character/5_dead/biker_death_02.png',
@@ -36,20 +40,22 @@ class Character extends MovableObject {
     ];
     ANIMATION_SPEED_IDLE = 250;   // 100ms per frame
     ANIMATION_SPEED_WALK = 30;    // 60ms per frame
-    ANIMATION_SPEED_JUMP = 150 ;    // 75ms per frame
+    ANIMATION_SPEED_JUMP = 150;    // 75ms per frame
+    ANIMATION_SPEED_HURT = 150;    // 75ms per frame
     ANIMATION_SPEED_DEAD = 250;    // 50ms per frame
     world;
     walking_sound = new Audio('audio/659370__matrixxx__retro-footsteps.wav');
     jumping_sound = new Audio('audio/678839__cartchaos__jump.wav');
     background_music = new Audio('audio/363164__adnova__spooker.wav');
     dying_sound = new Audio('audio/163442__under7dude__man-dying.wav');
-    animationInterval = null; 
+    animationInterval = null;
 
     constructor() {
         super().loadImage('../img2/2_character/2_walk/biker_walk_01.png')
         this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_WALK);
         this.loadImages(this.IMAGES_JUMP);
+        this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
         this.background_music.play();
         this.background_music.loop = true;
@@ -97,6 +103,8 @@ class Character extends MovableObject {
             this.playAnimation(this.IMAGES_DEAD);
             animationSpeed = this.ANIMATION_SPEED_DEAD;
             this.dying_sound.play();
+        } else if (this.isHurt()) {
+            this.playAnimation(this.IMAGES_HURT);
         } else if (this.isAboveGround()) {
             this.playAnimation(this.IMAGES_JUMP);
             animationSpeed = this.ANIMATION_SPEED_JUMP;
@@ -105,7 +113,6 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_WALK);
                 animationSpeed = this.ANIMATION_SPEED_WALK;
             } else {
-                // Der Charakter ist im Idle-Modus.
                 this.playAnimation(this.IMAGES_IDLE);
                 animationSpeed = this.ANIMATION_SPEED_IDLE;
             }
