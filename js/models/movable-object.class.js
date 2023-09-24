@@ -37,16 +37,22 @@ class MovableObject {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
 
-    drawFrame(ctx){
+    drawFrame(ctx) {
 
         if (this instanceof Character || this instanceof Zombie || this instanceof Monster || this instanceof Endboss) {
             ctx.beginPath();
             ctx.lineWidth = '5';
             ctx.strokeStyle = 'red';
             ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();   
+            ctx.stroke();
         }
+    }
 
+    isColliding(obj) {
+        return this.x + this.width >= obj.x &&
+            this.x <= obj.x + obj.width &&
+            this.y + this.height >= obj.y &&
+            this.y <= obj.y + obj.height;
     }
 
     /**

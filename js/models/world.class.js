@@ -13,11 +13,30 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
+        this.checkCollisions();
     }
 
     setWorld() {
         this.character.world = this; // wird nur an den Character übergeben
         // nur Character muss nach rechts und links gesteuert werden
+    }
+
+    checkCollisions() {
+        setInterval(() => {
+            // Überprüfung der Kollisionen mit Zombies
+            this.level.zombies.forEach((zombie) => {
+                if (this.character.isColliding(zombie)) {
+                    console.log('is colliding with zombie', zombie);
+                }
+            });
+    
+            // Überprüfung der Kollisionen mit Monstern
+            this.level.monsters.forEach((monster) => {
+                if (this.character.isColliding(monster)) {
+                    console.log('is colliding with monster', monster);
+                }
+            });
+        }, 1000)
     }
 
     draw() {
