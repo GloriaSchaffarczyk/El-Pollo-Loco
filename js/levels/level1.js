@@ -3,7 +3,6 @@ const LEVEL1 = new Level(
         new Zombie(),
         new Zombie(),
         new Zombie(),
-        new Endboss(),
     ],
     [
         new Monster(),
@@ -11,6 +10,9 @@ const LEVEL1 = new Level(
         new Monster(),
         new Monster(),
         new Monster(),
+    ],
+    [
+        new Endboss()
     ],
     [
         new Cloud()

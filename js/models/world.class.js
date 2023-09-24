@@ -23,20 +23,29 @@ class World {
 
     checkCollisions() {
         setInterval(() => {
-            // Überprüfung der Kollisionen mit Zombies
             this.level.zombies.forEach((zombie) => {
                 if (this.character.isColliding(zombie)) {
-                    console.log('is colliding with zombie', zombie);
+                    this.character.enemyHit();
+                    console.log('is colliding and loosing energy', this.character.energy);
                 }
             });
-    
-            // Überprüfung der Kollisionen mit Monstern
+
             this.level.monsters.forEach((monster) => {
                 if (this.character.isColliding(monster)) {
-                    console.log('is colliding with monster', monster);
+                    this.character.enemyHit();
+                    console.log('is colliding and loosing energy', this.character.energy);
                 }
             });
-        }, 1000)
+
+            this.level.endboss.forEach((endboss) => {
+                if (this.character.isColliding(endboss)) {
+                    console.log('Checking collision with endboss');
+                    this.character.endbossHit();
+                    console.log('is colliding with endboss', this.character.energy);
+                }
+            });
+
+        }, 500)
     }
 
     draw() {
@@ -47,6 +56,8 @@ class World {
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.zombies);
         this.addObjectsToMap(this.level.monsters); // Monster werden eingefügt
+        this.addObjectsToMap(this.level.endboss);
+
 
         this.ctx.translate(-this.camera_x, 0); // Kamera wird zurückgesetzt
 
