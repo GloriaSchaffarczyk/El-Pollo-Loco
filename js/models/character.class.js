@@ -49,6 +49,7 @@ class Character extends MovableObject {
     background_music = new Audio('audio/363164__adnova__spooker.wav');
     dying_sound = new Audio('audio/163442__under7dude__man-dying.wav');
     animationInterval = null;
+    hasDied = false;
 
     constructor() {
         super().loadImage('../img2/2_character/2_walk/biker_walk_01.png')
@@ -100,9 +101,12 @@ class Character extends MovableObject {
         let animationSpeed = this.ANIMATION_SPEED_IDLE;  // Defaultwert
 
         if (this.isDead()) {
-            this.playAnimation(this.IMAGES_DEAD);
-            animationSpeed = this.ANIMATION_SPEED_DEAD;
-            this.dying_sound.play();
+            if (!this.hasDied) {
+                this.playAnimation(this.IMAGES_DEAD);
+                animationSpeed = this.ANIMATION_SPEED_DEAD;
+                this.dying_sound.play();
+                this.hasDied = true;
+            }
         } else if (this.isHurt()) {
             this.playAnimation(this.IMAGES_HURT);
         } else if (this.isAboveGround()) {
