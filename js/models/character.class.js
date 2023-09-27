@@ -101,7 +101,7 @@ class Character extends MovableObject {
         let animationSpeed = this.ANIMATION_SPEED_IDLE;  // Defaultwert
 
         if (this.isDead()) {
-            if (!this.hasDied) {
+            if(!this.hasDied) {
                 this.playAnimation(this.IMAGES_DEAD);
                 animationSpeed = this.ANIMATION_SPEED_DEAD;
                 this.dying_sound.play();
