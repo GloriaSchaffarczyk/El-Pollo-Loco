@@ -6,6 +6,7 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
+    statusBar = new StatusBar();
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -56,6 +57,7 @@ class World {
         this.addObjectsToMap(this.level.zombies);
         this.addObjectsToMap(this.level.monsters); // Monster werden eingefügt
         this.addObjectsToMap(this.level.endboss);
+        this.addToMap(this.statusBar);
 
 
         this.ctx.translate(-this.camera_x, 0); // Kamera wird zurückgesetzt

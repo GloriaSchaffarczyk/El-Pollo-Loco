@@ -23,17 +23,6 @@ class MovableObject extends DrawableObject {
         return this.y < 290;
     }
 
-    drawFrame(ctx) {
-
-        if (this instanceof Character || this instanceof Zombie || this instanceof Monster || this instanceof Endboss) {
-            ctx.beginPath();
-            ctx.lineWidth = '5';
-            ctx.strokeStyle = 'red';
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-        }
-    }
-
     enemyHit() {
         this.energy -= 5;
         if (this.energy < 0) {
