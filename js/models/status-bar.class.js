@@ -15,12 +15,12 @@ class StatusBar extends DrawableObject {
         this.loadImages(this.IMAGES_HEALTH);
         this.x = 1; 
         this.y = 10;
-        this.width = 170;
-        this.height = 45;
-        this.setPercenage(100); // müssen wir setzen
+        this.width = 150;
+        this.height = 35;
+        this.setPercentage(100); // müssen wir setzen
     }
 
-    setPercenage(percentage) {
+    setPercentage(percentage) {
         this.percentage = percentage; // Zahl zwischen 0 und 5 ermitteln
         let path = this.IMAGES_HEALTH[this.resolveImageIndex()]; // Holt sich den Pfad also Index an der richtigen Stelle
         this.img = this.imageCache[path]; // holt sich das Bild an der jeweiligen Stelle
