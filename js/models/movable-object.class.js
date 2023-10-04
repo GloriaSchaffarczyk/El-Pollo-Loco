@@ -20,7 +20,11 @@ class MovableObject extends DrawableObject {
     }
 
     isAboveGround() {
+        if (this instanceof ThrowableObject) { // throwable objects fall
+            return true;
+        } else {
         return this.y < 290;
+        }
     }
 
     enemyHit() {
