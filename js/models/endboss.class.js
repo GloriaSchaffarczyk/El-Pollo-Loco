@@ -3,22 +3,22 @@ class Endboss extends MovableObject {
     height = 200;
     width = 200;
     ENDBOSS_IMAGES_WALKING = [
-        '../img2/4_boss/1_walk/boss_walk_right_01.png',
-        '../img2/4_boss/1_walk/boss_walk_right_02.png',
-        '../img2/4_boss/1_walk/boss_walk_right_03.png',
-        '../img2/4_boss/1_walk/boss_walk_right_04.png',
-        '../img2/4_boss/2_alert/boss_alert_01.png',
-        '../img2/4_boss/2_alert/boss_alert_02.png',
-        '../img2/4_boss/2_alert/boss_alert_03.png',
-        '../img2/4_boss/2_alert/boss_alert_04.png',
-        '../img2/4_boss/2_alert/boss_alert_05.png',
-        '../img2/4_boss/2_alert/boss_alert_05.png',
-        '../img2/4_boss/2_alert/boss_alert_05.png',
-        '../img2/4_boss/2_alert/boss_alert_05.png',
-        '../img2/4_boss/2_alert/boss_alert_04.png',
-        '../img2/4_boss/2_alert/boss_alert_03.png',
-        '../img2/4_boss/2_alert/boss_alert_02.png',
-        '../img2/4_boss/2_alert/boss_alert_01.png',
+        'img2/4_boss/1_walk/boss_walk_right_01.png',
+        'img2/4_boss/1_walk/boss_walk_right_02.png',
+        'img2/4_boss/1_walk/boss_walk_right_03.png',
+        'img2/4_boss/1_walk/boss_walk_right_04.png',
+        'img2/4_boss/2_alert/boss_alert_01.png',
+        'img2/4_boss/2_alert/boss_alert_02.png',
+        'img2/4_boss/2_alert/boss_alert_03.png',
+        'img2/4_boss/2_alert/boss_alert_04.png',
+        'img2/4_boss/2_alert/boss_alert_05.png',
+        'img2/4_boss/2_alert/boss_alert_05.png',
+        'img2/4_boss/2_alert/boss_alert_05.png',
+        'img2/4_boss/2_alert/boss_alert_05.png',
+        'img2/4_boss/2_alert/boss_alert_04.png',
+        'img2/4_boss/2_alert/boss_alert_03.png',
+        'img2/4_boss/2_alert/boss_alert_02.png',
+        'img2/4_boss/2_alert/boss_alert_01.png',
 
     ];
 

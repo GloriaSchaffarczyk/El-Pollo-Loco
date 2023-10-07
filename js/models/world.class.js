@@ -7,7 +7,7 @@ class World {
     keyboard;
     camera_x = 0;
     statusBar = new StatusBar();
-    throwableObjects = [new ThrowableObject()];
+    throwableObjects = [];
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -15,7 +15,7 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.checkCollisions();
+        this.run()
     }
 
     setWorld() {
@@ -23,33 +23,18 @@ class World {
         // nur Character muss nach rechts und links gesteuert werden
     }
 
-    checkCollisions() {
+    run() {
         setInterval(() => {
-            this.level.zombies.forEach((zombie) => {
-                if (this.character.isColliding(zombie)) {
-                    this.character.enemyHit();
-                    this.statusBar.setPercentage(this.character.energy)
-                    console.log('is colliding and loosing energy', this.character.energy);
-                }
-            });
-
-            this.level.monsters.forEach((monster) => {
-                if (this.character.isColliding(monster)) {
-                    this.character.enemyHit();
-                    this.statusBar.setPercentage(this.character.energy)
-                    console.log('is colliding and loosing energy', this.character.energy);
-                }
-            });
-
-            this.level.endboss.forEach((endboss) => {
-                if (this.character.isColliding(endboss)) {
-                    console.log('Checking collision with endboss');
-                    this.character.endbossHit();
-                    this.statusBar.setPercentage(this.character.energy)
-                    console.log('is colliding with endboss', this.character.energy);
-                }
-            });
+            this.checkCollisions();
+            this.checkThrowObjects();
         }, 500)
+    }
+
+    checkThrowObjects() {
+        if (this.keyboard.W) {
+            let bomb = new ThrowableObject(this.character.x + 90, this.character.y + -70);
+            this.throwableObjects.push(bomb);
+        }
     }
 
     draw() {
@@ -65,7 +50,7 @@ class World {
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.zombies);
         this.addObjectsToMap(this.level.monsters); // Monster werden eingefügt
-        this.addObjectsToMap(this.throwableObjects); 
+        this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.endboss);
 
 
@@ -106,4 +91,35 @@ class World {
         this.ctx.restore();
     }
 
+    checkCollisions() {
+        // check collisions
+        this.level.zombies.forEach((zombie) => {
+            if (this.character.isColliding(zombie)) {
+                this.character.enemyHit();
+                this.statusBar.setPercentage(this.character.energy)
+                console.log('is colliding and loosing energy', this.character.energy);
+            }
+        });
+
+        this.level.monsters.forEach((monster) => {
+            if (this.character.isColliding(monster)) {
+                this.character.enemyHit();
+                this.statusBar.setPercentage(this.character.energy)
+                console.log('is colliding and loosing energy', this.character.energy);
+            }
+        });
+
+        this.level.endboss.forEach((endboss) => {
+            if (this.character.isColliding(endboss)) {
+                console.log('Checking collision with endboss');
+                this.character.endbossHit();
+                this.statusBar.setPercentage(this.character.energy)
+                console.log('is colliding with endboss', this.character.energy);
+            }
+        });
+    }
+
 }
+
+
+// canvas.requestFullscreen für die Fullscreen-Anzeige 

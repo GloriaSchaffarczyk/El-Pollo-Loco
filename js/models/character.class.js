@@ -1,42 +1,42 @@
 class Character extends MovableObject {
     speed = 100;
     IMAGES_IDLE = [
-        '../img2/2_character/1_idle/idle/biker_idle_01.png',
-        '../img2/2_character/1_idle/idle/biker_idle_02.png',
-        '../img2/2_character/1_idle/idle/biker_idle_03.png',
-        '../img2/2_character/1_idle/idle/biker_idle_04.png',
+        'img2/2_character/1_idle/idle/biker_idle_01.png',
+        'img2/2_character/1_idle/idle/biker_idle_02.png',
+        'img2/2_character/1_idle/idle/biker_idle_03.png',
+        'img2/2_character/1_idle/idle/biker_idle_04.png',
     ];
     IMAGES_WALK = [
-        '../img2/2_character/2_walk/biker_walk_01.png',
-        '../img2/2_character/2_walk/biker_walk_01.png',
-        '../img2/2_character/2_walk/biker_walk_02.png',
-        '../img2/2_character/2_walk/biker_walk_02.png',
-        '../img2/2_character/2_walk/biker_walk_03.png',
-        '../img2/2_character/2_walk/biker_walk_03.png',
-        '../img2/2_character/2_walk/biker_walk_04.png',
-        '../img2/2_character/2_walk/biker_walk_04.png',
-        '../img2/2_character/2_walk/biker_walk_05.png',
-        '../img2/2_character/2_walk/biker_walk_05.png',
-        '../img2/2_character/2_walk/biker_walk_06.png',
-        '../img2/2_character/2_walk/biker_walk_06.png',
+        'img2/2_character/2_walk/biker_walk_01.png',
+        'img2/2_character/2_walk/biker_walk_01.png',
+        'img2/2_character/2_walk/biker_walk_02.png',
+        'img2/2_character/2_walk/biker_walk_02.png',
+        'img2/2_character/2_walk/biker_walk_03.png',
+        'img2/2_character/2_walk/biker_walk_03.png',
+        'img2/2_character/2_walk/biker_walk_04.png',
+        'img2/2_character/2_walk/biker_walk_04.png',
+        'img2/2_character/2_walk/biker_walk_05.png',
+        'img2/2_character/2_walk/biker_walk_05.png',
+        'img2/2_character/2_walk/biker_walk_06.png',
+        'img2/2_character/2_walk/biker_walk_06.png',
     ];
     IMAGES_JUMP = [
-        '../img2/2_character/3_jump/biker_jump_01.png',
-        '../img2/2_character/3_jump/biker_jump_02.png',
-        '../img2/2_character/3_jump/biker_jump_03.png',
-        '../img2/2_character/3_jump/biker_jump_04.png',
+        'img2/2_character/3_jump/biker_jump_01.png',
+        'img2/2_character/3_jump/biker_jump_02.png',
+        'img2/2_character/3_jump/biker_jump_03.png',
+        'img2/2_character/3_jump/biker_jump_04.png',
     ];
     IMAGES_HURT = [
-        '../img2/2_character/4_hurt/biker_hurt_01.png',
-        '../img2/2_character/4_hurt/biker_hurt_02.png',
+        'img2/2_character/4_hurt/biker_hurt_01.png',
+        'img2/2_character/4_hurt/biker_hurt_02.png',
     ];
     IMAGES_DEAD = [
-        '../img2/2_character/5_dead/biker_death_01.png',
-        '../img2/2_character/5_dead/biker_death_02.png',
-        '../img2/2_character/5_dead/biker_death_03.png',
-        '../img2/2_character/5_dead/biker_death_04.png',
-        '../img2/2_character/5_dead/biker_death_05.png',
-        '../img2/2_character/5_dead/biker_death_06.png',
+        'img2/2_character/5_dead/biker_death_01.png',
+        'img2/2_character/5_dead/biker_death_02.png',
+        'img2/2_character/5_dead/biker_death_03.png',
+        'img2/2_character/5_dead/biker_death_04.png',
+        'img2/2_character/5_dead/biker_death_05.png',
+        'img2/2_character/5_dead/biker_death_06.png',
     ];
     ANIMATION_SPEED_IDLE = 250;   // 100ms per frame
     ANIMATION_SPEED_WALK = 30;    // 60ms per frame
@@ -52,7 +52,7 @@ class Character extends MovableObject {
     hasDied = false;
 
     constructor() {
-        super().loadImage('../img2/2_character/2_walk/biker_walk_01.png')
+        super().loadImage('img2/2_character/2_walk/biker_walk_01.png')
         this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_WALK);
         this.loadImages(this.IMAGES_JUMP);
