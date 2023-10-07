@@ -8,7 +8,7 @@ class StatusBar extends DrawableObject {
         'img2/7_statusbars/1_statusbar/2_statusbar_health/statusbar-health_06.png',
     ];
 
-    percentage = 100;
+    percentage = 100; // 100% für Gesundheit etc.
 
     constructor() {
         super();
