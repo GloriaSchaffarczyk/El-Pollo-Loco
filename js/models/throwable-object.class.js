@@ -10,6 +10,7 @@ class ThrowableObject extends MovableObject {
         this.throw();
     }
 
+    // wenn sich der Character umdreht, muss die Flasche in die entgegengesetze Richtung fliegen, als muss += 10 angepasst werden
     throw() {
         this.speedY = 30;
         this.speedX = 20;
