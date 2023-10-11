@@ -1,8 +1,15 @@
 class ThrowableObject extends MovableObject {
     accelerationY = 3.5;
+    IMAGES_BIKER_THROWING_BOMB = [
+        'img2/6_bombs/bomb_rotation/bomb_01.png',
+        'img2/6_bombs/bomb_rotation/bomb_02.png',
+        'img2/6_bombs/bomb_rotation/bomb_03.png',
+        'img2/6_bombs/bomb_rotation/bomb_04.png',
+    ];
 
     constructor(x, y) {
-        super().loadImage('img2/2_character/1 Biker/Throw/1 Bombs/4.png');
+        super().loadImage('img2/6_bombs/bomb_rotation/bomb_01.png',);
+        this.loadImages(this.IMAGES_BIKER_THROWING_BOMB);
         this.x = x;
         this.y = y;
         this.width = 50;
@@ -17,6 +24,8 @@ class ThrowableObject extends MovableObject {
         this.applyGravity();
         setInterval(() => {
             this.x += 10;
+            this.playAnimation(this.IMAGES_BIKER_THROWING_BOMBER);
         }, 25);
     }
+
 }
