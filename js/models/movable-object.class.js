@@ -82,3 +82,14 @@ class MovableObject extends DrawableObject {
     }
 }
 
+// Aufgaben
+// Startscreen
+// Musik und Sounds
+// Coins einsammeln
+// Flaschen einsammeln
+// Flaschen nur werfen, wen sie vorhanden sind
+// Kollision
+// Endgegner besiegen
+// Game-Over-Screen
+// Fullscreen
+// Erklärung der Tasten
