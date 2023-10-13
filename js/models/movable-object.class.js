@@ -87,9 +87,10 @@ class MovableObject extends DrawableObject {
 // Musik und Sounds
 // Coins einsammeln
 // Flaschen einsammeln
-// Flaschen nur werfen, wen sie vorhanden sind
-// Kollision
+// Flaschen nur werfen, wenn sie vorhanden sind
+// Kollision mit Gegnern
 // Endgegner besiegen
 // Game-Over-Screen
 // Fullscreen
 // Erklärung der Tasten
+// 
