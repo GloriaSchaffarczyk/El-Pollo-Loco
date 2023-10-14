@@ -117,6 +117,29 @@ class World {
                 console.log('is colliding with endboss', this.character.energy);
             }
         });
+
+        this.throwableObjects.forEach((bomb) => {
+            this.level.zombies.forEach((zombie) => {
+                if (this.bomb.isColliding(zombie)) {
+                    this.zombie.enemyHitByBomb(); 
+                    console.log('Zombie hit by bomb');
+                }
+            });
+    
+            this.level.monsters.forEach((monster) => {
+                if (this.bomb.isColliding(monster)) {
+                    this.monster.enemyHitByBomb();
+                    console.log('Monster hit by bomb');
+                }
+            });
+    
+            this.level.endboss.forEach((endboss) => {
+                if (this.bomb.isColliding(endboss)) {
+                    this.endboss.enemyHitByBomb();
+                    console.log('Endboss hit by bomb');
+                }
+            });
+        });
     }
 
 }

@@ -62,6 +62,15 @@ class MovableObject extends DrawableObject {
             this.y <= obj.y + obj.height;
     }
 
+    enemyHitByBomb() {
+        this.energy -= 20;
+        if (this.energy < 0) {
+            this.energy = 10;
+        } else {
+            this.LastHit = new Date().getTime();
+        }
+    }
+
     playAnimation(images) {
         let i = this.currentImage % images.length;
         let path = images[i];
