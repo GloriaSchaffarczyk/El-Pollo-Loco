@@ -27,7 +27,7 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
-        }, 500)
+        }, 180)
     }
 
     checkThrowObjects() {
@@ -120,22 +120,22 @@ class World {
 
         this.throwableObjects.forEach((bomb) => {
             this.level.zombies.forEach((zombie) => {
-                if (this.bomb.isColliding(zombie)) {
-                    this.zombie.enemyHitByBomb(); 
+                if (bomb.isColliding(zombie)) {
+                    zombie.enemyHitByBomb(); 
                     console.log('Zombie hit by bomb');
                 }
             });
     
             this.level.monsters.forEach((monster) => {
-                if (this.bomb.isColliding(monster)) {
-                    this.monster.enemyHitByBomb();
+                if (bomb.isColliding(monster)) {
+                    monster.enemyHitByBomb();
                     console.log('Monster hit by bomb');
                 }
             });
     
             this.level.endboss.forEach((endboss) => {
-                if (this.bomb.isColliding(endboss)) {
-                    this.endboss.enemyHitByBomb();
+                if (bomb.isColliding(endboss)) {
+                    endboss.enemyHitByBomb();
                     console.log('Endboss hit by bomb');
                 }
             });
