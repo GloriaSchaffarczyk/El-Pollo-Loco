@@ -92,7 +92,6 @@ class World {
     }
 
     checkCollisions() {
-        // check collisions
         this.level.zombies.forEach((zombie) => {
             if (this.character.isColliding(zombie)) {
                 this.character.enemyHit();
