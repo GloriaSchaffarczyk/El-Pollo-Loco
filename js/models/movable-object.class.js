@@ -65,9 +65,10 @@ class MovableObject extends DrawableObject {
     enemyHitByBomb() {
         this.energy -= 20;
         if (this.energy < 0) {
-            this.energy = 10;
+            this.energy = 0;
         } else {
-            this.LastHit = new Date().getTime();
+            this.lastHit = new Date().getTime();
+            console.log('Hit!', this.energy); 
         }
     }
 
