@@ -32,7 +32,8 @@ class World {
 
     checkThrowObjects() {
         if (this.keyboard.W) {
-            let bomb = new ThrowableObject(this.character.x + 90, this.character.y + -70);
+            let direction = this.character.otherDirection ? 'left' : 'right';
+            let bomb = new ThrowableObject(this.character.x + 90, this.character.y + -70, direction);
             this.throwableObjects.push(bomb);
         }
     }
