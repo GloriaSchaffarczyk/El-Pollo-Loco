@@ -1,10 +1,21 @@
 body {
+    color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-image: url('img2/5_background/cemetary_04.jpg');
+    background-size: cover;
+    height: 100vh;
+}
+
+h1 {
+    padding-bottom: 50px;
 }
 
 canvas {
     background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
