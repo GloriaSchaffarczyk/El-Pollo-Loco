@@ -92,7 +92,6 @@ class MovableObject extends DrawableObject {
     }
 }
 
-// Aufgaben
 // Startscreen
 // Musik und Sounds
 // Coins einsammeln
