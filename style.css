@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'creepster';
+    src: url('fonts/creepster.ttf')  format('truetype'), /* Safari, Android, iOS */
+}
+
 body {
     color: white;
     display: flex;
@@ -7,6 +12,7 @@ body {
     background-image: url('img2/5_background/cemetary_04.jpg');
     background-size: cover;
     height: 100vh;
+    font-family: 'creepster', Arial, Helvetica, sans-serif;
 }
 
 h1 {
