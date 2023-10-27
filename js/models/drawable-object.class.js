@@ -10,12 +10,19 @@ class DrawableObject {
 
     loadImage(path) {
         this.img = new Image();
+        this.img.addEventListener('load', () => {
+            // Bild ist geladen, jetzt sicher zu zeichnen
+            this.imageLoaded = true;
+        });
         this.img.src = path;
     }
-
+    
     draw(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+        if (this.imageLoaded) { // Überprüfe den neuen Flag
+            ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+        }
     }
+    
     
     drawFrame(ctx) {
 
