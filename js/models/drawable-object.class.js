@@ -11,7 +11,7 @@ class DrawableObject {
     loadImage(path) {
         this.img = new Image();
         this.img.addEventListener('load', () => {
-            // Bild ist geladen, jetzt sicher zu zeichnen
+            // wenn das Bild geladen ist, kann auf das Canvas gezeichnet werden
             this.imageLoaded = true;
         });
         this.img.src = path;
