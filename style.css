@@ -18,12 +18,12 @@ body {
 h1 {
     padding-bottom: 50px;
     margin-block-start: 0;
-    font-size: 66px;
+    font-size: 60px;
 }
 
 canvas {
     background-color: black;
-    display: flex;
+    display: block;
     align-items: center;
     justify-content: center;
 }

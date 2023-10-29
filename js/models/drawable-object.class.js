@@ -18,7 +18,7 @@ class DrawableObject {
     }
     
     draw(ctx) {
-        if (this.imageLoaded) { // Überprüfe den neuen Flag
+        if (this.imageLoaded) {
             ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
         }
     }
