@@ -27,3 +27,10 @@ canvas {
     align-items: center;
     justify-content: center;
 }
+
+/* Smartphones with --- */
+@media only screen and (max-width: 760px) {
+    canvas {
+        width: 100%;
+    }
+}
