@@ -49,7 +49,7 @@ class World {
 
         this.addObjectsToMap(this.level.clouds);
         this.addToMap(this.character);
-        this.addObjectsToMap(this.level.zombies);
+        this.addObjectsToMap(this.level.zombies);  // Zombies werden eingefügt
         this.addObjectsToMap(this.level.monsters); // Monster werden eingefügt
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.endboss);
