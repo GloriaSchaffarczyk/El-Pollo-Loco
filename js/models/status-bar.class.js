@@ -12,6 +12,7 @@ class StatusBar extends DrawableObject {
 
     constructor() {
         super();
+        console.log('StatusBar constructor called');
         this.loadImages(this.IMAGES_HEALTH);
         this.x = 1; 
         this.y = 10;
@@ -21,12 +22,15 @@ class StatusBar extends DrawableObject {
     }
 
     setPercentage(percentage) {
-        this.percentage = percentage; // Zahl zwischen 0 und 5 ermitteln
-        let path = this.IMAGES_HEALTH[this.resolveImageIndex()]; // Holt sich den Pfad also Index an der richtigen Stelle
-        this.img = this.imageCache[path]; // holt sich das Bild an der jeweiligen Stelle
+        console.log(`setPercentage called with value: ${percentage}`);
+        this.percentage = percentage;
+        let path = this.IMAGES_HEALTH[this.resolveImageIndex()];
+        this.img = this.imageCache[path];
+        console.log(`Image set to: ${path}`);
     }
 
     resolveImageIndex() {
+        console.log(`resolveImageIndex called with percentage: ${this.percentage}`);
         if (this.percentage == 100) {
             return 5;
         } else if (this.percentage > 80) {
