@@ -6,29 +6,29 @@ class DrawableObject {
     img;
     imageCache = {};
     currentImage = 0;
+    imageLoaded = false;
 
 
     loadImage(path) {
         this.img = new Image();
         this.img.addEventListener('load', () => {
             console.log(`Image loaded from path: ${path}`);
-            this.imageLoaded = true;
+            this.imageLoaded = true; // Setzen auf true, wenn das Bild geladen ist
         });
         this.img.src = path;
     }
     
-    draw(ctx) {
-        console.log(`draw called for image with path: ${this.img.src}`);
-        if (this.imageLoaded) {
-            ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-        } else {
-            console.log('Image not loaded yet, cannot draw.');
-        }
+draw(ctx) {
+    console.log(`draw called for image with path: ${this.img.src}`);
+    if (this.imageLoaded) { // Zeichnen nur, wenn das Bild geladen ist
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    } else {
+        console.log('Image not loaded yet, cannot draw.');
     }
+}
     
     
     drawFrame(ctx) {
-
         if (this instanceof Character || this instanceof Zombie || this instanceof Monster || this instanceof Endboss) {
             ctx.beginPath();
             ctx.lineWidth = '5';

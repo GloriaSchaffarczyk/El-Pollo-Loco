@@ -44,7 +44,6 @@ class World {
         this.addObjectsToMap(this.level.backgroundObjects);
 
         this.ctx.translate(-this.camera_x, 0); // backwards
-        this.addToMap(this.statusBar);
         this.ctx.translate(this.camera_x, 0); //forwards
 
         this.addObjectsToMap(this.level.clouds);
@@ -53,6 +52,14 @@ class World {
         this.addObjectsToMap(this.level.monsters); // Monster werden eingefügt
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.endboss);
+        
+        // In der draw-Methode der World-Klasse, bevor man die StatusBar zeichnet:
+        this.ctx.fillStyle = 'red';
+        this.ctx.fillRect(this.statusBar.x, this.statusBar.y, this.statusBar.width, this.statusBar.height);
+        this.ctx.fillStyle = 'white';
+        this.ctx.fillText('Test', this.statusBar.x + 10, this.statusBar.y + 20);
+
+        this.addToMap(this.statusBar);
 
 
 
@@ -121,18 +128,18 @@ class World {
         this.throwableObjects.forEach((bomb) => {
             this.level.zombies.forEach((zombie) => {
                 if (bomb.isColliding(zombie)) {
-                    zombie.enemyHitByBomb(); 
+                    zombie.enemyHitByBomb();
                     console.log('Zombie hit by bomb');
                 }
             });
-    
+
             this.level.monsters.forEach((monster) => {
                 if (bomb.isColliding(monster)) {
                     monster.enemyHitByBomb();
                     console.log('Monster hit by bomb');
                 }
             });
-    
+
             this.level.endboss.forEach((endboss) => {
                 if (bomb.isColliding(endboss)) {
                     endboss.enemyHitByBomb();
