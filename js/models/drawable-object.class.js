@@ -17,17 +17,17 @@ class DrawableObject {
         });
         this.img.src = path;
     }
-    
-draw(ctx) {
-    console.log(`draw called for image with path: ${this.img.src}`);
-    if (this.imageLoaded) { // Zeichnen nur, wenn das Bild geladen ist
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-    } else {
-        console.log('Image not loaded yet, cannot draw.');
+
+    draw(ctx) {
+        console.log(`draw called for image with path: ${this.img.src}`);
+        if (this.imageLoaded) { // Zeichnen nur, wenn das Bild geladen ist
+            ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+        } else {
+            console.log('Image not loaded yet, cannot draw.');
+        }
     }
-}
-    
-    
+
+
     drawFrame(ctx) {
         if (this instanceof Character || this instanceof Zombie || this instanceof Monster || this instanceof Endboss) {
             ctx.beginPath();
@@ -38,20 +38,20 @@ draw(ctx) {
         }
     }
 
- /**
- * 
- * @param {Array} arr - ['img/image1.png', 'img/image2.png', 'img/image3.png', ...] 
- */
- loadImages(arr) {
-    arr.forEach((path) => {
-        let img = new Image();
-        img.addEventListener('load', () => {
-            console.log(`Image loaded from path: ${path}`);
-            this.imageCache[path].imageLoaded = true;
+    /**
+    * 
+    * @param {Array} arr - ['img/image1.png', 'img/image2.png', 'img/image3.png', ...] 
+    */
+    loadImages(arr) {
+        arr.forEach((path) => {
+            let img = new Image();
+            img.addEventListener('load', () => {
+                console.log(`Image loaded from path: ${path}`);
+                this.imageCache[path].imageLoaded = true;
+            });
+            img.src = path;
+            this.imageCache[path] = img;
         });
-        img.src = path;
-        this.imageCache[path] = img;
-    });
-}
+    }
 
 }

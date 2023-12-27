@@ -52,16 +52,8 @@ class World {
         this.addObjectsToMap(this.level.monsters); // Monster werden eingefügt
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.endboss);
-        
-        // In der draw-Methode der World-Klasse, bevor man die StatusBar zeichnet:
-        this.ctx.fillStyle = 'red';
-        this.ctx.fillRect(this.statusBar.x, this.statusBar.y, this.statusBar.width, this.statusBar.height);
-        this.ctx.fillStyle = 'white';
-        this.ctx.fillText('Test', this.statusBar.x + 10, this.statusBar.y + 20);
-
+    
         this.addToMap(this.statusBar);
-
-
 
         this.ctx.translate(-this.camera_x, 0); // Kamera wird zurückgesetzt
 
