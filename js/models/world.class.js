@@ -52,10 +52,9 @@ class World {
         this.addObjectsToMap(this.level.monsters); // Monster werden eingefügt
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.endboss);
-    
-        this.addToMap(this.statusBar);
 
         this.ctx.translate(-this.camera_x, 0); // Kamera wird zurückgesetzt
+        this.addToMap(this.statusBar);
 
         requestAnimationFrame(() => this.draw());
     }
