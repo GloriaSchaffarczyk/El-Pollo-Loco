@@ -42,7 +42,7 @@ class Character extends MovableObject {
     ANIMATION_SPEED_WALK = 30;    // 60ms per frame
     ANIMATION_SPEED_JUMP = 150;    // 75ms per frame
     ANIMATION_SPEED_HURT = 150;    // 75ms per frame
-    ANIMATION_SPEED_DEAD = 250;    // 50ms per frame
+    ANIMATION_SPEED_DEAD = 200;    // 50ms per frame
     world;
     walking_sound = new Audio('audio/659370__matrixxx__retro-footsteps.wav');
     jumping_sound = new Audio('audio/678839__cartchaos__jump.wav');

@@ -1,6 +1,8 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let isMusicOn = true;
+let isSoundOn = true;
 // Variable ctx wurde gelöscht
 
 function init() {
@@ -8,6 +10,22 @@ function init() {
     world = new World(canvas, keyboard);
 
 console.log('My character is', world['character']);
+}
+
+function toggleMusic() {
+    if (isMusicOn) {
+        muteMusic();
+    } else {
+        playMusic();
+    }
+}
+
+function toggleSound() {
+    if (isSoundOn) {
+        muteSound();
+    } else {
+        playSound();
+    }
 }
 
 window.addEventListener('keydown', (event) => {
@@ -63,3 +81,7 @@ window.addEventListener('keyup', (event) => {
         keyboard.E = false;
     }
 });
+
+function restartGame() {
+    location.reload();
+}
