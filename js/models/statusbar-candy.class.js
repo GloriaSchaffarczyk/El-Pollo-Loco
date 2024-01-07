@@ -8,13 +8,13 @@ class StatusbarCandy extends DrawableObject {
         'img2/7_statusbars/1_statusbar/1_statusbar_candy/statusbar-candy_06.png',
     ];
 
-    percentage = 100; // 100% für Gesundheit etc.
+    percentage = 0; // 100% für Gesundheit etc.
 
     constructor() {
         super().loadImage('img2/7_statusbars/1_statusbar/1_statusbar_candy/statusbar-candy_01.png');
         console.log('StatusBar Candy constructor called');
         this.loadImages(this.IMAGES_CANDY);
-        this.x = 17; 
+        this.x = 20; 
         this.y = 35;
         this.width = 150;
         this.height = 35;

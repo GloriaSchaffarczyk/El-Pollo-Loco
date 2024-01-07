@@ -12,6 +12,7 @@ class World {
         new StatusbarCandy()
     ];
     throwableObjects = [];
+    statusBarIcons;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -20,6 +21,7 @@ class World {
         this.draw();
         this.setWorld();
         this.run()
+        this.loadStatusbarIcons();
     }
 
     setWorld() {
@@ -42,6 +44,15 @@ class World {
         }
     }
 
+    loadStatusbarIcons() {
+        this.statusBarIcons = [
+            new StatusbarIcons(20, 22, 'HEALTH'),
+            new StatusbarIcons(20, 45, 'CANDY'),
+            new StatusbarIcons(20, 70, 'BOMBS')
+        ];
+        console.log("Statusbar Icons loaded:", this.statusBarIcons);
+    }    
+
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0); // Kamera wird nach links verschoben
@@ -60,9 +71,14 @@ class World {
         this.ctx.translate(-this.camera_x, 0); // Kamera wird zurückgesetzt
     
         // Zeichnen Sie jede Statusbar einzeln
-        this.statusBar.forEach(bar => {
-            this.addToMap(bar);
+        this.statusBar.forEach(statusbar => {
+            this.addToMap(statusbar);
         });
+        if (this.statusBarIcons) {
+            this.statusBarIcons.forEach(icon => {
+                this.addToMap(icon);
+            });
+        }
     
         requestAnimationFrame(() => this.draw());
     }
@@ -103,7 +119,7 @@ class World {
         this.level.zombies.forEach((zombie) => {
             if (this.character.isColliding(zombie)) {
                 this.character.enemyHit();
-                this.statusBar.setPercentage(this.character.energy)
+                this.statusBar[0].setPercentage(this.character.energy)
                 console.log('is colliding and loosing energy', this.character.energy);
             }
         });
@@ -111,7 +127,7 @@ class World {
         this.level.monsters.forEach((monster) => {
             if (this.character.isColliding(monster)) {
                 this.character.enemyHit();
-                this.statusBar.setPercentage(this.character.energy)
+                this.statusBar[0].setPercentage(this.character.energy)
                 console.log('is colliding and loosing energy', this.character.energy);
             }
         });
@@ -120,7 +136,7 @@ class World {
             if (this.character.isColliding(endboss)) {
                 console.log('Checking collision with endboss');
                 this.character.endbossHit();
-                this.statusBar.setPercentage(this.character.energy)
+                this.statusBar[0].setPercentage(this.character.energy)
                 console.log('is colliding with endboss', this.character.energy);
             }
         });
