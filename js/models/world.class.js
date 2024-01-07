@@ -6,7 +6,11 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
-    statusBar = new StatusBar();
+    statusBar = [
+        new StatusbarHealth(),
+        new StatusbarBombs(),
+        new StatusbarCandy()
+    ];
     throwableObjects = [];
 
     constructor(canvas, keyboard) {
@@ -42,22 +46,27 @@ class World {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0); // Kamera wird nach links verschoben
         this.addObjectsToMap(this.level.backgroundObjects);
-
+    
         this.ctx.translate(-this.camera_x, 0); // backwards
         this.ctx.translate(this.camera_x, 0); //forwards
-
+    
         this.addObjectsToMap(this.level.clouds);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.zombies);  // Zombies werden eingefügt
         this.addObjectsToMap(this.level.monsters); // Monster werden eingefügt
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.endboss);
-
+    
         this.ctx.translate(-this.camera_x, 0); // Kamera wird zurückgesetzt
-        this.addToMap(this.statusBar);
-
+    
+        // Zeichnen Sie jede Statusbar einzeln
+        this.statusBar.forEach(bar => {
+            this.addToMap(bar);
+        });
+    
         requestAnimationFrame(() => this.draw());
     }
+    
 
     addObjectsToMap(objects) {
         objects.forEach(object => {

@@ -1,4 +1,4 @@
-class StatusBar extends DrawableObject {
+class StatusbarHealth extends DrawableObject {
     IMAGES_HEALTH = [
         'img2/7_statusbars/1_statusbar/2_statusbar_health/statusbar-health_01.png',
         'img2/7_statusbars/1_statusbar/2_statusbar_health/statusbar-health_02.png',
@@ -14,7 +14,7 @@ class StatusBar extends DrawableObject {
         super().loadImage('img2/7_statusbars/1_statusbar/2_statusbar_health/statusbar-health_01.png');
         console.log('StatusBar constructor called');
         this.loadImages(this.IMAGES_HEALTH);
-        this.x = 1; 
+        this.x = 20; 
         this.y = 10;
         this.width = 150;
         this.height = 35;
