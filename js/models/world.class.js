@@ -46,9 +46,9 @@ class World {
 
     loadStatusbarIcons() {
         this.statusBarIcons = [
-            new StatusbarIcons(20, 22, 'HEALTH'),
-            new StatusbarIcons(20, 45, 'CANDY'),
-            new StatusbarIcons(20, 70, 'BOMBS')
+            new StatusbarIcons(15, 15, 'HEALTH'),
+            new StatusbarIcons(15, 38, 'CANDY'),
+            new StatusbarIcons(15, 62, 'BOMBS')
         ];
         console.log("Statusbar Icons loaded:", this.statusBarIcons);
     }    
