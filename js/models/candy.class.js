@@ -12,7 +12,7 @@ class Candy extends MovableObject {
         super().loadImage(this.IMAGES_CANDY[0]);
         this.loadImages(this.IMAGES_CANDY);
 
-        this.x = 500 + Math.random() * 10000; // hier wird die variable x, also die Position im Graphen auf der x-achse neu zugeteilt, und mit einem random wert erstellt
+        this.x = 100 + Math.random() * 10000; // hier wird die variable x, also die Position im Graphen auf der x-achse neu zugeteilt, und mit einem random wert erstellt
         // damit jedes Huhn, von den dreien die generiert werden, anders positioniert werden.
         this.animate();
     }

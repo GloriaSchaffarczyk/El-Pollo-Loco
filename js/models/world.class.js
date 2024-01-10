@@ -13,13 +13,15 @@ class World {
     ];
     throwableObjects = [];
     statusBarIcons;
-    candy;
-    bombs;
+    candies = [];
+    bombs = [];
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+        this.createCandies();
+        this.createBombs();
         this.draw();
         this.setWorld();
         this.run()
@@ -53,14 +55,24 @@ class World {
             new StatusbarIcons(15, 62, 'BOMBS')
         ];
         console.log("Statusbar Icons loaded:", this.statusBarIcons);
-    }    
+    }
+    
+    createCandies() {
+        for (let i = 0; i < 10; i++) { // Erstellen von 10 Candies
+            this.candies.push(new Candy());
+        }
+    }
+
+    createBombs() {
+        for (let i = 0; i < 10; i++) { // Erstellen von 10 Bombs
+            this.bombs.push(new Bombs());
+        }
+    }
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0); // Kamera wird nach links verschoben
         this.addObjectsToMap(this.level.backgroundObjects);
-        this.addObjectsToMap(this.level.candy);
-        this.addObjectsToMap(this.level.bombs);
     
         this.ctx.translate(-this.camera_x, 0); // backwards
         this.ctx.translate(this.camera_x, 0); //forwards
@@ -71,6 +83,12 @@ class World {
         this.addObjectsToMap(this.level.monsters); // Monster werden eingefügt
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.endboss);
+        this.candies.forEach(candy => {
+            this.addToMap(candy);
+        });
+        this.bombs.forEach(bomb => {
+            this.addToMap(bomb);
+        });
     
         this.ctx.translate(-this.camera_x, 0); // Kamera wird zurückgesetzt
     
