@@ -13,6 +13,8 @@ class World {
     ];
     throwableObjects = [];
     statusBarIcons;
+    candy;
+    bombs;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -57,6 +59,8 @@ class World {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0); // Kamera wird nach links verschoben
         this.addObjectsToMap(this.level.backgroundObjects);
+        this.addObjectsToMap(this.level.candy);
+        this.addObjectsToMap(this.level.bombs);
     
         this.ctx.translate(-this.camera_x, 0); // backwards
         this.ctx.translate(this.camera_x, 0); //forwards

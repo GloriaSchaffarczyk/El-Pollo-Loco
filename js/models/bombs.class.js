@@ -1,16 +1,16 @@
-class Candy extends MovableObject {
+class Bombs extends MovableObject {
 
     y = 250;
     width = 50;
     height = 50;
-    IMAGES_CANDY = [
-        'img2/8_candy/candy_01.png',
-        'img2/8_candy/candy_02.png'
+    IMAGES_BOMBS = [
+        'img2/6_bombs/bomb_01.png',
+        'img2/6_bombs/bomb_02.png'
     ];
 
     constructor() {
-        super().loadImage(this.IMAGES_CANDY[0]);
-        this.loadImages(this.IMAGES_CANDY);
+        super().loadImage(this.IMAGES_BOMBS[0]);
+        this.loadImages(this.IMAGES_BOMBS);
 
         this.x = 500 + Math.random() * 10000; // hier wird die variable x, also die Position im Graphen auf der x-achse neu zugeteilt, und mit einem random wert erstellt
         // damit jedes Huhn, von den dreien die generiert werden, anders positioniert werden.
@@ -19,7 +19,7 @@ class Candy extends MovableObject {
 
     animate() {
         setInterval(() => {
-            this.playAnimation(this.IMAGES_CANDY); // Calls the method from the superclass
+            this.playAnimation(this.IMAGES_BOMBS); // Calls the method from the superclass
         }, 1000 / 2);
     }
 
