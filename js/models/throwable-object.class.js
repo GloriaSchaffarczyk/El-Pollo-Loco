@@ -1,10 +1,10 @@
 class ThrowableObject extends MovableObject {
     accelerationY = 3.5;
     IMAGES_BIKER_THROWING_BOMB = [
-        'img2/6_bombs/bomb_rotation/bomb_01.png',
-        'img2/6_bombs/bomb_rotation/bomb_02.png',
-        'img2/6_bombs/bomb_rotation/bomb_03.png',
-        'img2/6_bombs/bomb_rotation/bomb_04.png',
+        'img2/6_bombs/bomb_rotation/bomb-rotation_01.png',
+        'img2/6_bombs/bomb_rotation/bomb-rotation_02.png',
+        'img2/6_bombs/bomb_rotation/bomb-rotation_03.png',
+        'img2/6_bombs/bomb_rotation/bomb-rotation_04.png',
     ];
 
     constructor(x, y, direction) {

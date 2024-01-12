@@ -58,13 +58,13 @@ class World {
     }
     
     createCandies() {
-        for (let i = 0; i < 10; i++) { // Erstellen von 10 Candies
+        for (let i = 0; i < 20; i++) { // Erstellen von 10 Candies
             this.candies.push(new Candy());
         }
     }
 
     createBombs() {
-        for (let i = 0; i < 10; i++) { // Erstellen von 10 Bombs
+        for (let i = 0; i < 20; i++) { // Erstellen von 10 Bombs
             this.bombs.push(new Bombs());
         }
     }
