@@ -38,11 +38,20 @@ class Character extends MovableObject {
         'img2/2_character/5_dead/biker_death_05.png',
         'img2/2_character/5_dead/biker_death_06.png',
     ];
+    IMAGES_THROWINGBOMBS = [
+        'img2/2_character/6_throw/biker_throw_01.png',
+        'img2/2_character/6_throw/biker_throw_02.png',
+        'img2/2_character/6_throw/biker_throw_03.png',
+        'img2/2_character/6_throw/biker_throw_04.png',
+        'img2/2_character/6_throw/biker_throw_05.png',
+        'img2/2_character/6_throw/biker_throw_06.png',
+    ];
     ANIMATION_SPEED_IDLE = 250;   // 100ms per frame
     ANIMATION_SPEED_WALK = 30;    // 60ms per frame
     ANIMATION_SPEED_JUMP = 150;    // 75ms per frame
     ANIMATION_SPEED_HURT = 150;    // 75ms per frame
     ANIMATION_SPEED_DEAD = 200;    // 50ms per frame
+    ANIMATION_SPEED_THROWINGBOMBS = 100;
     world;
     walking_sound = new Audio('audio/659370__matrixxx__retro-footsteps.wav');
     jumping_sound = new Audio('audio/678839__cartchaos__jump.wav');
@@ -58,6 +67,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_JUMP);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
+        this.loadImages(this.IMAGES_THROWINGBOMBS);
         this.background_music.play();
         this.background_music.loop = true;
         this.animate();
@@ -101,7 +111,7 @@ class Character extends MovableObject {
         let animationSpeed = this.ANIMATION_SPEED_IDLE;  // Defaultwert
 
         if (this.isDead()) {
-            if(!this.hasDied) {
+            if (!this.hasDied) {
                 this.playAnimation(this.IMAGES_DEAD);
                 animationSpeed = this.ANIMATION_SPEED_DEAD;
                 this.dying_sound.play();

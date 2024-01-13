@@ -1,6 +1,6 @@
 class ThrowableObject extends MovableObject {
     accelerationY = 3.5;
-    IMAGES_BIKER_THROWING_BOMB = [
+    IMAGES_BOMBROTATION = [
         'img2/6_bombs/bomb_rotation/bomb-rotation_01.png',
         'img2/6_bombs/bomb_rotation/bomb-rotation_02.png',
         'img2/6_bombs/bomb_rotation/bomb-rotation_03.png',
@@ -9,7 +9,7 @@ class ThrowableObject extends MovableObject {
 
     constructor(x, y, direction) {
         super().loadImage('img2/6_bombs/bomb_rotation/bomb_01.png',);
-        this.loadImages(this.IMAGES_BIKER_THROWING_BOMB);
+        this.loadImages(this.IMAGES_BOMBROTATION);
         this.x = x;
         this.y = y;
         this.direction = direction; // neu
@@ -25,7 +25,7 @@ class ThrowableObject extends MovableObject {
         this.applyGravity();
         setInterval(() => {
             this.x += this.speedX / 2;  // Anpassung hier
-            this.playAnimation(this.IMAGES_BIKER_THROWING_BOMB);
+            this.playAnimation(this.IMAGES_BOMBROTATION);
         }, 25);
     }
 }
