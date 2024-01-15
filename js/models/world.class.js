@@ -15,6 +15,7 @@ class World {
     statusBarIcons;
     candies = [];
     bombs = [];
+    bombHitEnemy = false;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
