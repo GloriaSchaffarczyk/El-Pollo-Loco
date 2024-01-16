@@ -31,16 +31,17 @@ class ThrowableObject extends MovableObject {
 
     // wenn sich der Character umdreht, muss die Flasche in die entgegengesetze Richtung fliegen, als muss += 10 angepasst werden
     throw() {
-        this.speedY = 30;
-        this.speedX = this.direction === 'left' ? -20 : 20;
-        this.applyGravity();
         setInterval(() => {
-            if(this.hitEnemy) {
+            if (this.hitEnemy) {
                 this.playAnimation(this.IMAGES_BOMBEXPLOSION);
             } else {
                 this.playAnimation(this.IMAGES_BOMBROTATION);
             }
-            this.x += this.speedX / 2;
-        }, 25); 
-    }    
+    
+            if (this.isAboveGround()) {
+                this.x += this.speedX / 2;
+                // Andere Bewegungslogik, falls benötigt
+            }
+        }, 250); 
+    }       
 }
