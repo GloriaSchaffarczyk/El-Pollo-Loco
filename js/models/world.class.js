@@ -15,7 +15,6 @@ class World {
     statusBarIcons;
     candies = [];
     bombs = [];
-    bombHitEnemy = false;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -169,6 +168,7 @@ class World {
             this.level.zombies.forEach((zombie) => {
                 if (bomb.isColliding(zombie)) {
                     zombie.enemyHitByBomb();
+                    bomb.hitEnemy = true;
                     console.log('Zombie hit by bomb');
                 }
             });
@@ -176,6 +176,7 @@ class World {
             this.level.monsters.forEach((monster) => {
                 if (bomb.isColliding(monster)) {
                     monster.enemyHitByBomb();
+                    bomb.hitEnemy = true;
                     console.log('Monster hit by bomb');
                 }
             });
@@ -183,6 +184,7 @@ class World {
             this.level.endboss.forEach((endboss) => {
                 if (bomb.isColliding(endboss)) {
                     endboss.enemyHitByBomb();
+                    bomb.hitEnemy = true;
                     console.log('Endboss hit by bomb');
                 }
             });

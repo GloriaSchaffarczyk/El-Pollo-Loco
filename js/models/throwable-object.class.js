@@ -16,6 +16,7 @@ class ThrowableObject extends MovableObject {
         'img2/6_bombs/bomb_explosion/bomb-explosion_07.png',
         'img2/6_bombs/bomb_explosion/bomb-explosion_08.png',
     ];
+    hitEnemy = false;
 
     constructor(x, y, direction) {
         super().loadImage('img2/6_bombs/bomb_rotation/bomb_01.png',);
@@ -34,7 +35,7 @@ class ThrowableObject extends MovableObject {
         this.speedX = this.direction === 'left' ? -20 : 20;
         this.applyGravity();
         setInterval(() => {
-            if(this.bombHitEnemy === true) {
+            if(this.hitEnemy) {
                 this.playAnimation(this.IMAGES_BOMBEXPLOSION);
             } else {
                 this.playAnimation(this.IMAGES_BOMBROTATION);
