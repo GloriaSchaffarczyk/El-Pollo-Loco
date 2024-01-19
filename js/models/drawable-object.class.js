@@ -12,14 +12,12 @@ class DrawableObject {
     loadImage(path) {
         this.img = new Image();
         this.img.addEventListener('load', () => {
-            console.log(`Image loaded from path: ${path}`);
             this.imageLoaded = true; // Setzen auf true, wenn das Bild geladen ist
         });
         this.img.src = path;
     }
 
     draw(ctx) {
-        console.log(`draw called for image with path: ${this.img.src}`);
         if (this.imageLoaded) { // Zeichnen nur, wenn das Bild geladen ist
             ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
         } else {
@@ -46,7 +44,6 @@ class DrawableObject {
         arr.forEach((path) => {
             let img = new Image();
             img.addEventListener('load', () => {
-                console.log(`Image loaded from path: ${path}`);
                 this.imageCache[path].imageLoaded = true;
             });
             img.src = path;
