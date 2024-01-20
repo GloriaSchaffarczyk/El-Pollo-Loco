@@ -6,6 +6,14 @@ class Character extends MovableObject {
         'img2/2_character/1_idle/idle/biker_idle_03.png',
         'img2/2_character/1_idle/idle/biker_idle_04.png',
     ];
+    IMAGES_LONG_IDLE = [
+        'img2/2_character/1_idle/long_idle/biker_long_idle_01.png',
+        'img2/2_character/1_idle/long_idle/biker_long_idle_02.png',
+        'img2/2_character/1_idle/long_idle/biker_long_idle_03.png',
+        'img2/2_character/1_idle/long_idle/biker_long_idle_04.png',
+        'img2/2_character/1_idle/long_idle/biker_long_idle_05.png',
+        'img2/2_character/1_idle/long_idle/biker_long_idle_06.png',
+    ];
     IMAGES_WALK = [
         'img2/2_character/2_walk/biker_walk_01.png',
         'img2/2_character/2_walk/biker_walk_01.png',
@@ -63,6 +71,7 @@ class Character extends MovableObject {
     constructor() {
         super().loadImage('img2/2_character/2_walk/biker_walk_01.png')
         this.loadImages(this.IMAGES_IDLE);
+        this.loadImages(this.IMAGES_LONG_IDLE);
         this.loadImages(this.IMAGES_WALK);
         this.loadImages(this.IMAGES_JUMP);
         this.loadImages(this.IMAGES_HURT);
@@ -126,6 +135,8 @@ class Character extends MovableObject {
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 this.playAnimation(this.IMAGES_WALK);
                 animationSpeed = this.ANIMATION_SPEED_WALK;
+            } else if (this.doesNothing <= 5000) {
+                this.playAnimation(this.IMAGES_LONG_IDLE);
             } else {
                 this.playAnimation(this.IMAGES_IDLE);
                 animationSpeed = this.ANIMATION_SPEED_IDLE;
