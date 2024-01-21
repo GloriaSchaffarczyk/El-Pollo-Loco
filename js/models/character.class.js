@@ -13,6 +13,38 @@ class Character extends MovableObject {
         'img2/2_character/1_idle/long_idle/biker_long_idle_04.png',
         'img2/2_character/1_idle/long_idle/biker_long_idle_05.png',
         'img2/2_character/1_idle/long_idle/biker_long_idle_06.png',
+        'img2/2_character/1_idle/idle/biker_idle_01.png',
+        'img2/2_character/1_idle/idle/biker_idle_02.png',
+        'img2/2_character/1_idle/idle/biker_idle_03.png',
+        'img2/2_character/1_idle/idle/biker_idle_04.png',
+        'img2/2_character/1_idle/idle/biker_idle_01.png',
+        'img2/2_character/1_idle/idle/biker_idle_02.png',
+        'img2/2_character/1_idle/idle/biker_idle_03.png',
+        'img2/2_character/1_idle/idle/biker_idle_04.png',
+        'img2/2_character/1_idle/long_idle/biker_long_idle_angry_01.png',
+        'img2/2_character/1_idle/long_idle/biker_long_idle_angry_02.png',
+        'img2/2_character/1_idle/long_idle/biker_long_idle_angry_03.png',
+        'img2/2_character/1_idle/long_idle/biker_long_idle_angry_04.png',
+        'img2/2_character/1_idle/long_idle/biker_long_idle_angry_05.png',
+        'img2/2_character/1_idle/long_idle/biker_long_idle_angry_06.png',
+        'img2/2_character/1_idle/idle/biker_idle_01.png',
+        'img2/2_character/1_idle/idle/biker_idle_02.png',
+        'img2/2_character/1_idle/idle/biker_idle_03.png',
+        'img2/2_character/1_idle/idle/biker_idle_04.png',
+        'img2/2_character/1_idle/idle/biker_idle_01.png',
+        'img2/2_character/1_idle/idle/biker_idle_02.png',
+        'img2/2_character/1_idle/idle/biker_idle_03.png',
+        'img2/2_character/1_idle/idle/biker_idle_04.png',
+        'img2/2_character/1_idle/long_idle/biker_long_idle_sit_01.png',
+        'img2/2_character/1_idle/long_idle/biker_long_idle_sit_02.png',
+        'img2/2_character/1_idle/long_idle/biker_long_idle_sit_03.png',
+        'img2/2_character/1_idle/long_idle/biker_long_idle_sit_03.png',
+        'img2/2_character/1_idle/long_idle/biker_long_idle_sit_03.png',
+        'img2/2_character/1_idle/long_idle/biker_long_idle_sit_04.png',
+        'img2/2_character/1_idle/idle/biker_idle_01.png',
+        'img2/2_character/1_idle/idle/biker_idle_02.png',
+        'img2/2_character/1_idle/idle/biker_idle_03.png',
+        'img2/2_character/1_idle/idle/biker_idle_04.png',
     ];
     IMAGES_WALK = [
         'img2/2_character/2_walk/biker_walk_01.png',
@@ -54,9 +86,9 @@ class Character extends MovableObject {
         'img2/2_character/6_throw/biker_throw_05.png',
         'img2/2_character/6_throw/biker_throw_06.png',
     ];
-    ANIMATION_SPEED_IDLE = 500;   // 100ms per frame
-    ANIMATION_SPEED_LONG_IDLE = 700;   // 100ms per frame
-    ANIMATION_SPEED_WALK = 50;    // 60ms per frame
+    ANIMATION_SPEED_IDLE = 400;   // 100ms per frame
+    ANIMATION_SPEED_LONG_IDLE = 400;   // 100ms per frame
+    ANIMATION_SPEED_WALK = 35;    // 60ms per frame
     ANIMATION_SPEED_JUMP = 150;    // 75ms per frame
     ANIMATION_SPEED_HURT = 150;    // 75ms per frame
     ANIMATION_SPEED_DEAD = 200;    // 50ms per frame
@@ -83,41 +115,71 @@ class Character extends MovableObject {
         this.background_music.loop = true;
         this.animate();
         this.applyGravity();
-        setInterval(() => {
-            this.idleTime += 100; // Zählt die Idle-Zeit hoch
-            this.setAnimationInterval();
-        }, 100); // Überprüft alle 100 Millisekunden
+        this.lastAnimationState = null;
     }
 
     animate() {
-
         setInterval(() => {
-            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-                this.moveRight();
-                this.otherDirection = false;
-                this.walking_sound.playbackRate = 9;
-                this.walking_sound.play();
-                this.idleTime = 0; // Zurücksetzen der Idle-Zeit
-            }
-
-            if (this.world.keyboard.LEFT && this.x > -650) {
-                this.moveLeft();
-                this.otherDirection = true;
-                this.walking_sound.playbackRate = 9;
-                this.walking_sound.play();
-                this.idleTime = 0; // Zurücksetzen der Idle-Zeit
-            }
-
-            if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-                this.jump();
-                this.jumping_sound.play();
-                this.idleTime = 0; // Zurücksetzen der Idle-Zeit
-            }
-
+            this.moveCharacterBasedOnInput();
+            this.checkAnimationState();
             this.world.camera_x = -this.x + 100;
         }, 5000 / 60);
+         this.setAnimationInterval();
+    }
 
-        this.setAnimationInterval();
+    moveCharacterBasedOnInput() {
+        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+            this.moveRight();
+            this.otherDirection = false;
+            this.walking_sound.playbackRate = 9;
+            this.walking_sound.play();
+            this.idleTime = 0; // Zurücksetzen der Idle-Zeit
+        }
+
+        if (this.world.keyboard.LEFT && this.x > -650) {
+            this.moveLeft();
+            this.otherDirection = true;
+            this.walking_sound.playbackRate = 9;
+            this.walking_sound.play();
+            this.idleTime = 0; // Zurücksetzen der Idle-Zeit
+        }
+
+        if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+            this.jump();
+            this.jumping_sound.play();
+            this.idleTime = 0; // Zurücksetzen der Idle-Zeit
+        }
+
+        // Erhöhen der Idle-Zeit, wenn keine Bewegungstasten gedrückt werden
+        if (!(this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.SPACE)) {
+            this.idleTime += 2000 / 60;
+        }
+    }
+
+    checkAnimationState() {
+        let currentAnimationState;
+
+        if (this.isDead()) {
+            currentAnimationState = 'DEAD';
+        } else if (this.isHurt()) {
+            currentAnimationState = 'HURT';
+        } else if (this.isAboveGround()) {
+            currentAnimationState = 'JUMP';
+        } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+            currentAnimationState = 'WALK';
+        } else {
+            if (this.idleTime > 5000) {
+                currentAnimationState = 'LONG_IDLE';
+            } else {
+                currentAnimationState = 'IDLE';
+            }
+        }
+
+        // Ändert die Animation nur, wenn sich der Zustand geändert hat
+        if (this.lastAnimationState !== currentAnimationState) {
+            this.setAnimationInterval();
+            this.lastAnimationState = currentAnimationState;
+        }
     }
 
     setAnimationInterval() {
@@ -137,6 +199,7 @@ class Character extends MovableObject {
             }
         } else if (this.isHurt()) {
             this.playAnimation(this.IMAGES_HURT);
+            animationSpeed = this.ANIMATION_SPEED_HURT;
         } else if (this.isAboveGround()) {
             this.playAnimation(this.IMAGES_JUMP);
             animationSpeed = this.ANIMATION_SPEED_JUMP;
