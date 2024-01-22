@@ -19,15 +19,15 @@ class ThrowableObject extends MovableObject {
     hitEnemy = false;
 
     constructor(x, y, direction) {
-        super().loadImage('img2/6_bombs/bomb_rotation/bomb_01.png',);
+        super().loadImage('img2/6_bombs/bomb_rotation/bomb-rotation_01.png',);
         this.loadImages(this.IMAGES_BOMBROTATION);
         this.x = x;
         this.y = y;
         this.direction = direction; // neu
         this.width = 50;
         this.height = 50;
-        this.throw();
-    }    
+        this.throw(100, 100);
+    }
 
     // wenn sich der Character umdreht, muss die Flasche in die entgegengesetze Richtung fliegen, als muss += 10 angepasst werden
     throw() {
@@ -35,13 +35,12 @@ class ThrowableObject extends MovableObject {
             if (this.hitEnemy) {
                 this.playAnimation(this.IMAGES_BOMBEXPLOSION);
             } else {
+                this.x += 10;
+                this.y = y;
+                this.speedY = 30;
+                this.applyGravity();
                 this.playAnimation(this.IMAGES_BOMBROTATION);
             }
-    
-            if (this.isAboveGround()) {
-                this.x += this.speedX / 2;
-                // Andere Bewegungslogik, falls benötigt
-            }
-        }, 250); 
+        }, 25);
     }       
 }
