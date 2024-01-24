@@ -36,9 +36,16 @@ class ThrowableObject extends MovableObject {
 
         this.applyGravity();
         setInterval(() => {
-            this.x += this.speedX; // Horizontale Bewegung aktualisieren
-            this.playAnimation(this.IMAGES_BOMBROTATION); // Rotation der Bombe animieren
+
+            if (this.hitEnemy) {
+                this.speedX = 0; // Stoppt die horizontale Bewegung
+                this.speedY = 0; // Stoppt die vertikale Bewegung
+                this.playAnimation(this.IMAGES_BOMBEXPLOSION);
+                // clearInterval(intervalId);
+            } else {
+                this.x += this.speedX; // Horizontale Bewegung aktualisieren
+                this.playAnimation(this.IMAGES_BOMBROTATION); // Rotation der Bombe animieren
+            }
         }, 25);
     }
-
 }
