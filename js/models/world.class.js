@@ -144,7 +144,7 @@ class World {
             if (this.character.isColliding(zombie)) {
                 this.character.enemyHit();
                 this.statusBar[0].setPercentage(this.character.energy)
-                console.log('is colliding and loosing energy', this.character.energy);
+                console.log('is colliding and loosing energy', this.character.energy); //evtl hier ein Problem?
             }
         });
 
@@ -170,7 +170,7 @@ class World {
                 if (bomb.isColliding(zombie)) {
                     zombie.enemyHitByBomb();
                     bomb.hitEnemy = true;
-                    console.log('Zombie hit by bomb');
+                    console.log('Zombie hit by bomb'); //funktioniert
                 }
             });
 
