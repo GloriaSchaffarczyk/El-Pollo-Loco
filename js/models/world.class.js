@@ -58,7 +58,7 @@ class World {
         ];
         console.log("Statusbar Icons loaded:", this.statusBarIcons);
     }
-    
+
     createCandies() {
         for (let i = 0; i < 20; i++) { // Erstellen von 10 Candies
             this.candies.push(new Candy());
@@ -75,10 +75,10 @@ class World {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0); // Kamera wird nach links verschoben
         this.addObjectsToMap(this.level.backgroundObjects);
-    
+
         this.ctx.translate(-this.camera_x, 0); // backwards
         this.ctx.translate(this.camera_x, 0); //forwards
-    
+
         this.addObjectsToMap(this.level.clouds);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.zombies);  // Zombies werden eingefügt
@@ -91,9 +91,9 @@ class World {
         this.bombs.forEach(bomb => {
             this.addToMap(bomb);
         });
-    
+
         this.ctx.translate(-this.camera_x, 0); // Kamera wird zurückgesetzt
-    
+
         // Zeichnen Sie jede Statusbar einzeln
         this.statusBar.forEach(statusbar => {
             this.addToMap(statusbar);
@@ -103,10 +103,10 @@ class World {
                 this.addToMap(icon);
             });
         }
-    
+
         requestAnimationFrame(() => this.draw());
     }
-    
+
 
     addObjectsToMap(objects) {
         objects.forEach(object => {
@@ -166,30 +166,36 @@ class World {
         });
 
         this.throwableObjects.forEach((bomb) => {
-            this.level.zombies.forEach((zombie) => {
-                if (bomb.isColliding(zombie)) {
-                    zombie.enemyHitByBomb();
-                    bomb.hitEnemy = true;
-                    console.log('Zombie hit by bomb'); //funktioniert
-                }
-            });
+            // Zusätzlicher Check, um zu überprüfen, ob die Bombe bereits einen Feind getroffen hat
+            if (!bomb.hitEnemy) {
+                this.level.zombies.forEach((zombie) => {
+                    if (bomb.isColliding(zombie)) {
+                        zombie.enemyHitByBomb();
+                        bomb.hitEnemy = true; // Markiere die Bombe als "getroffen"
+                        console.log('Zombie hit by bomb');
+                    }
+                });
 
-            this.level.monsters.forEach((monster) => {
-                if (bomb.isColliding(monster)) {
-                    monster.enemyHitByBomb();
-                    bomb.hitEnemy = true;
-                    console.log('Monster hit by bomb');
-                }
-            });
+                this.level.monsters.forEach((monster) => {
+                    if (bomb.isColliding(monster)) {
+                        monster.enemyHitByBomb();
+                        bomb.hitEnemy = true; // Markiere die Bombe als "getroffen"
+                        console.log('Monster hit by bomb');
+                    }
+                });
 
-            this.level.endboss.forEach((endboss) => {
-                if (bomb.isColliding(endboss)) {
-                    endboss.enemyHitByBomb();
-                    bomb.hitEnemy = true;
-                    console.log('Endboss hit by bomb');
-                }
-            });
+                this.level.endboss.forEach((endboss) => {
+                    if (bomb.isColliding(endboss)) {
+                        endboss.enemyHitByBomb();
+                        bomb.hitEnemy = true; // Markiere die Bombe als "getroffen"
+                        console.log('Endboss hit by bomb');
+                    }
+                });
+            }
         });
+
+        // Entferne alle Bomben, die einen Feind getroffen haben, aus dem Array
+        this.throwableObjects = this.throwableObjects.filter(bomb => !bomb.hitEnemy);
     }
 }
 
