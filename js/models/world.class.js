@@ -46,7 +46,7 @@ class World {
             let direction = this.character.otherDirection ? 'left' : 'right';
             let bomb = new ThrowableObject(this.character.x + 30, this.character.y + -70, direction);
             this.throwableObjects.push(bomb);
-            this.keyboard.W = false; // Verhindern, dass die Aktion im nächsten Frame erneut ausgelöst wird
+            this.keyboard.W = false; // Verhindert, dass die Aktion im nächsten Frame erneut ausgelöst wird
             this.character.idleTime = 0;
         }
     }
@@ -82,8 +82,8 @@ class World {
 
         this.addObjectsToMap(this.level.clouds);
         this.addToMap(this.character);
-        this.addObjectsToMap(this.level.zombies);  // Zombies werden eingefügt
-        this.addObjectsToMap(this.level.monsters); // Monster werden eingefügt
+        this.addObjectsToMap(this.level.zombies);  
+        this.addObjectsToMap(this.level.monsters); 
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.endboss);
         this.candies.forEach(candy => {
@@ -95,7 +95,7 @@ class World {
 
         this.ctx.translate(-this.camera_x, 0); // Kamera wird zurückgesetzt
 
-        // Zeichnen Sie jede Statusbar einzeln
+        // for each Statusbar
         this.statusBar.forEach(statusbar => {
             this.addToMap(statusbar);
         });
@@ -145,7 +145,7 @@ class World {
             if (this.character.isColliding(zombie)) {
                 this.character.enemyHit();
                 this.statusBar[0].setPercentage(this.character.energy)
-                console.log('is colliding and loosing energy', this.character.energy); //evtl hier ein Problem?
+                console.log('is colliding and loosing energy', this.character.energy); 
             }
         });
 
@@ -167,12 +167,11 @@ class World {
         });
 
         this.throwableObjects.forEach((bomb) => {
-            // Zusätzlicher Check, um zu überprüfen, ob die Bombe bereits einen Feind getroffen hat
             if (!bomb.hitEnemy) {
                 this.level.zombies.forEach((zombie) => {
                     if (bomb.isColliding(zombie)) {
                         zombie.enemyHitByBomb();
-                        bomb.hitEnemy = true; // Markiere die Bombe als "getroffen"
+                        bomb.hitEnemy = true; 
                         console.log('Zombie hit by bomb');
                     }
                 });
@@ -180,7 +179,7 @@ class World {
                 this.level.monsters.forEach((monster) => {
                     if (bomb.isColliding(monster)) {
                         monster.enemyHitByBomb();
-                        bomb.hitEnemy = true; // Markiere die Bombe als "getroffen"
+                        bomb.hitEnemy = true;
                         console.log('Monster hit by bomb');
                     }
                 });
@@ -188,14 +187,13 @@ class World {
                 this.level.endboss.forEach((endboss) => {
                     if (bomb.isColliding(endboss)) {
                         endboss.enemyHitByBomb();
-                        bomb.hitEnemy = true; // Markiere die Bombe als "getroffen"
+                        bomb.hitEnemy = true;
                         console.log('Endboss hit by bomb');
                     }
                 });
             }
         });
 
-        // Entferne alle Bomben, die einen Feind getroffen haben, aus dem Array
         this.throwableObjects = this.throwableObjects.filter(bomb => !bomb.hitEnemy);
     }
 }

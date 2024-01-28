@@ -75,8 +75,7 @@ class MovableObject extends DrawableObject {
         let i = this.currentImage % images.length;
         let path = images[i];
         this.img = this.imageCache[path];
-        this.currentImage++
-        console.log(`Animating image: ${path}, index: ${i}`);
+        this.currentImage++;
     }
 
     moveRight() {

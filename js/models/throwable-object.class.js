@@ -27,24 +27,33 @@ class ThrowableObject extends MovableObject {
         this.width = 50;
         this.height = 50;
         this.bombAnimation();
+        this.animationInterval = null;
+        this.exploding = false;
     }
 
     bombAnimation() {
         this.speedY = 30; // Anfangsgeschwindigkeit nach oben
-        this.speedX = this.direction === 'right' ? 10 : -10; // Setzen der horizontalen Geschwindigkeit basierend auf der Richtung
+        this.speedX = this.direction === 'right' ? 10 : -10;
 
         this.applyGravity();
-        setInterval(() => {
-            if (this.hitEnemy) {
-                this.speedX = 0; // Stoppt die horizontale Bewegung
-                this.speedY = 0; // Stoppt die vertikale Bewegung
-                this.playAnimation(this.IMAGES_BOMBEXPLOSION);
-                console.log("Explosion wird abgespielt");
-                // clearInterval(intervalId);
-            } else {
-                this.x += this.speedX; // Horizontale Bewegung aktualisieren
-                this.playAnimation(this.IMAGES_BOMBROTATION); // Rotation der Bombe animieren
-            }
-        }, 25);
+
+        // Starten Sie das Intervall nur, wenn es noch nicht läuft
+        if (!this.animationInterval) {
+            this.animationInterval = setInterval(() => {
+                if (this.hitEnemy && !this.exploding) {
+                    this.exploding = true;
+                    this.speedX = 0;
+                    this.speedY = 0;
+                    this.playAnimation(this.IMAGES_BOMBEXPLOSION);
+                    console.log("Explosion wird abgespielt");
+                    clearInterval(this.animationInterval);
+                    this.animationInterval = null; // Zurücksetzen der Intervall-ID
+                } else if (!this.hitEnemy) {
+                    this.x += this.speedX; // Horizontale Bewegung
+                    this.playAnimation(this.IMAGES_BOMBROTATION);
+                    console.log("Rotation");
+                }
+            }, 25);
+        }
     }
 }
