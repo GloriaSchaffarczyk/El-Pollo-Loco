@@ -26,17 +26,15 @@ class ThrowableObject extends MovableObject {
         this.direction = direction; // neu
         this.width = 50;
         this.height = 50;
-        this.throw();
+        this.bombAnimation();
     }
 
-
-    throw() {
+    bombAnimation() {
         this.speedY = 30; // Anfangsgeschwindigkeit nach oben
         this.speedX = this.direction === 'right' ? 10 : -10; // Setzen der horizontalen Geschwindigkeit basierend auf der Richtung
 
         this.applyGravity();
         setInterval(() => {
-
             if (this.hitEnemy) {
                 this.speedX = 0; // Stoppt die horizontale Bewegung
                 this.speedY = 0; // Stoppt die vertikale Bewegung

@@ -86,13 +86,13 @@ class Character extends MovableObject {
         'img2/2_character/6_throw/biker_throw_05.png',
         'img2/2_character/6_throw/biker_throw_06.png',
     ];
-    ANIMATION_SPEED_IDLE = 400;   // 100ms per frame
-    ANIMATION_SPEED_LONG_IDLE = 400;   // 100ms per frame
-    ANIMATION_SPEED_WALK = 35;    // 60ms per frame
-    ANIMATION_SPEED_JUMP = 150;    // 75ms per frame
-    ANIMATION_SPEED_HURT = 150;    // 75ms per frame
-    ANIMATION_SPEED_DEAD = 200;    // 50ms per frame
-    ANIMATION_SPEED_THROWINGBOMBS = 100;
+    ANIMATION_SPEED_IDLE = 400; 
+    ANIMATION_SPEED_LONG_IDLE = 400;   
+    ANIMATION_SPEED_WALK = 35;    
+    ANIMATION_SPEED_JUMP = 150;   
+    ANIMATION_SPEED_HURT = 150;    
+    ANIMATION_SPEED_DEAD = 250;    
+    ANIMATION_SPEED_THROWINGBOMBS = 45;
     world;
     walking_sound = new Audio('audio/659370__matrixxx__retro-footsteps.wav');
     jumping_sound = new Audio('audio/678839__cartchaos__jump.wav');
@@ -100,7 +100,8 @@ class Character extends MovableObject {
     dying_sound = new Audio('audio/163442__under7dude__man-dying.wav');
     animationInterval = null;
     hasDied = false;
-    idleTime = 0; // Variable für die Inaktivitätszeit
+    isThrowingBomb = false;
+    idleTime = 0; 
 
     constructor() {
         super().loadImage('img2/2_character/2_walk/biker_walk_01.png')
@@ -120,75 +121,44 @@ class Character extends MovableObject {
 
     animate() {
         setInterval(() => {
-            this.moveCharacterBasedOnInput();
-            this.checkAnimationState();
+            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+                this.moveRight();
+                this.otherDirection = false;
+                this.walking_sound.playbackRate = 9;
+                this.walking_sound.play();
+                this.idleTime = 0;
+            }
+
+            if (this.world.keyboard.LEFT && this.x > -650) {
+                this.moveLeft();
+                this.otherDirection = true;
+                this.walking_sound.playbackRate = 9;
+                this.walking_sound.play();
+                this.idleTime = 0;
+            }
+
+            if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+                this.jump();
+                this.jumping_sound.play();
+                this.idleTime = 0;
+            }
+
+            if (!(this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.SPACE)) {
+                this.idleTime += 2000 / 60;
+            }
+
             this.world.camera_x = -this.x + 100;
         }, 5000 / 60);
-         this.setAnimationInterval();
-    }
 
-    moveCharacterBasedOnInput() {
-        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-            this.moveRight();
-            this.otherDirection = false;
-            this.walking_sound.playbackRate = 9;
-            this.walking_sound.play();
-            this.idleTime = 0; // Zurücksetzen der Idle-Zeit
-        }
-
-        if (this.world.keyboard.LEFT && this.x > -650) {
-            this.moveLeft();
-            this.otherDirection = true;
-            this.walking_sound.playbackRate = 9;
-            this.walking_sound.play();
-            this.idleTime = 0; // Zurücksetzen der Idle-Zeit
-        }
-
-        if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-            this.jump();
-            this.jumping_sound.play();
-            this.idleTime = 0; // Zurücksetzen der Idle-Zeit
-        }
-
-        // Erhöhen der Idle-Zeit, wenn keine Bewegungstasten gedrückt werden
-        if (!(this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.SPACE)) {
-            this.idleTime += 2000 / 60;
-        }
-    }
-
-    checkAnimationState() {
-        let currentAnimationState;
-
-        if (this.isDead()) {
-            currentAnimationState = 'DEAD';
-        } else if (this.isHurt()) {
-            currentAnimationState = 'HURT';
-        } else if (this.isAboveGround()) {
-            currentAnimationState = 'JUMP';
-        } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-            currentAnimationState = 'WALK';
-        } else {
-            if (this.idleTime > 5000) {
-                currentAnimationState = 'LONG_IDLE';
-            } else {
-                currentAnimationState = 'IDLE';
-            }
-        }
-
-        // Ändert die Animation nur, wenn sich der Zustand geändert hat
-        if (this.lastAnimationState !== currentAnimationState) {
-            this.setAnimationInterval();
-            this.lastAnimationState = currentAnimationState;
-        }
+        this.setAnimationInterval();
     }
 
     setAnimationInterval() {
-        // Zunächst löschen wir das aktuelle Intervall, wenn es existiert.
         if (this.animationInterval) {
             clearInterval(this.animationInterval);
         }
 
-        let animationSpeed;
+        let animationSpeed = this.ANIMATION_SPEED_IDLE;  // Defaultwert
 
         if (this.isDead()) {
             if (!this.hasDied) {
@@ -197,9 +167,10 @@ class Character extends MovableObject {
                 this.dying_sound.play();
                 this.hasDied = true;
             }
+        } else if (this.isThrowingBomb) {
+            animationSpeed = this.ANIMATION_SPEED_THROWINGBOMBS;
         } else if (this.isHurt()) {
             this.playAnimation(this.IMAGES_HURT);
-            animationSpeed = this.ANIMATION_SPEED_HURT;
         } else if (this.isAboveGround()) {
             this.playAnimation(this.IMAGES_JUMP);
             animationSpeed = this.ANIMATION_SPEED_JUMP;
@@ -208,7 +179,7 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_WALK);
                 animationSpeed = this.ANIMATION_SPEED_WALK;
             } else {
-                if (this.idleTime > 5000) { // Wechsel zu Long_Idle nach 5 Sekunden
+                if (this.idleTime > 5000) {
                     this.playAnimation(this.IMAGES_LONG_IDLE);
                     animationSpeed = this.ANIMATION_SPEED_LONG_IDLE;
                 } else {
@@ -222,6 +193,21 @@ class Character extends MovableObject {
             this.setAnimationInterval();  // Bei jeder Ausführung wird das Intervall aktualisiert.
         }, animationSpeed);
     }
+
+    throwBomb() {
+        this.currentImage = 0;
+        this.isThrowingBomb = true;
+        const animationInterval = setInterval(() => {
+            this.playAnimation(this.IMAGES_THROWINGBOMBS);
+    
+            // Beendet das Intervall, wenn die Animation abgeschlossen ist
+            if (this.currentImage >= this.IMAGES_THROWINGBOMBS.length) {
+                clearInterval(animationInterval);
+                this.isThrowingBomb = false;
+                this.currentImage = 0; // Zurücksetzen für nächste Animation
+            }
+        }, this.ANIMATION_SPEED_THROWINGBOMBS);
+    }     
 
     initBackgroundMusic() {
         document.addEventListener('click', () => {

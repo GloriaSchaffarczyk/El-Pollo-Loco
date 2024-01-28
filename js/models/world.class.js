@@ -42,10 +42,11 @@ class World {
 
     checkThrowObjects() {
         if (this.keyboard.W) {
-            this.character.IMAGES_THROWINGBOMBS;
+            this.character.throwBomb(); // Ruft die Bombenwurf-Animation auf
             let direction = this.character.otherDirection ? 'left' : 'right';
-            let bomb = new ThrowableObject(this.character.x + 90, this.character.y + -70, direction);
+            let bomb = new ThrowableObject(this.character.x + 30, this.character.y + -70, direction);
             this.throwableObjects.push(bomb);
+            this.keyboard.W = false; // Verhindern, dass die Aktion im nächsten Frame erneut ausgelöst wird
             this.character.idleTime = 0;
         }
     }
