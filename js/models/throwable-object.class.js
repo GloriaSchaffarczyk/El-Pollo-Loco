@@ -39,6 +39,7 @@ class ThrowableObject extends MovableObject {
                 this.speedX = 0; // Stoppt die horizontale Bewegung
                 this.speedY = 0; // Stoppt die vertikale Bewegung
                 this.playAnimation(this.IMAGES_BOMBEXPLOSION);
+                console.log("Explosion wird abgespielt");
                 // clearInterval(intervalId);
             } else {
                 this.x += this.speedX; // Horizontale Bewegung aktualisieren
