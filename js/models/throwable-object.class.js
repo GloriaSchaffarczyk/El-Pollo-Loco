@@ -21,6 +21,7 @@ class ThrowableObject extends MovableObject {
     constructor(x, y, direction) {
         super().loadImage('img2/6_bombs/bomb_rotation/bomb-rotation_01.png',);
         this.loadImages(this.IMAGES_BOMBROTATION);
+        this.loadImages(this.IMAGES_BOMBEXPLOSION);
         this.x = x;
         this.y = y;
         this.direction = direction; // neu
@@ -40,14 +41,17 @@ class ThrowableObject extends MovableObject {
         // Starten Sie das Intervall nur, wenn es noch nicht läuft
         if (!this.animationInterval) {
             this.animationInterval = setInterval(() => {
-                if (this.hitEnemy && !this.exploding) {
+                if (this.hitEnemy) {
                     this.exploding = true;
                     this.speedX = 0;
                     this.speedY = 0;
-                    this.playAnimation(this.IMAGES_BOMBEXPLOSION);
-                    console.log("Explosion wird abgespielt");
-                    clearInterval(this.animationInterval);
-                    this.animationInterval = null; // Zurücksetzen der Intervall-ID
+                    setTimeout(() => {
+                        this.playAnimation(this.IMAGES_BOMBEXPLOSION);
+                        console.log("Explosion wird abgespielt");
+                        clearInterval(this.animationInterval);
+                        this.animationInterval = null; // Zurücksetzen der Intervall-ID
+                    }, 2000)
+        
                 } else if (!this.hitEnemy) {
                     this.x += this.speedX; // Horizontale Bewegung
                     this.playAnimation(this.IMAGES_BOMBROTATION);
