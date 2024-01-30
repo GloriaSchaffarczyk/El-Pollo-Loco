@@ -45,8 +45,8 @@ class ThrowableObject extends MovableObject {
                     this.exploding = true;
                     this.speedX = 0;
                     this.speedY = 0;
+                    this.playAnimation(this.IMAGES_BOMBEXPLOSION);
                     setTimeout(() => {
-                        this.playAnimation(this.IMAGES_BOMBEXPLOSION);
                         console.log("Explosion wird abgespielt");
                         clearInterval(this.animationInterval);
                         this.animationInterval = null; // Zurücksetzen der Intervall-ID
