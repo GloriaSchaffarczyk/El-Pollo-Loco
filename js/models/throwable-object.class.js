@@ -18,7 +18,7 @@ class ThrowableObject extends MovableObject {
     ];
     hitEnemy = false;
     isExploded = false;
-    ANIMATION_SPEED_EXPLOSION = 10;
+    ANIMATION_SPEED_EXPLOSION = 10; 
 
     constructor(x, y, direction) {
         super().loadImage('img2/6_bombs/bomb_rotation/bomb-rotation_01.png',);
@@ -35,34 +35,35 @@ class ThrowableObject extends MovableObject {
     }
 
     bombAnimation() {
-        this.speedY = 30; // Anfangsgeschwindigkeit nach oben
-        this.speedX = this.direction === 'right' ? 10 : -10;
-    
-
-        this.applyGravity();
-
-        // Starten Sie das Intervall nur, wenn es noch nicht läuft
         if (!this.animationInterval) {
+            this.speedY = 30; // Anfangsgeschwindigkeit nach oben
+            this.speedX = this.direction === 'right' ? 10 : -10;
+            this.applyGravity();
+
             this.animationInterval = setInterval(() => {
                 if (this.hitEnemy) {
-                    this.speedX = 0;
-                    this.speedY = 0;
-                    this.playAnimation(this.IMAGES_BOMBEXPLOSION);
-                    if (!this.isExploding) {
-                        animationSpeed = this.ANIMATION_SPEED_EXPLOSION;
-                        setTimeout(() => {
-                            console.log("Explosion wird abgespielt");
-                            clearInterval(this.animationInterval);
-                        }, 8 * this.IMAGES_BOMBEXPLOSION.length);
-                        this.animationInterval = null; // Zurücksetzen der Intervall-ID
-                    }      
-                    this.isExploded = true;
-                } else if (!this.hitEnemy) {
+                    this.handleExplosion();
+                } else {
                     this.x += this.speedX; // Horizontale Bewegung
                     this.playAnimation(this.IMAGES_BOMBROTATION);
-                    console.log("Rotation");
                 }
             }, 25);
+        }
+    }
+
+    handleExplosion() {
+        if (!this.isExploding) {
+            this.speedX = 0;
+            this.speedY = 0;
+            this.isExploding = true;
+            this.playAnimation(this.IMAGES_BOMBEXPLOSION);
+
+            setTimeout(() => {
+                console.log("Explosion wird abgespielt");
+                this.isExploded = true;
+                clearInterval(this.animationInterval);
+                this.animationInterval = null;
+            }, this.IMAGES_BOMBEXPLOSION.length * this.ANIMATION_SPEED_EXPLOSION);
         }
     }
 }
