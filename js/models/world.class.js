@@ -84,8 +84,8 @@ class World {
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.zombies);  
         this.addObjectsToMap(this.level.monsters); 
-        this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.endboss);
+        this.addObjectsToMap(this.throwableObjects);
         this.candies.forEach(candy => {
             this.addToMap(candy);
         });
@@ -104,6 +104,8 @@ class World {
                 this.addToMap(icon);
             });
         }
+
+        this.removeExplodedBombs();
 
         requestAnimationFrame(() => this.draw());
     }
@@ -193,9 +195,12 @@ class World {
                 });
             }
         });
-
-        this.throwableObjects = this.throwableObjects.filter(bomb => !bomb.hitEnemy);
     }
+
+    removeExplodedBombs() {
+        this.throwableObjects = this.throwableObjects.filter(bomb => !bomb.isExploded);
+    }
+    
 }
 
 

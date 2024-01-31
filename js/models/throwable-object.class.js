@@ -17,6 +17,8 @@ class ThrowableObject extends MovableObject {
         'img2/6_bombs/bomb_explosion/bomb-explosion_08.png',
     ];
     hitEnemy = false;
+    isExploded = false;
+    ANIMATION_SPEED_EXPLOSION = 10;
 
     constructor(x, y, direction) {
         super().loadImage('img2/6_bombs/bomb_rotation/bomb-rotation_01.png',);
@@ -35,6 +37,7 @@ class ThrowableObject extends MovableObject {
     bombAnimation() {
         this.speedY = 30; // Anfangsgeschwindigkeit nach oben
         this.speedX = this.direction === 'right' ? 10 : -10;
+    
 
         this.applyGravity();
 
@@ -42,16 +45,18 @@ class ThrowableObject extends MovableObject {
         if (!this.animationInterval) {
             this.animationInterval = setInterval(() => {
                 if (this.hitEnemy) {
-                    this.exploding = true;
                     this.speedX = 0;
                     this.speedY = 0;
                     this.playAnimation(this.IMAGES_BOMBEXPLOSION);
-                    setTimeout(() => {
-                        console.log("Explosion wird abgespielt");
-                        clearInterval(this.animationInterval);
+                    if (!this.isExploding) {
+                        animationSpeed = this.ANIMATION_SPEED_EXPLOSION;
+                        setTimeout(() => {
+                            console.log("Explosion wird abgespielt");
+                            clearInterval(this.animationInterval);
+                        }, 8 * this.IMAGES_BOMBEXPLOSION.length);
                         this.animationInterval = null; // Zurücksetzen der Intervall-ID
-                    }, 2000)
-        
+                    }      
+                    this.isExploded = true;
                 } else if (!this.hitEnemy) {
                     this.x += this.speedX; // Horizontale Bewegung
                     this.playAnimation(this.IMAGES_BOMBROTATION);
