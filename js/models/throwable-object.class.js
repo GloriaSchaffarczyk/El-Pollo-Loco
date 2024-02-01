@@ -18,7 +18,7 @@ class ThrowableObject extends MovableObject {
     ];
     hitEnemy = false;
     isExploded = false;
-    ANIMATION_SPEED_EXPLOSION = 10; 
+    ANIMATION_SPEED_EXPLOSION = 100; 
 
     constructor(x, y, direction) {
         super().loadImage('img2/6_bombs/bomb_rotation/bomb-rotation_01.png',);
@@ -43,6 +43,8 @@ class ThrowableObject extends MovableObject {
             this.animationInterval = setInterval(() => {
                 if (this.hitEnemy) {
                     this.handleExplosion();
+                    this.speedX = 0;
+                    this.speedY = 0;
                 } else {
                     this.x += this.speedX; // Horizontale Bewegung
                     this.playAnimation(this.IMAGES_BOMBROTATION);
@@ -53,17 +55,27 @@ class ThrowableObject extends MovableObject {
 
     handleExplosion() {
         if (!this.isExploding) {
-            this.speedX = 0;
-            this.speedY = 0;
             this.isExploding = true;
-            this.playAnimation(this.IMAGES_BOMBEXPLOSION);
-
+            let currentFrame = 0;
+            let maxFrames = this.IMAGES_BOMBEXPLOSION.length;
+    
+            // Setze das Intervall zur Anzeige jedes Explosionsbildes
+            this.explosionInterval = setInterval(() => {
+                if (currentFrame < maxFrames) {
+                    this.img = this.imageCache[this.IMAGES_BOMBEXPLOSION[currentFrame++]];
+                } else {
+                    clearInterval(this.explosionInterval); // Beendet die Explosionsanimation
+                }
+            }, this.ANIMATION_SPEED_EXPLOSION);
+    
+            // Setze ein Timeout, um die Bombe als explodiert zu markieren und die Hauptanimation zu beenden
             setTimeout(() => {
                 console.log("Explosion wird abgespielt");
                 this.isExploded = true;
                 clearInterval(this.animationInterval);
                 this.animationInterval = null;
-            }, this.IMAGES_BOMBEXPLOSION.length * this.ANIMATION_SPEED_EXPLOSION);
+            }, maxFrames * this.ANIMATION_SPEED_EXPLOSION);
         }
     }
+    
 }
