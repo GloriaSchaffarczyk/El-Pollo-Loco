@@ -22,7 +22,7 @@ class MovableObject extends DrawableObject {
         if (this instanceof ThrowableObject) { // throwable objects fall
             return true;
         } else {
-        return this.y < 290;
+            return this.y < 290;
         }
     }
 
@@ -45,8 +45,8 @@ class MovableObject extends DrawableObject {
     }
 
     isHurt() {
-        let timePassed = new Date().getTime() - this.lastHit; 
-        timePassed = timePassed / 1000; 
+        let timePassed = new Date().getTime() - this.lastHit;
+        timePassed = timePassed / 1000;
         return timePassed < 1;
     }
 
@@ -61,13 +61,31 @@ class MovableObject extends DrawableObject {
             this.y <= obj.y + obj.height;
     }
 
+    /* Bessere Formel zur Kollisionsberechnung (Genauer)
+    isColliding(obj) {
+        return (this.X + this.width) >= obj.X && this.X <= (obj.X + obj.width) &&
+            (this.Y + this.offsetY + this.height) >= obj.Y &&
+            (this.Y + this.offsetY) <= (obj.Y + obj.height) &&
+            obj.onCollisionCourse; // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
+    } */
+
     enemyHitByBomb() {
         this.energy -= 20;
         if (this.energy <= 0) {
             this.energy = 0;
         } else {
             this.lastHit = new Date().getTime();
-            console.log('Hit!', this.energy); 
+            console.log('Hit!', this.energy);
+        }
+    }
+
+    endbossHitByBomb() {
+        this.energy -= 20;
+        if (this.energy <= 0) {
+            this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
+            console.log('Hit endboss!', this.energy);
         }
     }
 

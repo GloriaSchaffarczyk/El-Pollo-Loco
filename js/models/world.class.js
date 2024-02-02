@@ -188,7 +188,7 @@ class World {
 
                 this.level.endboss.forEach((endboss) => {
                     if (bomb.isColliding(endboss)) {
-                        endboss.enemyHitByBomb();
+                        endboss.endbossHitByBomb();
                         bomb.hitEnemy = true;
                         console.log('Endboss hit by bomb');
                     }

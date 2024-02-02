@@ -43,8 +43,8 @@ class ThrowableObject extends MovableObject {
             this.animationInterval = setInterval(() => {
                 if (this.hitEnemy) {
                     this.handleExplosion();
-                    this.speedX = 0;
-                    this.speedY = 0;
+                    this.speedX = 1;
+                    this.speedY = 1;
                 } else {
                     this.x += this.speedX; // Horizontale Bewegung
                     this.playAnimation(this.IMAGES_BOMBROTATION);
