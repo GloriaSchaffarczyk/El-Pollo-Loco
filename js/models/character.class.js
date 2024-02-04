@@ -1,5 +1,11 @@
 class Character extends MovableObject {
     speed = 100;
+    offset={
+        top:0,
+        right: 50,
+        bottom: 0,
+        left: 10
+    }
     IMAGES_IDLE = [
         'img2/2_character/1_idle/idle/biker_idle_01.png',
         'img2/2_character/1_idle/idle/biker_idle_02.png',

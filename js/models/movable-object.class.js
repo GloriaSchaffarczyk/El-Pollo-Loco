@@ -1,4 +1,10 @@
 class MovableObject extends DrawableObject {
+    offset={
+        top:0,
+        right: 0,
+        bottom: 0,
+        left: 0
+    };
     speed = 0.15;
     otherDirection = false;
     speedY = 0;
@@ -54,18 +60,29 @@ class MovableObject extends DrawableObject {
         return this.energy == 0;
     }
 
-    isColliding(obj) {
+    isColliding(mo) {
+        return (
+            this.x + this.offset.left + this.width - this.offset.right >=
+            mo.x + mo.offset.left &&
+            this.y + this.offset.top + this.height - this.offset.bottom >=
+            mo.y + mo.offset.top &&
+            this.x + this.offset.left <= mo.x + mo.offset.left + mo.width - mo.offset.right &&
+            this.y + this.offset.top <= mo.y + mo.offset.top + mo.height - mo.offset.bottom
+        );
+    }
+
+    /* isColliding(obj) {
         return this.x + this.width >= obj.x &&
             this.x <= obj.x + obj.width &&
             this.y + this.height >= obj.y &&
             this.y <= obj.y + obj.height;
-    }
+    } */
 
-    /* Bessere Formel zur Kollisionsberechnung (Genauer)
-    isColliding(obj) {
-        return (this.X + this.width) >= obj.X && this.X <= (obj.X + obj.width) &&
-            (this.Y + this.offsetY + this.height) >= obj.Y &&
-            (this.Y + this.offsetY) <= (obj.Y + obj.height) &&
+    // Bessere Formel zur Kollisionsberechnung (Genauer)
+    /* isColliding(obj) {
+        return (this.x + this.width) >= obj.x && this.x <= (obj.x + obj.width) &&
+            (this.y + this.offsetX + this.height) >= obj.y &&
+            (this.y + this.offsetY) <= (obj.y + obj.height) &&
             obj.onCollisionCourse; 
     } */
     // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.

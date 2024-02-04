@@ -2,6 +2,12 @@ class Zombie extends MovableObject {
     y = 305;
     height = 80;
     width = 80;
+    offset={
+        top:0,
+        right: 0,
+        bottom: 0,
+        left: 0
+    }
     ZOMBIE_WALKING = [
         'img2/3_enemies/zombie/1_walk/zombie_walk_01.png',
         'img2/3_enemies/zombie/1_walk/zombie_walk_02.png',
