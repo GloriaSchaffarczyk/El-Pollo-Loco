@@ -1,5 +1,11 @@
 class ThrowableObject extends MovableObject {
     accelerationY = 3.5;
+    offset = {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+    };
     IMAGES_BOMBROTATION = [
         'img2/6_bombs/bomb_rotation/bomb-rotation_01.png',
         'img2/6_bombs/bomb_rotation/bomb-rotation_02.png',

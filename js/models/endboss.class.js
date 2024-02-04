@@ -1,9 +1,9 @@
 class Endboss extends MovableObject {
     offset={
-        top:-40,
-        right: -60,
-        bottom: 0,
-        left: 0
+        top: 30,
+        right: 60,
+        bottom: 30,
+        left: 10,  
     }
     y = 200;
     height = 200;
@@ -31,7 +31,7 @@ class Endboss extends MovableObject {
     constructor() {
         super().loadImage(this.ENDBOSS_IMAGES_WALKING[0]);
         this.loadImages(this.ENDBOSS_IMAGES_WALKING);
-        this.x = 2500;
+        this.x = 1500;
         this.speed = 0.25;
         this.animate();
     }

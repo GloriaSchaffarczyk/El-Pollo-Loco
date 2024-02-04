@@ -2,11 +2,11 @@ class Monster extends MovableObject {
     y = 326;
     height = 60;
     width = 60;
-    offset={
-        top:0,
+    offset = {
+        top: 20,
         right: 0,
         bottom: 0,
-        left: 0
+        left: 10
     }
     MONSTER_WALKING = [
         'img2/3_enemies/monster/1_walk/monster_walk_06.png',

@@ -7,7 +7,7 @@ class Bombs extends MovableObject {
         right: 0,
         bottom: 0,
         left: 0
-    }
+    };
     IMAGES_BOMBS = [
         'img2/6_bombs/bomb_01.png',
         'img2/6_bombs/bomb_02.png'

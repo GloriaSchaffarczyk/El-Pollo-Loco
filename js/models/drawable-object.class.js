@@ -25,7 +25,6 @@ class DrawableObject {
         }
     }
 
-
     drawFrame(ctx) {
         if (this instanceof Character || this instanceof Zombie || this instanceof Monster || this instanceof Endboss) {
             ctx.beginPath();
@@ -35,6 +34,22 @@ class DrawableObject {
             ctx.stroke();
         }
     }
+
+    drawFrameBlue(ctx) {
+        if (this instanceof Character || this instanceof Zombie || this instanceof Monster || this instanceof Endboss) {
+            ctx.beginPath();
+            ctx.lineWidth = '5';
+            ctx.strokeStyle = 'blue'; // Setze die Farbe des Rahmens auf Blau
+            // Berechne die Position und Größe des Rahmens basierend auf den Objekteigenschaften und deren Offset
+            ctx.rect(
+                this.x + (this.offset ? this.offset.left : 0),
+                this.y + (this.offset ? this.offset.top : 0),
+                this.width - (this.offset ? this.offset.left + this.offset.right : 0),
+                this.height - (this.offset ? this.offset.top + this.offset.bottom : 0)
+            );
+            ctx.stroke();
+        }
+    }    
 
     /**
     * 
