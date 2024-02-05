@@ -24,6 +24,9 @@ class Zombie extends MovableObject {
         'img2/3_enemies/zombie/2_dead/zombie_dead_05.png',
         'img2/3_enemies/zombie/2_dead/zombie_dead_06.png',
     ];
+    hasDied = false;
+    ANIMATION_SPEED_ZOMBIE_DYING = 250;
+    zombie_dying_sound = new Audio('audio/163442__under7dude__man-dying.wav');
 
 
     constructor() {
@@ -41,7 +44,14 @@ class Zombie extends MovableObject {
         }, 1000 / 60);
 
         setInterval(() => {
-            this.playAnimation(this.ZOMBIE_WALKING);
+            if (!this.hasDied) {
+                this.playAnimation(this.ZOMBIE_WALKING);
+            } else {
+                this.playAnimation(this.ZOMBIE_DYING);
+                animationSpeed = this.ANIMATION_SPEED_ZOMBIE_DYING;
+                this.zombie_dying_sound.play();
+                this.hasDied = true;
+            }
         }, 500);
     }
 }
