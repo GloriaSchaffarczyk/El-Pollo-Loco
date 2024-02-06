@@ -175,6 +175,7 @@ class World {
                     if (bomb.isColliding(zombie)) {
                         zombie.enemyHitByBomb();
                         bomb.hitEnemy = true; 
+                        zombie.isDead();
                         console.log('Zombie hit by bomb');
                     }
                 });
