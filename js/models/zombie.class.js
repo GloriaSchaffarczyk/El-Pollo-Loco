@@ -53,6 +53,7 @@ class Zombie extends MovableObject {
                 this.playAnimation(this.ZOMBIE_DYING);
                 this.animationSpeed = this.ANIMATION_SPEED_ZOMBIE_DYING;
                 this.zombie_dying_sound.play();
+                this.speed = 0;
             }
         }, 500);
     }

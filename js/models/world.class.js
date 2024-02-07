@@ -171,7 +171,7 @@ class World {
 
         this.throwableObjects.forEach((bomb) => {
             if (!bomb.hitEnemy) {
-                this.level.zombies.forEach((zombie) => {
+                this.level.zombies.forEach((zombie, index) => {
                     if (bomb.isColliding(zombie)) {
                         zombie.enemyHitByBomb();
                         bomb.hitEnemy = true; 
