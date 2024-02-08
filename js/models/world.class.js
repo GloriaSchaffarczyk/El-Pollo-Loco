@@ -105,7 +105,7 @@ class World {
             });
         }
 
-        this.removeExplodedBombs();
+        this.removeObjects();
 
         requestAnimationFrame(() => this.draw());
     }
@@ -199,10 +199,13 @@ class World {
         });
     }
 
-    removeExplodedBombs() {
+    removeObjects() {
+        this.level.zombies = this.level.zombies.filter(zombie => !zombie.readyToRemove);
+        this.level.monsters = this.level.monsters.filter(monster => !monster.readyToRemove);
+        this.level.endboss = this.level.endboss.filter(boss => !boss.readyToRemove);
         this.throwableObjects = this.throwableObjects.filter(bomb => !bomb.isExploded);
-    }
-    
+    }    
+
 }
 
 

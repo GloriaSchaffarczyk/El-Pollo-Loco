@@ -11,6 +11,7 @@ class MovableObject extends DrawableObject {
     accelerationY = 3.5;
     energy = 100;
     lastHit = 0;
+    readyToRemove = false;
 
     applyGravity() {
         let groundLevel = 290;
@@ -111,6 +112,21 @@ class MovableObject extends DrawableObject {
         this.img = this.imageCache[path];
         this.currentImage++;
     }
+
+    playAnimationOnce(images, callback = () => {}) {
+        let animationIndex = 0;
+        let animationLength = images.length;
+        let animationInterval = setInterval(() => {
+            if (animationIndex < animationLength) {
+                this.img = this.imageCache[images[animationIndex++]];
+            } else {
+                clearInterval(animationInterval);
+                this.readyToRemove = true; // Objekt ist bereit zur Entfernung
+                callback(); // Aufruf des Callbacks nach Beendigung der Animation
+            }
+        }, 100); // Geschwindigkeit der Animation, anpassbar nach Bedarf
+    }
+    
 
     moveRight() {
         this.x += this.speed;
