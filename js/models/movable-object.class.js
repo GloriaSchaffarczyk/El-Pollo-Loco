@@ -113,21 +113,24 @@ class MovableObject extends DrawableObject {
         this.currentImage++;
     }
 
-    playAnimationOnce(images, callback = () => {}) {
+    playAnimationOnce(images) {
         let animationIndex = 0;
         let animationLength = images.length;
-        let animationInterval = setInterval(() => {
+    
+        // Sicherstellen, dass die Animation nur einmal gestartet wird
+        if (this.animationInterval) return;
+    
+        this.animationInterval = setInterval(() => {
             if (animationIndex < animationLength) {
                 this.img = this.imageCache[images[animationIndex++]];
             } else {
-                clearInterval(animationInterval);
-                this.readyToRemove = true; // Objekt ist bereit zur Entfernung
-                callback(); // Aufruf des Callbacks nach Beendigung der Animation
+                clearInterval(this.animationInterval);
+                this.animationInterval = null;
+                this.readyToRemove = true; // Setze das Objekt als bereit zum Entfernen
             }
-        }, 100); // Geschwindigkeit der Animation, anpassbar nach Bedarf
-    }
+        }, 100);
+    } 
     
-
     moveRight() {
         this.x += this.speed;
     };

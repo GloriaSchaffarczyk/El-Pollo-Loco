@@ -25,8 +25,8 @@ class Zombie extends MovableObject {
         'img2/3_enemies/zombie/2_dead/zombie_dead_06.png',
     ];
     animationSpeed;
-    ANIMATION_SPEED_ZOMBIE_DYING = 250;
-    ANIMATION_SPEED_ZOMBIE_WALKING = 10;
+    ANIMATION_SPEED_ZOMBIE_DYING = 2000;
+    ANIMATION_SPEED_ZOMBIE_WALKING = 500;
     zombie_dying_sound = new Audio('audio/445983__breviceps__zombie-gargles.wav');
     energy = 20;
 
@@ -48,14 +48,10 @@ class Zombie extends MovableObject {
         setInterval(() => {
             if (!this.hasDied) {
                 this.playAnimation(this.ZOMBIE_WALKING);
-                this.animationSpeed = this.ANIMATION_SPEED_ZOMBIE_WALKING;
-            } else {
+            } else if (!this.readyToRemove) { // Verwende readyToRemove direkt
                 this.playAnimationOnce(this.ZOMBIE_DYING);
-                this.animationSpeed = this.ANIMATION_SPEED_ZOMBIE_DYING;
-                this.zombie_dying_sound.play();
-                this.speed = 0;
             }
-        }, 500);
-    }
+        }, 200);
+    }    
     
 }
