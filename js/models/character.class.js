@@ -207,7 +207,7 @@ class Character extends MovableObject {
             this.playAnimation(this.IMAGES_THROWINGBOMBS);
     
             // Beendet das Intervall, wenn die Animation abgeschlossen ist
-            if (this.currentImage >= this.IMAGES_THROWINGBOMBS.length) {
+            if (this.currentImage >= this.IMAGES_THROWINGBOMBS.length) { // möglicherweise kann ich das allgemein festlegen?
                 clearInterval(animationInterval);
                 this.isThrowingBomb = false;
                 this.currentImage = 0; // Zurücksetzen für nächste Animation
