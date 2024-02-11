@@ -47,10 +47,8 @@ class Monster extends MovableObject {
         setInterval(() => {
             if (!this.hasDied) {
                 this.playAnimation(this.MONSTER_WALKING);
-                this.animationSpeed = this.ANIMATION_SPEED_MONSTER_WALKING;
             } else {
-                this.playAnimation(this.MONSTER_DYING);
-                this.animationSpeed = this.ANIMATION_SPEED_MONSTER_DYING;
+                this.playAnimationOnce(this.MONSTER_DYING);
                 this.monster_dying_sound.play();
             }
         }, 300);
