@@ -34,7 +34,7 @@ class Endboss extends MovableObject {
         'img2/4_boss/1_walk/boss_dead_05.png',
         'img2/4_boss/1_walk/boss_dead_06.png',
     ];
-    energy = 100;
+    energy = 100; // energy of endboss is higher
 
     constructor() {
         super().loadImage(this.ENDBOSS_IMAGES_WALKING[0]);
