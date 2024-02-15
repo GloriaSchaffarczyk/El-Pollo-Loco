@@ -18,7 +18,7 @@ class StatusbarBombs extends DrawableObject {
         this.y = 60;
         this.width = 150;
         this.height = 35;
-        this.setPercentage(100); // müssen wir setzen
+        this.setPercentage(0); // müssen wir setzen
     }
 
     setPercentage(percentage) {
