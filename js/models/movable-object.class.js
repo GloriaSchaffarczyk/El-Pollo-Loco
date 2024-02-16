@@ -154,5 +154,4 @@ class MovableObject extends DrawableObject {
 // Endgegner besiegen
 // Game-Over-Screen
 // Fullscreen
-// Erklärung der Tasten
 // 
