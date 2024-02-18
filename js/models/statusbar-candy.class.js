@@ -32,17 +32,17 @@ class StatusbarCandy extends DrawableObject {
     resolveImageIndex() {
         console.log(`resolveImageIndex called with percentage: ${this.percentage}`);
         if (this.percentage == 100) {
-            return 0;
-        } else if (this.percentage > 80) {
-            return 1;
-        } else if (this.percentage > 60) {
-            return 2;
-        } else if (this.percentage > 40) {
-            return 3;
-        } else if (this.percentage > 20) {
-            return 4;
-        } else {
             return 5;
+        } else if (this.percentage > 80) {
+            return 4;
+        } else if (this.percentage > 60) {
+            return 3;
+        } else if (this.percentage > 40) {
+            return 2;
+        } else if (this.percentage > 20) {
+            return 1;
+        } else {
+            return 0;
         }
     }
 }
