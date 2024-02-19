@@ -61,13 +61,13 @@ class World {
     }
 
     createCandies() {
-        for (let i = 0; i < 20; i++) { // Erstellen von 10 Candies
+        for (let i = 0; i < 20; i++) { // Erstellen von 20 Candies
             this.candies.push(new Candy());
         }
     }
 
     createBombs() {
-        for (let i = 0; i < 20; i++) { // Erstellen von 10 Bombs
+        for (let i = 0; i < 20; i++) { // Erstellen von 20 Bombs
             this.bombs.push(new Bombs());
         }
     }
@@ -171,7 +171,7 @@ class World {
 
         this.throwableObjects.forEach((bomb) => {
             if (!bomb.hitEnemy) {
-                this.level.zombies.forEach((zombie, index) => {
+                this.level.zombies.forEach((zombie) => {
                     if (bomb.isColliding(zombie)) {
                         zombie.enemyHitByBomb();
                         bomb.hitEnemy = true; 
