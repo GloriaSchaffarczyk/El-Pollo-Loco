@@ -36,6 +36,8 @@ class World {
     run() {
         setInterval(() => {
             this.checkCollisions();
+            this.checkCollisionsCharacterCandy();
+            this.checkCollisionsCharacterBombs();
             this.checkThrowObjects();
         }, 180)
     }
@@ -199,13 +201,32 @@ class World {
         });
     }
 
+    checkCollisionsCharacterCandy() {
+        this.candies.forEach((candy) => {
+            if (this.character.isColliding(candy)) {
+                console.log(`Character kollidiert mit Candy`);
+                candy.readyToRemove = true;
+            }
+        });
+    }
+
+    checkCollisionsCharacterBombs() {
+        this.bombs.forEach((bomb) => {
+            if (this.character.isColliding(bomb)) {
+                console.log(`Character kollidiert mit Bombe`);
+                bomb.readyToRemove = true;
+            }
+        });
+    }
+    
     removeObjects() {
         this.level.zombies = this.level.zombies.filter(zombie => !zombie.readyToRemove);
         this.level.monsters = this.level.monsters.filter(monster => !monster.readyToRemove);
         this.level.endboss = this.level.endboss.filter(boss => !boss.readyToRemove);
         this.throwableObjects = this.throwableObjects.filter(bomb => !bomb.isExploded);
+        this.candies = this.candies.filter(candy => !candy.readyToRemove);
+        this.bombs = this.bombs.filter(bomb => !bomb.readyToRemove);
     }    
-
 }
 
 

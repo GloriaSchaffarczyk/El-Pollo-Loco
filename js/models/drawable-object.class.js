@@ -26,7 +26,7 @@ class DrawableObject {
     }
 
     drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Zombie || this instanceof Monster || this instanceof Endboss) {
+        if (this instanceof Character || this instanceof Zombie || this instanceof Monster || this instanceof Endboss || this instanceof Candy || this instanceof Bombs) {
             ctx.beginPath();
             ctx.lineWidth = '5';
             ctx.strokeStyle = 'red';
@@ -36,7 +36,7 @@ class DrawableObject {
     }
 
     drawFrameBlue(ctx) {
-        if (this instanceof Character || this instanceof Zombie || this instanceof Monster || this instanceof Endboss) {
+        if (this instanceof Character || this instanceof Zombie || this instanceof Monster || this instanceof Endboss || this instanceof Candy || this instanceof Bombs) {
             ctx.beginPath();
             ctx.lineWidth = '5';
             ctx.strokeStyle = 'blue'; // Setze die Farbe des Rahmens auf Blau

@@ -1,6 +1,6 @@
 class Candy extends MovableObject {
 
-    y = 250;
+    y = 150;
     width = 50;
     height = 50;
     IMAGES_CANDY = [
