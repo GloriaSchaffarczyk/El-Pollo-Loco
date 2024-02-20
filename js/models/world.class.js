@@ -206,6 +206,10 @@ class World {
             if (this.character.isColliding(candy)) {
                 console.log(`Character kollidiert mit Candy`);
                 candy.readyToRemove = true;
+                if(this.percentage < 100) {
+                    this.statusBar[1].setPercentage(this.character.candy);
+                    console.log('is colliding with candy', this.character.candy); 
+                }
             }
         });
     }
