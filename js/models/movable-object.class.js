@@ -106,6 +106,14 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    collectingCandies() {
+        this.candies += 20;
+    }
+
+    collectingBombs() {
+        this.bombs += 20;
+    }
+
     playAnimation(images) {
         let i = this.currentImage % images.length;
         let path = images[i];

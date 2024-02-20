@@ -207,6 +207,7 @@ class World {
                 console.log(`Character kollidiert mit Candy`);
                 candy.readyToRemove = true;
                 if(this.percentage < 100) {
+                    this.character.collectingCandies();
                     this.statusBar[1].setPercentage(this.character.candy);
                     console.log('is colliding with candy', this.character.candy); 
                 }
@@ -219,6 +220,11 @@ class World {
             if (this.character.isColliding(bomb)) {
                 console.log(`Character kollidiert mit Bombe`);
                 bomb.readyToRemove = true;
+                if(this.percentage < 100) {
+                    this.character.collectingBombs();
+                    this.statusBar[1].setPercentage(this.character.bombs);
+                    console.log('is colliding with candy', this.character.bombs); 
+                }
             }
         });
     }
