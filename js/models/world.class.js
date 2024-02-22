@@ -13,14 +13,14 @@ class World {
     ];
     throwableObjects = [];
     statusBarIcons;
-    candies = [];
+    candy = [];
     bombs = [];
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
-        this.createCandies();
+        this.createCandy();
         this.createBombs();
         this.draw();
         this.setWorld();
@@ -62,9 +62,9 @@ class World {
         console.log("Statusbar Icons loaded:", this.statusBarIcons);
     }
 
-    createCandies() {
-        for (let i = 0; i < 20; i++) { // Erstellen von 20 Candies
-            this.candies.push(new Candy());
+    createCandy() {
+        for (let i = 0; i < 20; i++) { // Erstellen von 20 Candy
+            this.candy.push(new Candy());
         }
     }
 
@@ -88,7 +88,7 @@ class World {
         this.addObjectsToMap(this.level.monsters); 
         this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.throwableObjects);
-        this.candies.forEach(candy => {
+        this.candy.forEach(candy => {
             this.addToMap(candy);
         });
         this.bombs.forEach(bomb => {
@@ -202,39 +202,33 @@ class World {
     }
 
     checkCollisionsCharacterCandy() {
-        this.candies.forEach((candy) => {
+        this.candy.forEach((candy) => {
             if (this.character.isColliding(candy)) {
                 console.log(`Character kollidiert mit Candy`);
                 candy.readyToRemove = true;
-                if(this.percentage < 100) {
-                    this.character.collectingCandies();
-                    this.statusBar[1].setPercentage(this.character.candy);
-                    console.log('is colliding with candy', this.character.candy); 
-                }
+                this.character.collectingCandy();
+                this.statusBar[2].setPercentage(this.character.candy);
             }
         });
     }
-
+    
     checkCollisionsCharacterBombs() {
         this.bombs.forEach((bomb) => {
             if (this.character.isColliding(bomb)) {
                 console.log(`Character kollidiert mit Bombe`);
                 bomb.readyToRemove = true;
-                if(this.percentage < 100) {
-                    this.character.collectingBombs();
-                    this.statusBar[1].setPercentage(this.character.bombs);
-                    console.log('is colliding with candy', this.character.bombs); 
-                }
+                this.character.collectingBombs();
+                this.statusBar[1].setPercentage(this.character.bombs);
             }
         });
-    }
+    }    
     
     removeObjects() {
         this.level.zombies = this.level.zombies.filter(zombie => !zombie.readyToRemove);
         this.level.monsters = this.level.monsters.filter(monster => !monster.readyToRemove);
         this.level.endboss = this.level.endboss.filter(boss => !boss.readyToRemove);
         this.throwableObjects = this.throwableObjects.filter(bomb => !bomb.isExploded);
-        this.candies = this.candies.filter(candy => !candy.readyToRemove);
+        this.candy = this.candy.filter(candy => !candy.readyToRemove);
         this.bombs = this.bombs.filter(bomb => !bomb.readyToRemove);
     }    
 }

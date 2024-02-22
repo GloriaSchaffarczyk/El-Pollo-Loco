@@ -12,6 +12,8 @@ class MovableObject extends DrawableObject {
     energy = 100;
     lastHit = 0;
     readyToRemove = false;
+    bombs = 0;
+    candy = 0;
 
     applyGravity() {
         let groundLevel = 290;
@@ -106,13 +108,20 @@ class MovableObject extends DrawableObject {
         }
     }
 
-    collectingCandies() {
-        this.candies += 20;
+    collectingCandy() {
+        this.candy += 20;
+        if (this.candy > 100) {
+            this.candy = 100;
+        }
     }
-
+    
     collectingBombs() {
         this.bombs += 20;
+        if (this.bombs > 100) {
+            this.bombs = 100;
+        }
     }
+    
 
     playAnimation(images) {
         let i = this.currentImage % images.length;
