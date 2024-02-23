@@ -213,6 +213,7 @@ class Character extends MovableObject {
                 this.currentImage = 0; // Zurücksetzen für nächste Animation
             }
         }, this.ANIMATION_SPEED_THROWINGBOMBS);
+        this.reducingBombs();
     }     
 
     initBackgroundMusic() {

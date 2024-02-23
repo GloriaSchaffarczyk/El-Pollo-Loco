@@ -121,7 +121,13 @@ class MovableObject extends DrawableObject {
             this.bombs = 100;
         }
     }
-    
+
+    reducingBombs() {
+        this.bombs -= 20;
+        if (this.bombs <= 0) {
+            this.bombs = 0;
+        }
+    }
 
     playAnimation(images) {
         let i = this.currentImage % images.length;
