@@ -50,9 +50,9 @@ class World {
             this.throwableObjects.push(bomb);
             this.keyboard.W = false; // Verhindert, dass die Aktion im nächsten Frame erneut ausgelöst wird
             this.character.idleTime = 0;
-            this.character.ownedBombs -= 20; // Reduziere die Anzahl der Bomben, da eine geworfen wurde
         }
-    }    
+    }
+
 
     loadStatusbarIcons() {
         this.statusBarIcons = [
@@ -64,13 +64,13 @@ class World {
     }
 
     createCandy() {
-        for (let i = 0; i < 20; i++) { // Erstellen von 20 Candy
+        for (let i = 0; i < 40; i++) { // Erstellen von 20 Candy
             this.createdCandy.push(new Candy());
         }
     }
 
     createBombs() {
-        for (let i = 0; i < 20; i++) { // Erstellen von 20 Bombs
+        for (let i = 0; i < 40; i++) { // Erstellen von 20 Bombs
             this.createdBombs.push(new Bombs());
         }
     }
@@ -85,8 +85,8 @@ class World {
 
         this.addObjectsToMap(this.level.clouds);
         this.addToMap(this.character);
-        this.addObjectsToMap(this.level.zombies);  
-        this.addObjectsToMap(this.level.monsters); 
+        this.addObjectsToMap(this.level.zombies);
+        this.addObjectsToMap(this.level.monsters);
         this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.throwableObjects);
         this.createdCandy.forEach(candy => {
@@ -151,7 +151,7 @@ class World {
             if (this.character.isColliding(zombie)) {
                 this.character.enemyHit();
                 this.statusBar[0].setPercentage(this.character.energy)
-                console.log('is colliding and loosing energy', this.character.energy); 
+                console.log('is colliding and loosing energy', this.character.energy);
             }
         });
 
@@ -177,7 +177,7 @@ class World {
                 this.level.zombies.forEach((zombie) => {
                     if (bomb.isColliding(zombie)) {
                         zombie.enemyHitByBomb();
-                        bomb.hitEnemy = true; 
+                        bomb.hitEnemy = true;
                         zombie.isDead();
                         console.log('Zombie hit by bomb');
                     }
@@ -204,7 +204,7 @@ class World {
 
     checkCollisionsCharacterCandy() {
         this.createdCandy.forEach((candy) => {
-            if (this.character.isColliding(candy)) {
+            if (this.character.isColliding(candy) && this.character.candy < 100) {
                 console.log(`Character kollidiert mit Candy`);
                 candy.readyToRemove = true;
                 this.character.collectingCandy();
@@ -212,18 +212,18 @@ class World {
             }
         });
     }
-    
+
     checkCollisionsCharacterBombs() {
         this.createdBombs.forEach((bomb) => {
-            if (this.character.isColliding(bomb)) {
+            if (this.character.isColliding(bomb) && this.character.ownedBombs < 100) {
                 console.log(`Character kollidiert mit Bombe`);
                 bomb.readyToRemove = true;
                 this.character.collectingBombs();
                 this.statusBar[1].setPercentage(this.character.ownedBombs);
             }
         });
-    }    
-    
+    }
+
     removeObjects() {
         this.level.zombies = this.level.zombies.filter(zombie => !zombie.readyToRemove);
         this.level.monsters = this.level.monsters.filter(monster => !monster.readyToRemove);
@@ -231,7 +231,7 @@ class World {
         this.throwableObjects = this.throwableObjects.filter(bomb => !bomb.isExploded);
         this.createdCandy = this.createdCandy.filter(candy => !candy.readyToRemove);
         this.createdBombs = this.createdBombs.filter(bomb => !bomb.readyToRemove);
-    }    
+    }
 }
 
 

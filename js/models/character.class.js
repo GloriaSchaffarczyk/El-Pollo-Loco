@@ -202,18 +202,18 @@ class Character extends MovableObject {
     }
 
     throwBomb() {
-        this.currentImage = 0;
-        this.isThrowingBomb = true;
-        // Hier beginnt die Animation für das Werfen der Bombe
-        const animationInterval = setInterval(() => {
-            this.playAnimation(this.IMAGES_THROWINGBOMBS);
-            if (this.currentImage >= this.IMAGES_THROWINGBOMBS.length) {
-                clearInterval(animationInterval);
-                this.isThrowingBomb = false;
-                this.currentImage = 0; // Zurücksetzen für nächste Animation
-            }
-        }, this.ANIMATION_SPEED_THROWINGBOMBS);
-    }    
+            this.currentImage = 0;
+            this.isThrowingBomb = true;
+            const animationInterval = setInterval(() => {
+                this.playAnimation(this.IMAGES_THROWINGBOMBS);
+                if (this.currentImage >= this.IMAGES_THROWINGBOMBS.length) {
+                    clearInterval(animationInterval);
+                    this.isThrowingBomb = false;
+                    this.currentImage = 0; // Zurücksetzen für nächste Animation
+                    this.reducingBombs(); // Aufruf hier, Statusleiste wird in reducingBombs aktualisiert
+                }
+            }, this.ANIMATION_SPEED_THROWINGBOMBS);
+    }            
             
     initBackgroundMusic() {
         document.addEventListener('click', () => {

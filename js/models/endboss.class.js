@@ -27,22 +27,23 @@ class Endboss extends MovableObject {
         'img2/4_boss/2_alert/boss_alert_01.png',
     ];
     ENDBOSS_DYING = [
-        'img2/4_boss/1_walk/boss_dead_01.png',
-        'img2/4_boss/1_walk/boss_dead_02.png',
-        'img2/4_boss/1_walk/boss_dead_03.png',
-        'img2/4_boss/1_walk/boss_dead_04.png',
-        'img2/4_boss/1_walk/boss_dead_05.png',
-        'img2/4_boss/1_walk/boss_dead_06.png',
+        'img2/4_boss/5_dead/boss_dead_01.png',
+        'img2/4_boss/5_dead/boss_dead_02.png',
+        'img2/4_boss/5_dead/boss_dead_03.png',
+        'img2/4_boss/5_dead/boss_dead_04.png',
+        'img2/4_boss/5_dead/boss_dead_05.png',
+        'img2/4_boss/5_dead/boss_dead_06.png',
     ];
     energy = 100; // energy of endboss is higher
 
     constructor() {
         super().loadImage(this.ENDBOSS_IMAGES_WALKING[0]);
         this.loadImages(this.ENDBOSS_IMAGES_WALKING);
+        this.loadImages(this.ENDBOSS_DYING);
         this.x = 1500;
         this.speed = 0.25;
         this.animate();
-    }
+    } 
 
     animate() {
         setInterval(() => {

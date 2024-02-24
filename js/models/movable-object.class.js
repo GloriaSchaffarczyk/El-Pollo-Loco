@@ -91,7 +91,6 @@ class MovableObject extends DrawableObject {
     enemyHitByBomb() {
         this.energy -= 20;
         if (this.energy <= 0) {
-            this.energy = 0;
             this.hasDied = true;
         } else {
             this.lastHit = new Date().getTime();
@@ -101,7 +100,7 @@ class MovableObject extends DrawableObject {
     endbossHitByBomb() {
         this.energy -= 20;
         if (this.energy <= 0) {
-            this.energy = 0;
+            this.hasDied = true;
         } else {
             this.lastHit = new Date().getTime();
             console.log('Hit endboss!', this.energy);
@@ -121,13 +120,13 @@ class MovableObject extends DrawableObject {
             this.ownedBombs = 100;
         }
     }
-
     reducingBombs() {
-        this.ownedBombs -= 20;
-        if (this.ownedBombs <= 0) {
-            this.ownedBombs = 0;
+        this.ownedBombs -= 20; // Reduziere um eine Bombe
+        if (this.ownedBombs < 0) {
+            this.ownedBombs = 0; // Verhindere negative Werte
         }
-    }
+        this.world.statusBar[1].setPercentage(this.ownedBombs);
+    }    
 
     playAnimation(images) {
         let i = this.currentImage % images.length;
@@ -177,4 +176,5 @@ class MovableObject extends DrawableObject {
 // Endgegner besiegen
 // Game-Over-Screen
 // Fullscreen
-// 
+// Boss attackiert, wenn Charakter sich nähert
+// Character springt auf Gegner und sie sterben...?
