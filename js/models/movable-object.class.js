@@ -116,16 +116,16 @@ class MovableObject extends DrawableObject {
     }
     
     collectingBombs() {
-        this.bombs += 20;
-        if (this.bombs > 100) {
-            this.bombs = 100;
+        this.ownedBombs += 20;
+        if (this.ownedBombs > 100) {
+            this.ownedBombs = 100;
         }
     }
 
     reducingBombs() {
-        this.bombs -= 20;
-        if (this.bombs <= 0) {
-            this.bombs = 0;
+        this.ownedBombs -= 20;
+        if (this.ownedBombs <= 0) {
+            this.ownedBombs = 0;
         }
     }
 

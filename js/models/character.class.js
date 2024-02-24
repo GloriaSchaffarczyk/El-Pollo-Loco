@@ -108,6 +108,7 @@ class Character extends MovableObject {
     hasDied = false;
     isThrowingBomb = false;
     idleTime = 0; 
+    ownedBombs = 0;
 
     constructor() {
         super().loadImage('img2/2_character/2_walk/biker_walk_01.png')
@@ -203,19 +204,17 @@ class Character extends MovableObject {
     throwBomb() {
         this.currentImage = 0;
         this.isThrowingBomb = true;
+        // Hier beginnt die Animation für das Werfen der Bombe
         const animationInterval = setInterval(() => {
             this.playAnimation(this.IMAGES_THROWINGBOMBS);
-    
-            // Beendet das Intervall, wenn die Animation abgeschlossen ist
-            if (this.currentImage >= this.IMAGES_THROWINGBOMBS.length) { // möglicherweise kann ich das allgemein festlegen?
+            if (this.currentImage >= this.IMAGES_THROWINGBOMBS.length) {
                 clearInterval(animationInterval);
                 this.isThrowingBomb = false;
                 this.currentImage = 0; // Zurücksetzen für nächste Animation
             }
         }, this.ANIMATION_SPEED_THROWINGBOMBS);
-        this.reducingBombs();
-    }     
-
+    }    
+            
     initBackgroundMusic() {
         document.addEventListener('click', () => {
             this.playBackgroundMusic();

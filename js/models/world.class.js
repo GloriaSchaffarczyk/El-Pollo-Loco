@@ -13,8 +13,8 @@ class World {
     ];
     throwableObjects = [];
     statusBarIcons;
-    candy = [];
-    bombs = [];
+    createdCandy = [];
+    createdBombs = [];
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -43,15 +43,16 @@ class World {
     }
 
     checkThrowObjects() {
-        if (this.keyboard.W) {
+        if (this.keyboard.W && this.character.ownedBombs > 0) {
             this.character.throwBomb(); // Ruft die Bombenwurf-Animation auf
             let direction = this.character.otherDirection ? 'left' : 'right';
             let bomb = new ThrowableObject(this.character.x + 30, this.character.y + -70, direction);
             this.throwableObjects.push(bomb);
             this.keyboard.W = false; // Verhindert, dass die Aktion im nächsten Frame erneut ausgelöst wird
             this.character.idleTime = 0;
+            this.character.ownedBombs -= 20; // Reduziere die Anzahl der Bomben, da eine geworfen wurde
         }
-    }
+    }    
 
     loadStatusbarIcons() {
         this.statusBarIcons = [
@@ -64,13 +65,13 @@ class World {
 
     createCandy() {
         for (let i = 0; i < 20; i++) { // Erstellen von 20 Candy
-            this.candy.push(new Candy());
+            this.createdCandy.push(new Candy());
         }
     }
 
     createBombs() {
         for (let i = 0; i < 20; i++) { // Erstellen von 20 Bombs
-            this.bombs.push(new Bombs());
+            this.createdBombs.push(new Bombs());
         }
     }
 
@@ -88,10 +89,10 @@ class World {
         this.addObjectsToMap(this.level.monsters); 
         this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.throwableObjects);
-        this.candy.forEach(candy => {
+        this.createdCandy.forEach(candy => {
             this.addToMap(candy);
         });
-        this.bombs.forEach(bomb => {
+        this.createdBombs.forEach(bomb => {
             this.addToMap(bomb);
         });
 
@@ -202,7 +203,7 @@ class World {
     }
 
     checkCollisionsCharacterCandy() {
-        this.candy.forEach((candy) => {
+        this.createdCandy.forEach((candy) => {
             if (this.character.isColliding(candy)) {
                 console.log(`Character kollidiert mit Candy`);
                 candy.readyToRemove = true;
@@ -213,12 +214,12 @@ class World {
     }
     
     checkCollisionsCharacterBombs() {
-        this.bombs.forEach((bomb) => {
+        this.createdBombs.forEach((bomb) => {
             if (this.character.isColliding(bomb)) {
                 console.log(`Character kollidiert mit Bombe`);
                 bomb.readyToRemove = true;
                 this.character.collectingBombs();
-                this.statusBar[1].setPercentage(this.character.bombs);
+                this.statusBar[1].setPercentage(this.character.ownedBombs);
             }
         });
     }    
@@ -228,8 +229,8 @@ class World {
         this.level.monsters = this.level.monsters.filter(monster => !monster.readyToRemove);
         this.level.endboss = this.level.endboss.filter(boss => !boss.readyToRemove);
         this.throwableObjects = this.throwableObjects.filter(bomb => !bomb.isExploded);
-        this.candy = this.candy.filter(candy => !candy.readyToRemove);
-        this.bombs = this.bombs.filter(bomb => !bomb.readyToRemove);
+        this.createdCandy = this.createdCandy.filter(candy => !candy.readyToRemove);
+        this.createdBombs = this.createdBombs.filter(bomb => !bomb.readyToRemove);
     }    
 }
 
