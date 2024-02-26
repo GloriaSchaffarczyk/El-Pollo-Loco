@@ -177,4 +177,5 @@ class MovableObject extends DrawableObject {
 // Game-Over-Screen
 // Fullscreen
 // Boss attackiert, wenn Charakter sich nähert
+// andere Musik
 // Character springt auf Gegner und sie sterben...?
