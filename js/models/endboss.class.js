@@ -35,6 +35,7 @@ class Endboss extends MovableObject {
         'img2/4_boss/5_dead/boss_dead_06.png',
     ];
     energy = 100; // energy of endboss is higher
+    endboss_dying_sound = new Audio('audio/607201__tomronaldmusic__defeated_ogre.wav');
 
     constructor() {
         super().loadImage(this.ENDBOSS_IMAGES_WALKING[0]);
@@ -51,6 +52,7 @@ class Endboss extends MovableObject {
                 this.playAnimation(this.ENDBOSS_IMAGES_WALKING);
             } else if (!this.readyToRemove) {
                 this.playAnimationOnce(this.ENDBOSS_DYING);
+                this.endboss_dying_sound.play();
             }
         }, 200);
     }
