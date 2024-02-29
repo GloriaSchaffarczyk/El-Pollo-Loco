@@ -49,7 +49,7 @@ class Monster extends MovableObject {
                 this.playAnimation(this.MONSTER_WALKING);
             } else {
                 this.playAnimationOnce(this.MONSTER_DYING);
-                this.monster_dying_sound.play();
+                this.monster_dying_sound.play(); // gets played on repeat, need to find solution
             }
         }, 300);
     }
