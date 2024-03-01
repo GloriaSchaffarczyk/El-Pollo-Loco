@@ -29,6 +29,46 @@ canvas {
     justify-content: center;
 }
 
+#startscreen {
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    width: 750px;
+    padding: 20px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: linear-gradient(180deg, rgba(2,0,36,0.9) 15%, rgba(1,29,135,0.9) 50%, rgba(21, 62, 122, 0.9) 70%, rgba(34, 64, 97, 0.9) 100%);
+}
+
+.upper-startscreen {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: row;
+    padding: 10px;
+}
+
+.lower-startscreen {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+}
+
+.upper-startscreen-left {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.upper-startscreen-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
 /* Smartphones width --- */
 @media only screen and (max-width: 720px) {
     canvas {
