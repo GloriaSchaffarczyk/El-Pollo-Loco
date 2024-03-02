@@ -1,6 +1,7 @@
 @font-face {
     font-family: 'creepster';
-    src: url('fonts/creepster.ttf')  format('truetype'), /* Safari, Android, iOS */
+    src: url('fonts/creepster.ttf') format('truetype'),
+        /* Safari, Android, iOS */
 }
 
 body {
@@ -39,12 +40,11 @@ canvas {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-image: linear-gradient(180deg, rgba(2,0,36,0.9) 15%, rgba(1,29,135,0.9) 50%, rgba(21, 62, 122, 0.9) 70%, rgba(34, 64, 97, 0.9) 100%);
+    background-image: linear-gradient(180deg, rgba(2, 0, 36, 0.9) 15%, rgba(1, 29, 135, 0.9) 50%, rgba(21, 62, 122, 0.9) 70%, rgba(34, 64, 97, 0.9) 100%);
 }
 
 .upper-startscreen {
     display: flex;
-    width: 100%;
     height: 100%;
     flex-direction: row;
     padding: 10px;
@@ -52,21 +52,86 @@ canvas {
 
 .lower-startscreen {
     display: flex;
-    width: 100%;
     height: 100%;
+    flex-direction: row;
     padding: 10px;
 }
 
 .upper-startscreen-left {
+    min-width: 50%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: flex-start;
 }
 
 .upper-startscreen-right {
+    min-width: 50%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: flex-start;
+}
+
+.upper-startscreen-right p {
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table,
+td {
+    border: 1px solid transparent;
+}
+
+td {
+    padding: 5px 0px 5px 0px;
+    width: 40px;
+}
+
+table td img {
+    max-width: 172px;
+    max-height: 32px;
+    /* Begrenzt die maximale Höhe der Bilder auf 100px */
+    display: block;
+    /* Verhindert, dass am Bildrand zusätzlicher Platz entsteht */
+}
+
+.lower-startscreen-left {
+    min-width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.lower-startscreen-right {
+    min-width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#startButton {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+#startButton:hover {
+    background-color: white;
+    color: black;
+}
+
+#startButton p {
+    font-family: 'creepster';
+    font-size: 48px;
 }
 
 /* Smartphones width --- */

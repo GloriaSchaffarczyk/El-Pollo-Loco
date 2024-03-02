@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,6 +29,7 @@
     <script src="js/game.js"></script>
 
 </head>
+
 <body onload="init()">
     <h1>Monster Munching Madness</h1>
 
@@ -54,16 +56,49 @@
     <div class="startscreen" id="startscreen">
         <div class="upper-startscreen">
             <div class="upper-startscreen-left">
-                How to play
+                <h2>Controls</h2>
+                <table>
+                    <tr>
+                        <td>Move</td>
+                        <td><img src="img2/10_general_images/01_game_pad/arrow-keys.png" alt="arrow-keys"></td>
+                    </tr>
+                    <tr>
+                        <td>Jump</td>
+                        <td><img src="img2/10_general_images/01_game_pad/space-key.png" alt="space-key"></td>
+                    </tr>
+                    <tr>
+                        <td>Throw</td>
+                        <td><img src="img2/10_general_images/01_game_pad/w-key.png" alt="w-key"></td>
+                    </tr>
+                </table>
             </div>
             <div class="upper-startscreen-right">
-                What's it about
+                <h2>How to play</h2>
+                <p>It's Halloween and evil Zombies and Monsters rose from the dead.
+                Collect bombs and try throwing them at your enemies before they're able to kill you.<br>
+                You can also collect candy. It's Halloween after all.<br>
+                Be warned: a mighty laser shooting monster has been spotted.
+                Throwing multiple bombs at it might be helpful.<br>
+                Good luck adventurer and happy Trick or Treating!<br>
+                </p>
             </div>
         </div>
         <div class="lower-startscreen">
-            Enemies
+            <div class="lower-startscreen-left">
+                <h2>Enemies</h2>
+                <div class="enemy-images">
+                    <img src="img2/9_intro_outro_screens/start/startscreen-monster.png" alt="">
+                    <img src="img2/9_intro_outro_screens/start/startscreen-zombie.png" alt="">
+                    <img src="img2/9_intro_outro_screens/start/startscreen-endboss.png" alt="">
+                </div>
+            </div>
+            <div class="lower-startscreen-right">
+                <button id="startButton" onclick="startGame()"><p>Start Game</p></button>
+            </div>
+
         </div>
     </div>
 
 </body>
+
 </html>

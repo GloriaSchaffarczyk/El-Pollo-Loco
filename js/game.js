@@ -9,7 +9,7 @@ function init() {
     canvas = document.getElementById('canvas'); // hier ist das HTML des Canvas gespeichert
     world = new World(canvas, keyboard);
 
-console.log('My character is', world['character']);
+    console.log('My character is', world['character']);
 }
 
 function toggleMusic() {
