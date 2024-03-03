@@ -53,7 +53,6 @@ class World {
         }
     }
 
-
     loadStatusbarIcons() {
         this.statusBarIcons = [
             new StatusbarIcons(15, 15, 'HEALTH'),

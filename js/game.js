@@ -6,25 +6,34 @@ let isSoundOn = true;
 // Variable ctx wurde gelöscht
 
 function init() {
-    canvas = document.getElementById('canvas'); // hier ist das HTML des Canvas gespeichert
-    world = new World(canvas, keyboard);
-
-    console.log('My character is', world['character']);
+    canvas = document.getElementById('canvas');
 }
+
+function startGame() {
+    initLevel();
+    world = new World(canvas, keyboard);
+    startscreen.classList.add('hidden');
+    symbols.classList.remove('hidden'); 
+}
+
 
 function toggleMusic() {
     if (isMusicOn) {
         muteMusic();
+        document.getElementById('music').src = 'img2/7_statusbars/3_icons/music-off.png';
     } else {
         playMusic();
+        document.getElementById('music').src = 'img2/7_statusbars/3_icons/music-on.png';
     }
 }
 
 function toggleSound() {
     if (isSoundOn) {
         muteSound();
+        document.getElementById('sound').src = 'img2/7_statusbars/3_icons/sound-off_02.png'
     } else {
         playSound();
+        document.getElementById('sound').src = 'img2/7_statusbars/3_icons/sound-on.png'
     }
 }
 
@@ -84,4 +93,28 @@ window.addEventListener('keyup', (event) => {
 
 function restartGame() {
     location.reload();
+}
+
+function muteMusic() {
+    world.character.background_music.volume = 0;
+    isMusicOn = false;
+}
+
+function playMusic() {
+    world.character.background_music.volume = 0.5;
+    isMusicOn = true;
+}
+
+function muteSound() {
+    world.character.walking_sound.volume = 0;
+    world.character.jumping_sound.volume = 0;
+    world.character.dying_sound.volume = 0;
+    isSoundOn = false;
+}
+
+function playSound() {
+    world.character.walking_sound.volume = 0.5;
+    world.character.jumping_sound.volume = 0.5;
+    world.character.dying_sound.volume = 0.5;
+    isSoundOn = true;
 }
