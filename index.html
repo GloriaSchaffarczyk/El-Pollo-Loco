@@ -32,18 +32,18 @@
 
 <body onload="init()">
 
-    <div class="title-and-canvas">
+    <div class="title-and-canvas" id="title-and-canvas">
         <h1>Monster Munching Madness</h1>
         <canvas width="720" height="480" id="canvas">
         </canvas>
         <div class="symbols, hidden" id="symbols">
-            <img src="img2/7_statusbars/3_icons/maximize (2).png" alt="fullscreen" onclick="fullscreen()" id="fullscreen">
+            <img src="img2/7_statusbars/3_icons/maximize_02.png" alt="enter-fullscreen" onclick="toggleFullscreen()" id="enterFullscreen">
             <img src="img2/7_statusbars/3_icons/music-on.png" alt="music-on-off" onclick="toggleMusic()" id="music">
             <img src="img2/7_statusbars/3_icons/sound-on.png" alt="sounds-on-off" onclick="toggleSound()" id="sound">
         </div>
     </div>
 
-    <div class="description hidden">
+    <div class="description hidden" id="description">
         <div class="keys">
             <p>Move =</p>
             <img src="img2/10_general_images/01_game_pad/arrow-keys.png" alt="">

@@ -167,7 +167,7 @@ class MovableObject extends DrawableObject {
 }
 
 // Aufgaben
-// Startscreen
+// Startscreen 
 // Musik und Sounds
 // Coins einsammeln
 // Flaschen einsammeln

@@ -14,8 +14,8 @@ function startGame() {
     world = new World(canvas, keyboard);
     startscreen.classList.add('hidden');
     symbols.classList.remove('hidden'); 
+    description.classList.remove('hidden')
 }
-
 
 function toggleMusic() {
     if (isMusicOn) {
@@ -117,4 +117,30 @@ function playSound() {
     world.character.jumping_sound.volume = 0.5;
     world.character.dying_sound.volume = 0.5;
     isSoundOn = true;
+}
+
+function toggleFullscreen() {
+    let titleAndFullscreen = document.getElementById('.title-and-canvas') || document.getElementById('canvas');
+
+    if (!document.fullscreenElement) {
+        if (titleAndFullscreen.requestFullscreen) {
+            titleAndFullscreen.requestFullscreen();
+        } else if (titleAndFullscreen.webkitRequestFullscreen) { // Safari
+            titleAndFullscreen.webkitRequestFullscreen();
+        } else if (titleAndFullscreen.mozRequestFullScreen) { // Firefox
+            titleAndFullscreen.mozRequestFullScreen();
+        } else if (titleAndFullscreen.msRequestFullscreen) { // IE
+            titleAndFullscreen.msRequestFullscreen();
+        }
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) { // Safari
+            document.webkitExitFullscreen();
+        } else if (document.mozCancelFullScreen) { // Firefox
+            document.mozCancelFullScreen();
+        } else if (document.msExitFullscreen) { // IE
+            document.msExitFullscreen();
+        }
+    }
 }
