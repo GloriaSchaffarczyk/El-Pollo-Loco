@@ -13,15 +13,11 @@ class World {
     ];
     throwableObjects = [];
     statusBarIcons;
-    createdCandy = [];
-    createdBombs = [];
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
-        this.createCandy();
-        this.createBombs();
         this.draw();
         this.setWorld();
         this.run()
@@ -64,18 +60,6 @@ class World {
         console.log("Statusbar Icons loaded:", this.statusBarIcons);
     }
 
-    createCandy() {
-        for (let i = 0; i < 40; i++) { // Erstellen von 20 Candy
-            this.createdCandy.push(new Candy());
-        }
-    }
-
-    createBombs() {
-        for (let i = 0; i < 40; i++) { // Erstellen von 20 Bombs
-            this.createdBombs.push(new Bombs());
-        }
-    }
-
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0); // Kamera wird nach links verschoben
@@ -90,16 +74,10 @@ class World {
         this.addObjectsToMap(this.level.monsters);
         this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.throwableObjects);
-        this.createdCandy.forEach(candy => {
-            this.addToMap(candy);
-        });
-        this.createdBombs.forEach(bomb => {
-            this.addToMap(bomb);
-        });
+        this.addObjectsToMap(this.level.candy);
+        this.addObjectsToMap(this.level.bombs);
 
         this.ctx.translate(-this.camera_x, 0); // Kamera wird zurückgesetzt
-
-        // for each Statusbar
         this.statusBar.forEach(statusbar => {
             this.addToMap(statusbar);
         });
@@ -110,15 +88,16 @@ class World {
         }
 
         this.removeObjects();
-
         requestAnimationFrame(() => this.draw());
     }
 
 
     addObjectsToMap(objects) {
-        objects.forEach(object => {
-            this.addToMap(object);
-        });
+        if (objects && Array.isArray(objects)) {
+            objects.forEach(object => {
+                this.addToMap(object);
+            });
+        }
     }
 
     addToMap(movableObject) {
@@ -148,31 +127,38 @@ class World {
     }
 
     checkCollisions() {
-        this.level.zombies.forEach((zombie) => {
-            if (this.character.isColliding(zombie) && !this.character.isAboveGround()) {
-                this.character.enemyHit();
-                this.statusBar[0].setPercentage(this.character.energy)
-                console.log('is colliding and loosing energy', this.character.energy);
-            }
-        });
-
-        this.level.monsters.forEach((monster) => {
-            if (this.character.isColliding(monster) && !this.character.isAboveGround()) {
-                this.character.enemyHit();
-                this.statusBar[0].setPercentage(this.character.energy)
-                console.log('is colliding and loosing energy', this.character.energy);
-            }
-        });
-
-        this.level.endboss.forEach((endboss) => {
-            if (this.character.isColliding(endboss)) {
-                console.log('Checking collision with endboss');
-                this.character.endbossHit();
-                this.statusBar[0].setPercentage(this.character.energy)
-                console.log('is colliding with endboss', this.character.energy);
-            }
-        });
-
+        if (Array.isArray(this.level.zombies)) {
+            this.level.zombies.forEach((zombie) => {
+                if (this.character.isColliding(zombie) && !this.character.isAboveGround()) {
+                    this.character.enemyHit();
+                    this.statusBar[0].setPercentage(this.character.energy);
+                    console.log('Zombie collision detected, losing energy', this.character.energy);
+                }
+            });
+        }
+    
+        if (Array.isArray(this.level.monsters)) { // Korrigiert von this.level.monster zu this.level.monsters
+            this.level.monsters.forEach((monster) => {
+                if (this.character.isColliding(monster) && !this.character.isAboveGround()) {
+                    this.character.enemyHit();
+                    this.statusBar[0].setPercentage(this.character.energy);
+                    console.log('Monster collision detected, losing energy', this.character.energy);
+                }
+            });
+        }
+    
+        // Überprüfung, ob endboss ein Array ist, hinzugefügt
+        if (Array.isArray(this.level.endboss)) {
+            this.level.endboss.forEach((endboss) => {
+                if (this.character.isColliding(endboss)) {
+                    console.log('Checking collision with endboss');
+                    this.character.endbossHit();
+                    this.statusBar[0].setPercentage(this.character.energy);
+                    console.log('Endboss collision detected, losing energy', this.character.energy);
+                }
+            });
+        }
+    
         this.throwableObjects.forEach((bomb) => {
             if (!bomb.hitEnemy) {
                 this.level.zombies.forEach((zombie) => {
@@ -183,7 +169,7 @@ class World {
                         console.log('Zombie hit by bomb');
                     }
                 });
-
+    
                 this.level.monsters.forEach((monster) => {
                     if (bomb.isColliding(monster)) {
                         monster.enemyHitByBomb();
@@ -191,20 +177,23 @@ class World {
                         console.log('Monster hit by bomb');
                     }
                 });
-
-                this.level.endboss.forEach((endboss) => {
-                    if (bomb.isColliding(endboss)) {
-                        endboss.endbossHitByBomb();
-                        bomb.hitEnemy = true;
-                        console.log('Endboss hit by bomb');
-                    }
-                });
+    
+                // Überprüfung, ob endboss ein Array ist, sollte hier nicht nötig sein, da endboss normalerweise ein einzelnes Objekt ist. Wenn endboss jedoch als Array implementiert ist, füge die gleiche Überprüfung wie oben hinzu.
+                if (Array.isArray(this.level.endboss)) {
+                    this.level.endboss.forEach((endboss) => {
+                        if (bomb.isColliding(endboss)) {
+                            endboss.endbossHitByBomb();
+                            bomb.hitEnemy = true;
+                            console.log('Endboss hit by bomb');
+                        }
+                    });
+                }
             }
         });
     }
 
     checkCollisionsCharacterCandy() {
-        this.createdCandy.forEach((candy) => {
+        this.level.candy.forEach((candy) => {
             if (this.character.isColliding(candy) && this.character.candy < 100) {
                 console.log(`Character kollidiert mit Candy`);
                 candy.readyToRemove = true;
@@ -215,7 +204,7 @@ class World {
     }
 
     checkCollisionsCharacterBombs() {
-        this.createdBombs.forEach((bomb) => {
+        this.level.bombs.forEach((bomb) => {
             if (this.character.isColliding(bomb) && this.character.ownedBombs < 100) {
                 console.log(`Character kollidiert mit Bombe`);
                 bomb.readyToRemove = true;
@@ -228,10 +217,10 @@ class World {
     removeObjects() {
         this.level.zombies = this.level.zombies.filter(zombie => !zombie.readyToRemove);
         this.level.monsters = this.level.monsters.filter(monster => !monster.readyToRemove);
-        this.level.endboss = this.level.endboss.filter(boss => !boss.readyToRemove);
+        // this.level.endboss = this.level.endboss.filter(boss => !boss.readyToRemove);
         this.throwableObjects = this.throwableObjects.filter(bomb => !bomb.isExploded);
-        this.createdCandy = this.createdCandy.filter(candy => !candy.readyToRemove);
-        this.createdBombs = this.createdBombs.filter(bomb => !bomb.readyToRemove);
+        this.level.candy = this.level.candy.filter(candy => !candy.readyToRemove);
+        this.level.bombs = this.level.bombs.filter(bomb => !bomb.readyToRemove);
     }
 
     checkJumpOnZombie() {
@@ -254,6 +243,3 @@ class World {
         });
     }
 }
-
-
-// canvas.requestFullscreen für die Fullscreen-Anzeige  
