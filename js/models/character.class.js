@@ -1,6 +1,6 @@
 class Character extends MovableObject {
     speed = 100;
-    offset={
+    offset = {
         top: 10,
         right: 40,
         bottom: 0,
@@ -72,6 +72,14 @@ class Character extends MovableObject {
         'img2/2_character/3_jump/biker_jump_03.png',
         'img2/2_character/3_jump/biker_jump_04.png',
     ];
+    IMAGES_DOUBLE_JUMP = [
+        'img2/2_character/3_jump/biker_doublejump_01.png',
+        'img2/2_character/3_jump/biker_doublejump_02.png',
+        'img2/2_character/3_jump/biker_doublejump_03.png',
+        'img2/2_character/3_jump/biker_doublejump_04.png',
+        'img2/2_character/3_jump/biker_doublejump_05.png',
+        'img2/2_character/3_jump/biker_doublejump_06.png',
+    ]
     IMAGES_HURT = [
         'img2/2_character/4_hurt/biker_hurt_01.png',
         'img2/2_character/4_hurt/biker_hurt_02.png',
@@ -92,12 +100,12 @@ class Character extends MovableObject {
         'img2/2_character/6_throw/biker_throw_05.png',
         'img2/2_character/6_throw/biker_throw_06.png',
     ];
-    ANIMATION_SPEED_IDLE = 400; 
-    ANIMATION_SPEED_LONG_IDLE = 400;   
-    ANIMATION_SPEED_WALK = 35;    
-    ANIMATION_SPEED_JUMP = 150;   
-    ANIMATION_SPEED_HURT = 150;    
-    ANIMATION_SPEED_DEAD = 250;    
+    ANIMATION_SPEED_IDLE = 400;
+    ANIMATION_SPEED_LONG_IDLE = 400;
+    ANIMATION_SPEED_WALK = 35;
+    ANIMATION_SPEED_JUMP = 150;
+    ANIMATION_SPEED_HURT = 150;
+    ANIMATION_SPEED_DEAD = 250;
     ANIMATION_SPEED_THROWINGBOMBS = 45;
     world;
     walking_sound = new Audio('audio/659370__matrixxx__retro-footsteps.wav');
@@ -107,8 +115,9 @@ class Character extends MovableObject {
     animationInterval = null;
     hasDied = false;
     isThrowingBomb = false;
-    idleTime = 0; 
+    idleTime = 0;
     ownedBombs = 0;
+    canDoubleJump = false;
 
     constructor() {
         super().loadImage('img2/2_character/2_walk/biker_walk_01.png')
@@ -116,6 +125,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_LONG_IDLE);
         this.loadImages(this.IMAGES_WALK);
         this.loadImages(this.IMAGES_JUMP);
+        this.loadImages(this.IMAGES_DOUBLE_JUMP)
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_THROWINGBOMBS);
@@ -178,6 +188,9 @@ class Character extends MovableObject {
             animationSpeed = this.ANIMATION_SPEED_THROWINGBOMBS;
         } else if (this.isHurt()) {
             this.playAnimation(this.IMAGES_HURT);
+        } else if (this.isAboveGround() && this.canDoubleJump) {
+            this.playAnimation(this.IMAGES_DOUBLE_JUMP);
+            animationSpeed = this.ANIMATION_SPEED_JUMP;
         } else if (this.isAboveGround()) {
             this.playAnimation(this.IMAGES_JUMP);
             animationSpeed = this.ANIMATION_SPEED_JUMP;
@@ -202,19 +215,19 @@ class Character extends MovableObject {
     }
 
     throwBomb() {
-            this.currentImage = 0;
-            this.isThrowingBomb = true;
-            const animationInterval = setInterval(() => {
-                this.playAnimation(this.IMAGES_THROWINGBOMBS);
-                if (this.currentImage >= this.IMAGES_THROWINGBOMBS.length) {
-                    clearInterval(animationInterval);
-                    this.isThrowingBomb = false;
-                    this.currentImage = 0; // Zurücksetzen für nächste Animation
-                    this.reducingBombs(); // Aufruf hier, Statusleiste wird in reducingBombs aktualisiert
-                }
-            }, this.ANIMATION_SPEED_THROWINGBOMBS);
-    }            
-            
+        this.currentImage = 0;
+        this.isThrowingBomb = true;
+        const animationInterval = setInterval(() => {
+            this.playAnimation(this.IMAGES_THROWINGBOMBS);
+            if (this.currentImage >= this.IMAGES_THROWINGBOMBS.length) {
+                clearInterval(animationInterval);
+                this.isThrowingBomb = false;
+                this.currentImage = 0; // Zurücksetzen für nächste Animation
+                this.reducingBombs(); // Aufruf hier, Statusleiste wird in reducingBombs aktualisiert
+            }
+        }, this.ANIMATION_SPEED_THROWINGBOMBS);
+    }
+
     initBackgroundMusic() {
         document.addEventListener('click', () => {
             this.playBackgroundMusic();

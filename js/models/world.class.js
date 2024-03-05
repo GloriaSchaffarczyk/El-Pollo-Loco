@@ -39,6 +39,8 @@ class World {
             this.checkCollisionsCharacterCandy();
             this.checkCollisionsCharacterBombs();
             this.checkThrowObjects();
+            this.checkJumpOnMonster();
+            this.checkJumpOnZombie();
         }, 180)
     }
 
@@ -147,7 +149,7 @@ class World {
 
     checkCollisions() {
         this.level.zombies.forEach((zombie) => {
-            if (this.character.isColliding(zombie)) {
+            if (this.character.isColliding(zombie) && !this.character.isAboveGround()) {
                 this.character.enemyHit();
                 this.statusBar[0].setPercentage(this.character.energy)
                 console.log('is colliding and loosing energy', this.character.energy);
@@ -155,7 +157,7 @@ class World {
         });
 
         this.level.monsters.forEach((monster) => {
-            if (this.character.isColliding(monster)) {
+            if (this.character.isColliding(monster) && !this.character.isAboveGround()) {
                 this.character.enemyHit();
                 this.statusBar[0].setPercentage(this.character.energy)
                 console.log('is colliding and loosing energy', this.character.energy);
@@ -231,7 +233,27 @@ class World {
         this.createdCandy = this.createdCandy.filter(candy => !candy.readyToRemove);
         this.createdBombs = this.createdBombs.filter(bomb => !bomb.readyToRemove);
     }
+
+    checkJumpOnZombie() {
+        this.level.zombies.forEach(zombie => {
+            if (this.character.isColliding(zombie) && this.character.speedY < 0 && this.character.isAboveGround()) {
+                this.character.canDoubleJump = true;
+                this.character.doubleJump();
+                zombie.enemyHitByBomb();
+            }
+        });
+    }
+
+    checkJumpOnMonster() {
+        this.level.monsters.forEach(monster => {
+            if (this.character.isColliding(monster) && this.character.speedY < 0 && this.character.isAboveGround()) {
+                this.character.canDoubleJump = true;
+                this.character.doubleJump();
+                monster.enemyHitByBomb();
+            }
+        });
+    }
 }
 
 
-// canvas.requestFullscreen für die Fullscreen-Anzeige 
+// canvas.requestFullscreen für die Fullscreen-Anzeige  

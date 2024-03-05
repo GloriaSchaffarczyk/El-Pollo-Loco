@@ -1,5 +1,5 @@
 class MovableObject extends DrawableObject {
-        offset = {
+    offset = {
         top: 0,
         right: 0,
         bottom: 0,
@@ -14,6 +14,7 @@ class MovableObject extends DrawableObject {
     readyToRemove = false;
     bombs = 0;
     candy = 0;
+    speedX = 0;
 
     applyGravity() {
         let groundLevel = 290;
@@ -23,6 +24,7 @@ class MovableObject extends DrawableObject {
                 this.speedY -= this.accelerationY;
             } else {
                 this.y = groundLevel;
+                this.canDoubleJump = false;
             }
         }, 1000 / 25);
     }
@@ -70,7 +72,7 @@ class MovableObject extends DrawableObject {
             this.x + this.offset.left <= mo.x + mo.width - mo.offset.right &&
             this.y + this.offset.top <= mo.y + mo.height - mo.offset.bottom
         );
-    }    
+    }
 
     /* isColliding(obj) {
         return this.x + this.width >= obj.x &&
@@ -95,7 +97,7 @@ class MovableObject extends DrawableObject {
         } else {
             this.lastHit = new Date().getTime();
         }
-    }    
+    }
 
     endbossHitByBomb() {
         this.energy -= 20;
@@ -113,7 +115,7 @@ class MovableObject extends DrawableObject {
             this.candy = 100;
         }
     }
-    
+
     collectingBombs() {
         this.ownedBombs += 20;
         if (this.ownedBombs > 100) {
@@ -126,7 +128,7 @@ class MovableObject extends DrawableObject {
             this.ownedBombs = 0; // Verhindere negative Werte
         }
         this.world.statusBar[1].setPercentage(this.ownedBombs);
-    }    
+    }
 
     playAnimation(images) {
         let i = this.currentImage % images.length;
@@ -138,10 +140,10 @@ class MovableObject extends DrawableObject {
     playAnimationOnce(images) {
         let animationIndex = 0;
         let animationLength = images.length;
-    
+
         // Sicherstellen, dass die Animation nur einmal gestartet wird
         if (this.animationInterval) return;
-    
+
         this.animationInterval = setInterval(() => {
             if (animationIndex < animationLength) {
                 this.img = this.imageCache[images[animationIndex++]];
@@ -151,8 +153,8 @@ class MovableObject extends DrawableObject {
                 this.readyToRemove = true; // Setze das Objekt als bereit zum Entfernen
             }
         }, 100);
-    } 
-    
+    }
+
     moveRight() {
         this.x += this.speed;
     };
@@ -164,10 +166,28 @@ class MovableObject extends DrawableObject {
     jump() {
         this.speedY = 30;
     }
+
+    doubleJump() {
+        this.speedY = 30;
+        this.speedX = this.otherDirection ? -5 : 5; 
+
+        if (this.horizontalMoveInterval) {
+            clearInterval(this.horizontalMoveInterval);
+        }
+
+        this.horizontalMoveInterval = setInterval(() => {
+            if (this.isAboveGround()) {
+                this.x += this.speedX;
+            } else {
+                clearInterval(this.horizontalMoveInterval);
+            }
+        }, 5000 / 60);
+    }
+
 }
 
 // Aufgaben
-// Startscreen 
+// Startscreen
 // Musik und Sounds
 // Coins einsammeln
 // Flaschen einsammeln
