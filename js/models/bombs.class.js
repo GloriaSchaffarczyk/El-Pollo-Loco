@@ -17,7 +17,7 @@ class Bombs extends MovableObject {
         super().loadImage(this.IMAGES_BOMBS[0]);
         this.loadImages(this.IMAGES_BOMBS);
 
-        this.x = 50 + Math.random() * 10000; // hier wird die variable x, also die Position im Graphen auf der x-achse neu zugeteilt, und mit einem random wert erstellt
+        this.x = 50 + Math.random() * 15000; // hier wird die variable x, also die Position im Graphen auf der x-achse neu zugeteilt, und mit einem random wert erstellt
         // damit jedes Huhn, von den dreien die generiert werden, anders positioniert werden.
         this.animate();
     }

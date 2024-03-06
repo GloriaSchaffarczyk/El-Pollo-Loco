@@ -9,11 +9,14 @@ class Level {
     level_end_x = 5720;
 
     constructor() {
+        this.generateCandy();
+        this.generateBombs();
         this.generateBackground();
         this.generateInitialEnemies();
         this.generateInitialClouds();
         this.spawnEnemiesIfNeeded();
         this.spawnCloudsPeriodically();
+        this.endboss = [new Endboss()];
     }
 
     generateBackground() {
@@ -31,9 +34,21 @@ class Level {
         }
     }
 
+    generateCandy() {
+        for (let i = 0; i < 40; i++) {
+            this.candy.push(new Candy());
+        }
+    }
+    
+    generateBombs() {
+        for (let i = 0; i < 40; i++) {
+            this.bombs.push(new Bombs());
+        }
+    }
+
     generateInitialEnemies() {
-        this.generateZombies(3);
-        this.generateMonsters(5);
+        this.generateZombies(7);
+        this.generateMonsters(7);
     }
 
     generateInitialClouds() {
@@ -42,12 +57,12 @@ class Level {
 
     spawnEnemiesIfNeeded() {
         setInterval(() => {
-            if (this.zombies.length < 3) {
-                this.generateZombies(3 - this.zombies.length);
+            if (this.zombies.length < 7) {
+                this.generateZombies(2 - this.zombies.length);
             }
 
-            if (this.monsters.length < 5) {
-                this.generateMonsters(5 - this.monsters.length);
+            if (this.monsters.length < 7) {
+                this.generateMonsters(2 - this.monsters.length);
             }
         }, 10000);
     }

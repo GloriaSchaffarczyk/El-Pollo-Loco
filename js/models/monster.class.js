@@ -34,7 +34,7 @@ class Monster extends MovableObject {
         super().loadImage('img2/3_enemies/monster/1_walk/monster_walk_01.png');
         this.loadImages(this.MONSTER_WALKING);
         this.loadImages(this.MONSTER_DYING);
-        this.x = 570 + Math.random() * 500;
+        this.x = 570 + Math.random() * 10000;
         this.speed = 0.25 + Math.random() * 0.25;
         this.animate();
     }

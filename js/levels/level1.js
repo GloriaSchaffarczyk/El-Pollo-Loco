@@ -1,9 +1,5 @@
 let LEVEL1;
 
 function initLevel() {
-    LEVEL1 = new Level(
-        [
-            new Endboss()
-        ],
-    );
+    LEVEL1 = new Level();
 }

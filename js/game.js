@@ -17,6 +17,7 @@ function startGame() {
     description.classList.remove('hidden')
 }
 
+
 function toggleMusic() {
     if (isMusicOn) {
         muteMusic();
