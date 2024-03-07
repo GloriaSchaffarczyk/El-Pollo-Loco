@@ -165,8 +165,8 @@ class World {
                     if (bomb.isColliding(zombie)) {
                         zombie.enemyHitByBomb();
                         bomb.hitEnemy = true;
-                        zombie.isDead();
-                        console.log('Zombie hit by bomb');
+                        zombie.zombie_dying_sound.play();
+                        bomb.bomb_explosion_sound.play();
                     }
                 });
     
@@ -174,7 +174,8 @@ class World {
                     if (bomb.isColliding(monster)) {
                         monster.enemyHitByBomb();
                         bomb.hitEnemy = true;
-                        console.log('Monster hit by bomb');
+                        monster.monster_dying_sound.play();
+                        bomb.bomb_explosion_sound.play();
                     }
                 });
     
@@ -184,7 +185,7 @@ class World {
                         if (bomb.isColliding(endboss)) {
                             endboss.endbossHitByBomb();
                             bomb.hitEnemy = true;
-                            console.log('Endboss hit by bomb');
+                            bomb.bomb_explosion_sound.play();
                         }
                     });
                 }
@@ -199,6 +200,7 @@ class World {
                 candy.readyToRemove = true;
                 this.character.collectingCandy();
                 this.statusBar[2].setPercentage(this.character.candy);
+                candy.collecting_candy_sound.play();
             }
         });
     }
@@ -210,6 +212,7 @@ class World {
                 bomb.readyToRemove = true;
                 this.character.collectingBombs();
                 this.statusBar[1].setPercentage(this.character.ownedBombs);
+                bomb.collecting_bombs_sound.play();
             }
         });
     }
@@ -217,7 +220,6 @@ class World {
     removeObjects() {
         this.level.zombies = this.level.zombies.filter(zombie => !zombie.readyToRemove);
         this.level.monsters = this.level.monsters.filter(monster => !monster.readyToRemove);
-        // this.level.endboss = this.level.endboss.filter(boss => !boss.readyToRemove);
         this.throwableObjects = this.throwableObjects.filter(bomb => !bomb.isExploded);
         this.level.candy = this.level.candy.filter(candy => !candy.readyToRemove);
         this.level.bombs = this.level.bombs.filter(bomb => !bomb.readyToRemove);
@@ -229,6 +231,7 @@ class World {
                 this.character.canDoubleJump = true;
                 this.character.doubleJump();
                 zombie.enemyHitByBomb();
+                zombie.zombie_dying_sound.play();
             }
         });
     }
@@ -239,6 +242,7 @@ class World {
                 this.character.canDoubleJump = true;
                 this.character.doubleJump();
                 monster.enemyHitByBomb();
+                monster.monster_dying_sound.play();
             }
         });
     }

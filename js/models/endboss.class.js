@@ -1,9 +1,9 @@
 class Endboss extends MovableObject {
-    offset={
+    offset = {
         top: 30,
         right: 60,
         bottom: 30,
-        left: 10,  
+        left: 10,
     }
     y = 200;
     height = 200;
@@ -34,6 +34,16 @@ class Endboss extends MovableObject {
         'img2/4_boss/5_dead/boss_dead_05.png',
         'img2/4_boss/5_dead/boss_dead_06.png',
     ];
+    ENBOSS_ATTACK = [
+        'img2/4_boss/3_attack/boss_attack_01.png',
+        'img2/4_boss/3_attack/boss_attack_02.png',
+        'img2/4_boss/3_attack/boss_attack_03.png',
+        'img2/4_boss/3_attack/boss_attack_04.png',
+        'img2/4_boss/3_attack/boss_attack_05.png',
+        'img2/4_boss/3_attack/boss_attack_06.png',
+        'img2/4_boss/3_attack/boss_attack_07.png',
+        'img2/4_boss/3_attack/boss_attack_08.png',
+    ]
     energy = 100; // energy of endboss is higher
     endboss_dying_sound = new Audio('audio/607201__tomronaldmusic__defeated_ogre.wav');
 
@@ -44,16 +54,40 @@ class Endboss extends MovableObject {
         this.x = 5100;
         this.speed = 0.25;
         this.animate();
-    } 
+        this.dyingAnimationPlayed = false;
+    }
+
+    animateAttack() {
+        if (world.character.x < 4640) {
+            setInterval(() => {
+                this.moveLeft();
+            }, 1000 / 60);
+        }
+    }
 
     animate() {
         setInterval(() => {
             if (!this.hasDied) {
                 this.playAnimation(this.ENDBOSS_IMAGES_WALKING);
-            } else if (!this.readyToRemove) {
-                this.playAnimationOnce(this.ENDBOSS_DYING);
-                this.endboss_dying_sound.play();
+            } else if (!this.dyingAnimationPlayed) {
+                this.handleDyingAnimation();
+                this.dyingAnimationPlayed = true;
             }
         }, 200);
+    }
+
+    handleDyingAnimation() {
+        let currentFrame = 0;
+        let maxFrames = this.ENDBOSS_DYING.length;
+        this.endboss_dying_sound.play();
+
+        this.dyingAnimationInterval = setInterval(() => {
+            if (currentFrame < maxFrames) {
+                this.img = this.imageCache[this.ENDBOSS_DYING[currentFrame++]];
+            } else {
+                clearInterval(this.dyingAnimationInterval); // Beendet die Sterbeanimation
+                this.readyToRemove = true; // Setze den Endboss als bereit zum Entfernen
+            }
+        }, 400);
     }
 }

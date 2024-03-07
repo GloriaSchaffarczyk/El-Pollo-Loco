@@ -27,7 +27,7 @@ class Monster extends MovableObject {
     animationSpeed;
     ANIMATION_SPEED_MONSTER_DYING = 250;
     ANIMATION_SPEED_MONSTER_WALKING = 10;
-    monster_dying_sound = new Audio('audio/445983__breviceps__zombie-gargles.wav');
+    monster_dying_sound = new Audio('audio/410524__meijstroaudio__monster-screeching.wav');
     energy = 20;
 
     constructor() {
@@ -49,7 +49,6 @@ class Monster extends MovableObject {
                 this.playAnimation(this.MONSTER_WALKING);
             } else {
                 this.playAnimationOnce(this.MONSTER_DYING);
-                this.monster_dying_sound.play();
             }
         }, 300);
     }
