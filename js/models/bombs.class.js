@@ -13,7 +13,6 @@ class Bombs extends MovableObject {
         'img2/6_bombs/bomb_02.png'
     ];
     collecting_bombs_sound = new Audio('audio/651515__1bob__grab-item.wav');
-    bomb_explosion_sound = new Audio('audio/404742__owlstorm__retro-video-game-sfx-explode-5.wav')
 
     constructor() {
         super().loadImage(this.IMAGES_BOMBS[0]);
@@ -28,13 +27,6 @@ class Bombs extends MovableObject {
         setInterval(() => {
             this.playAnimation(this.IMAGES_BOMBS); // Calls the method from the superclass
         }, 1000 / 2);
-    }
-
-    playAnimation(images) {
-        let i = this.currentImage % images.length;
-        let path = images[i];
-        this.img = this.imageCache[path];
-        this.currentImage++;
     }
 
     removeFromMap() {

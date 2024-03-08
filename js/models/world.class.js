@@ -37,6 +37,7 @@ class World {
             this.checkThrowObjects();
             this.checkJumpOnMonster();
             this.checkJumpOnZombie();
+            this.triggerEnemyAttack();
         }, 180)
     }
 
@@ -179,7 +180,6 @@ class World {
                     }
                 });
     
-                // Überprüfung, ob endboss ein Array ist, sollte hier nicht nötig sein, da endboss normalerweise ein einzelnes Objekt ist. Wenn endboss jedoch als Array implementiert ist, füge die gleiche Überprüfung wie oben hinzu.
                 if (Array.isArray(this.level.endboss)) {
                     this.level.endboss.forEach((endboss) => {
                         if (bomb.isColliding(endboss)) {
@@ -243,6 +243,16 @@ class World {
                 this.character.doubleJump();
                 monster.enemyHitByBomb();
                 monster.monster_dying_sound.play();
+            }
+        });
+    }
+
+    triggerEnemyAttack() {
+        this.level.endboss.forEach(endboss => {
+            if (this.character.x > 4840) {
+                endboss.characterIsCloseToEndboss = true;
+                endboss.endboss_battle_music.play();
+                character.background_music.pause();
             }
         });
     }

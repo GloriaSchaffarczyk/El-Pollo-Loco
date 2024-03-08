@@ -3,10 +3,13 @@ let world;
 let keyboard = new Keyboard();
 let isMusicOn = true;
 let isSoundOn = true;
-// Variable ctx wurde gelöscht
+startscreen_sound = new Audio('audio/475300__adnova__bell-cave.wav')
+startscreen_sound.loop = true;
 
 function init() {
     canvas = document.getElementById('canvas');
+    startscreen_sound.loop = true; 
+    startscreen_sound.play();
 }
 
 function startGame() {
@@ -15,8 +18,8 @@ function startGame() {
     startscreen.classList.add('hidden');
     symbols.classList.remove('hidden'); 
     description.classList.remove('hidden')
+    startscreen_sound.pause();
 }
-
 
 function toggleMusic() {
     if (isMusicOn) {

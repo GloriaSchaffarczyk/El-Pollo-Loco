@@ -34,7 +34,7 @@ class Endboss extends MovableObject {
         'img2/4_boss/5_dead/boss_dead_05.png',
         'img2/4_boss/5_dead/boss_dead_06.png',
     ];
-    ENBOSS_ATTACK = [
+    ENDBOSS_ATTACK = [
         'img2/4_boss/3_attack/boss_attack_01.png',
         'img2/4_boss/3_attack/boss_attack_02.png',
         'img2/4_boss/3_attack/boss_attack_03.png',
@@ -43,32 +43,33 @@ class Endboss extends MovableObject {
         'img2/4_boss/3_attack/boss_attack_06.png',
         'img2/4_boss/3_attack/boss_attack_07.png',
         'img2/4_boss/3_attack/boss_attack_08.png',
-    ]
+    ];
     energy = 100; // energy of endboss is higher
     endboss_dying_sound = new Audio('audio/607201__tomronaldmusic__defeated_ogre.wav');
+    endboss_battle_music = new Audio('audio/573803__sami_hiltunen__boss-battle-music.wav');
 
     constructor() {
         super().loadImage(this.ENDBOSS_IMAGES_WALKING[0]);
         this.loadImages(this.ENDBOSS_IMAGES_WALKING);
         this.loadImages(this.ENDBOSS_DYING);
+        this.loadImages(this.ENDBOSS_ATTACK);
         this.x = 5100;
         this.speed = 0.25;
         this.animate();
         this.dyingAnimationPlayed = false;
-    }
-
-    animateAttack() {
-        if (world.character.x < 4640) {
-            setInterval(() => {
-                this.moveLeft();
-            }, 1000 / 60);
-        }
+        this.characterIsCloseToEndboss = false;
     }
 
     animate() {
         setInterval(() => {
             if (!this.hasDied) {
-                this.playAnimation(this.ENDBOSS_IMAGES_WALKING);
+                if (this.characterIsCloseToEndboss) {
+                    this.moveLeft();
+                    this.speed = 3;
+                    this.playAnimation(this.ENDBOSS_ATTACK);
+                } else {
+                    this.playAnimation(this.ENDBOSS_IMAGES_WALKING);
+                }
             } else if (!this.dyingAnimationPlayed) {
                 this.handleDyingAnimation();
                 this.dyingAnimationPlayed = true;

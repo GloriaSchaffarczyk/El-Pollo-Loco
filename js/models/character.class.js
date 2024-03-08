@@ -79,7 +79,7 @@ class Character extends MovableObject {
         'img2/2_character/3_jump/biker_doublejump_04.png',
         'img2/2_character/3_jump/biker_doublejump_05.png',
         'img2/2_character/3_jump/biker_doublejump_06.png',
-    ]
+    ];
     IMAGES_HURT = [
         'img2/2_character/4_hurt/biker_hurt_01.png',
         'img2/2_character/4_hurt/biker_hurt_02.png',
