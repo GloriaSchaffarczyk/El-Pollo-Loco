@@ -252,7 +252,6 @@ class World {
             if (this.character.x > 4840) {
                 endboss.characterIsCloseToEndboss = true;
                 endboss.endboss_battle_music.play();
-                character.background_music.pause();
             }
         });
     }

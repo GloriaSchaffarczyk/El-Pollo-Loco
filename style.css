@@ -210,6 +210,10 @@ table td img {
     canvas {
         width: 100%;
     }
+
+    .description {
+        display: none;
+    }
 }
 
 /* Smartphones height --- */
@@ -220,6 +224,10 @@ table td img {
 
     canvas {
         height: 100vh;
+    }
+
+    .description {
+        display: none;
     }
 }
 
