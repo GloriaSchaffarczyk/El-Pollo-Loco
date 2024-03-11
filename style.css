@@ -207,19 +207,23 @@ table td img {
 
 /* Smartphones width --- */
 @media only screen and (max-width: 720px) {
+    h1 {
+        display: none !important;
+    }
+
     canvas {
         width: 100%;
     }
 
     .description {
-        display: none;
+        display: none !important;
     }
 }
 
 /* Smartphones height --- */
 @media only screen and (max-height: 480px) {
     h1 {
-        display: none;
+        display: none !important;
     }
 
     canvas {
@@ -227,7 +231,7 @@ table td img {
     }
 
     .description {
-        display: none;
+        display: none !important;
     }
 }
 

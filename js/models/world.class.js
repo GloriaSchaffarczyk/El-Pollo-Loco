@@ -92,7 +92,6 @@ class World {
         requestAnimationFrame(() => this.draw());
     }
 
-
     addObjectsToMap(objects) {
         if (objects && Array.isArray(objects)) {
             objects.forEach(object => {
@@ -249,9 +248,10 @@ class World {
 
     triggerEnemyAttack() {
         this.level.endboss.forEach(endboss => {
-            if (this.character.x > 4840) {
+            if (this.character.x > 4640) {
                 endboss.characterIsCloseToEndboss = true;
-                endboss.endboss_battle_music.play();
+                // endboss.endboss_battle_music.play();
+                // character.background_music.pause();
             }
         });
     }

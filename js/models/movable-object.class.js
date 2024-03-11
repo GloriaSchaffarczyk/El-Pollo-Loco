@@ -141,7 +141,6 @@ class MovableObject extends DrawableObject {
         let animationIndex = 0;
         let animationLength = images.length;
 
-        // Sicherstellen, dass die Animation nur einmal gestartet wird
         if (this.animationInterval) return;
 
         this.animationInterval = setInterval(() => {
@@ -150,7 +149,7 @@ class MovableObject extends DrawableObject {
             } else {
                 clearInterval(this.animationInterval);
                 this.animationInterval = null;
-                this.readyToRemove = true; // Setze das Objekt als bereit zum Entfernen
+                this.readyToRemove = true;
             }
         }, 100);
     }

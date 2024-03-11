@@ -21,6 +21,10 @@ function startGame() {
     startscreen_sound.pause();
 }
 
+function endGame() {
+    
+}
+
 function toggleMusic() {
     if (isMusicOn) {
         muteMusic();

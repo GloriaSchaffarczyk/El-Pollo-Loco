@@ -61,16 +61,23 @@ class Endboss extends MovableObject {
     }
 
     animate() {
+        let i = 0;
         setInterval(() => {
-            if (!this.hasDied) {
-                if (this.characterIsCloseToEndboss) {
-                    this.moveLeft();
-                    this.speed = 3;
-                    this.playAnimation(this.ENDBOSS_ATTACK);
-                } else {
-                    this.playAnimation(this.ENDBOSS_IMAGES_WALKING);
+            if (!this.hasDied) { // Überprüft, ob der Endboss noch am Leben ist
+                if (this.characterIsCloseToEndboss) { // Wenn der Charakter nahe genug ist
+                    if (i < 17) { // Wenn i kleiner als 17 ist, spiele die Walking-Animation
+                        this.playAnimation(this.ENDBOSS_IMAGES_WALKING);
+                        i++;
+                    } else { // Sobald i >= 17, wechsle zur Attack-Animation
+                        this.playAnimation(this.ENDBOSS_ATTACK);
+                        this.moveLeft();
+                        this.speed = 3;
+                    }
+                } else { // Wenn der Charakter nicht nahe genug ist
+                    this.playAnimation(this.ENDBOSS_IMAGES_WALKING); // Spiele immer die Walking-Animation
+                    i = 0; // Setze i zurück, sodass bei einer erneuten Annäherung des Charakters die Walking-Animation von vorne beginnt
                 }
-            } else if (!this.dyingAnimationPlayed) {
+            } else if (!this.dyingAnimationPlayed) { // Wenn der Endboss gestorben ist und die Sterbeanimation noch nicht abgespielt wurde
                 this.handleDyingAnimation();
                 this.dyingAnimationPlayed = true;
             }
