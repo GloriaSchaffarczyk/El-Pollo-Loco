@@ -10,7 +10,6 @@ class World {
         new StatusbarHealth(),
         new StatusbarBombs(),
         new StatusbarCandy(),
-        new StatusbarEndboss(),
     ];
     throwableObjects = [];
     statusBarIcons;
@@ -58,7 +57,6 @@ class World {
             new StatusbarIcons(15, 15, 'HEALTH'),
             new StatusbarIcons(15, 38, 'CANDY'),
             new StatusbarIcons(15, 62, 'BOMBS'),
-            new StatusbarIcons(510, 22, 'ENDBOSS'),
         ];
         console.log("Statusbar Icons loaded:", this.statusBarIcons);
     }
@@ -108,8 +106,8 @@ class World {
         }
 
         movableObject.draw(this.ctx);
-        movableObject.drawFrame(this.ctx);
-        movableObject.drawFrameBlue(this.ctx);
+        // movableObject.drawFrame(this.ctx);
+        // movableObject.drawFrameBlue(this.ctx);
 
         if (movableObject.otherDirection) {
             this.flipImageBack(movableObject);
@@ -251,11 +249,12 @@ class World {
 
     triggerEnemyAttack() {
         this.level.endboss.forEach(endboss => {
-            if (this.character.x > 4640) {
+            if (this.character.x > 4640 && !endboss.characterIsCloseToEndboss) {
                 endboss.characterIsCloseToEndboss = true;
-                // endboss.endboss_battle_music.play();
-                // character.background_music.pause();
+    
+                this.statusBar.push(new StatusbarEndboss());
+                this.statusBarIcons.push(new StatusbarIcons(480, 22, 'ENDBOSS'));
             }
         });
-    }
+    }    
 }
