@@ -9,7 +9,8 @@ class World {
     statusBar = [
         new StatusbarHealth(),
         new StatusbarBombs(),
-        new StatusbarCandy()
+        new StatusbarCandy(),
+        new StatusbarEndboss(),
     ];
     throwableObjects = [];
     statusBarIcons;
@@ -56,7 +57,8 @@ class World {
         this.statusBarIcons = [
             new StatusbarIcons(15, 15, 'HEALTH'),
             new StatusbarIcons(15, 38, 'CANDY'),
-            new StatusbarIcons(15, 62, 'BOMBS')
+            new StatusbarIcons(15, 62, 'BOMBS'),
+            new StatusbarIcons(510, 22, 'ENDBOSS'),
         ];
         console.log("Statusbar Icons loaded:", this.statusBarIcons);
     }
@@ -184,6 +186,7 @@ class World {
                         if (bomb.isColliding(endboss)) {
                             endboss.endbossHitByBomb();
                             bomb.hitEnemy = true;
+                            this.statusBar[3].setPercentage(endboss.energy);
                             bomb.bomb_explosion_sound.play();
                         }
                     });

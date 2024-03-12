@@ -104,7 +104,7 @@ class Character extends MovableObject {
     ANIMATION_SPEED_LONG_IDLE = 400;
     ANIMATION_SPEED_WALK = 35;
     ANIMATION_SPEED_JUMP = 150;
-    ANIMATION_SPEED_HURT = 150;
+    ANIMATION_SPEED_HURT = 50;
     ANIMATION_SPEED_DEAD = 250;
     ANIMATION_SPEED_THROWINGBOMBS = 45;
     world;
@@ -112,6 +112,7 @@ class Character extends MovableObject {
     jumping_sound = new Audio('audio/678839__cartchaos__jump.wav');
     background_music = new Audio('audio/363164__adnova__spooker.wav');
     dying_sound = new Audio('audio/163442__under7dude__man-dying.wav');
+    hurt_sound = new Audio('audio/486943__matrixxx__human-aah.wav')
     animationInterval = null;
     hasDied = false;
     isThrowingBomb = false;
@@ -188,6 +189,7 @@ class Character extends MovableObject {
             animationSpeed = this.ANIMATION_SPEED_THROWINGBOMBS;
         } else if (this.isHurt()) {
             this.playAnimation(this.IMAGES_HURT);
+            this.hurt_sound.play();
         } else if (this.isAboveGround() && this.canDoubleJump) {
             this.playAnimation(this.IMAGES_DOUBLE_JUMP);
             animationSpeed = this.ANIMATION_SPEED_JUMP;

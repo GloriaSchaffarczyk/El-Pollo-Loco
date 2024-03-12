@@ -5,6 +5,7 @@ class StatusbarIcons extends DrawableObject {
     ICON_HEALTH = 'img2/7_statusbars/3_icons/health_02.png';
     ICON_CANDY = 'img2/7_statusbars/3_icons/candy_02.png';
     ICON_BOMBS = 'img2/7_statusbars/3_icons/bomb_02.png';
+    ICON_ENDBOSS = 'img2/7_statusbars/3_icons/skull.png';
 
     constructor(x, y, icons) {
         super();
@@ -22,6 +23,8 @@ class StatusbarIcons extends DrawableObject {
             this.loadImage(this.ICON_CANDY);
         } else if (icons == 'BOMBS') {
             this.loadImage(this.ICON_BOMBS);
+        } else if (icons == 'ENDBOSS') {
+            this.loadImage(this.ICON_ENDBOSS);
         }
     }
 }

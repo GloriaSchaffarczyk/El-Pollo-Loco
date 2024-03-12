@@ -57,20 +57,22 @@ class Level {
 
     spawnEnemiesIfNeeded() {
         setInterval(() => {
-            if (this.zombies.length < 7) {
-                this.generateZombies(2 - this.zombies.length);
+            let zombiesToAdd = 7 - this.zombies.length;
+            if (zombiesToAdd > 0) {
+                this.generateZombies(zombiesToAdd);
             }
-
-            if (this.monsters.length < 7) {
-                this.generateMonsters(2 - this.monsters.length);
+    
+            let monstersToAdd = 7 - this.monsters.length;
+            if (monstersToAdd > 0) {
+                this.generateMonsters(monstersToAdd);
             }
         }, 10000);
-    }
+    }    
 
     spawnCloudsPeriodically() {
         setInterval(() => {
             this.clouds.push(new Cloud());
-        }, 10000);
+        }, 100000);
     }
 
     generateZombies(count) {
