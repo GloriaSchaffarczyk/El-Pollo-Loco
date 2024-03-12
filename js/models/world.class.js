@@ -1,6 +1,5 @@
 class World {
     character = new Character();
-    // wenn wir auf die Variablen aus dieser Klasse zugreifen wollen, brauchen wir "this"
     level = LEVEL1;
     canvas;
     ctx;
@@ -25,8 +24,7 @@ class World {
     }
 
     setWorld() {
-        this.character.world = this; // wird nur an den Character übergeben
-        // nur Character muss nach rechts und links gesteuert werden
+        this.character.world = this;
     }
 
     run() {
@@ -58,7 +56,6 @@ class World {
             new StatusbarIcons(15, 38, 'CANDY'),
             new StatusbarIcons(15, 62, 'BOMBS'),
         ];
-        console.log("Statusbar Icons loaded:", this.statusBarIcons);
     }
 
     draw() {
@@ -147,7 +144,6 @@ class World {
             });
         }
     
-        // Überprüfung, ob endboss ein Array ist, hinzugefügt
         if (Array.isArray(this.level.endboss)) {
             this.level.endboss.forEach((endboss) => {
                 if (this.character.isColliding(endboss)) {
@@ -251,7 +247,6 @@ class World {
         this.level.endboss.forEach(endboss => {
             if (this.character.x > 4640 && !endboss.characterIsCloseToEndboss) {
                 endboss.characterIsCloseToEndboss = true;
-    
                 this.statusBar.push(new StatusbarEndboss());
                 this.statusBarIcons.push(new StatusbarIcons(480, 22, 'ENDBOSS'));
             }

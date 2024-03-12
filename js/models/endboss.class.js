@@ -80,6 +80,8 @@ class Endboss extends MovableObject {
             } else if (!this.dyingAnimationPlayed) { 
                 this.handleDyingAnimation();
                 this.dyingAnimationPlayed = true;
+                this.hasDied = true;
+                endGame(true);
             }
         }, 200);
     }

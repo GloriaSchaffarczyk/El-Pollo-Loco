@@ -102,12 +102,12 @@ class Character extends MovableObject {
     ];
     ANIMATION_SPEED_IDLE = 400;
     ANIMATION_SPEED_LONG_IDLE = 400;
-    ANIMATION_SPEED_WALK = 35;
+    ANIMATION_SPEED_WALK = 25;
     ANIMATION_SPEED_JUMP = 150;
     ANIMATION_SPEED_HURT = 50;
     ANIMATION_SPEED_DEAD = 250;
     ANIMATION_SPEED_THROWINGBOMBS = 45;
-    world;
+    world;                       
     walking_sound = new Audio('audio/659370__matrixxx__retro-footsteps.wav');
     jumping_sound = new Audio('audio/678839__cartchaos__jump.wav');
     background_music = new Audio('audio/363164__adnova__spooker.wav');

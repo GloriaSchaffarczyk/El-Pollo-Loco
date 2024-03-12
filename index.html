@@ -33,12 +33,13 @@
 
 <body onload="init()">
 
-    <div class="title-and-canvas" id="title-and-canvas">
-        <h1>Monster Munching Madness</h1>
+    <div class="titleandcanvas" id="titleandcanvas">
+        <h1 id="title">Monster Munching Madness</h1>
         <canvas width="720" height="480" id="canvas">
         </canvas>
         <div class="symbols hidden" id="symbols">
-            <img src="img2/7_statusbars/3_icons/maximize_02.png" alt="enter-fullscreen" onclick="toggleFullscreen()" id="enterFullscreen">
+            <img src="img2/7_statusbars/3_icons/maximize_02.png" alt="enter-fullscreen" onclick="toggleFullscreen()"
+                id="enterFullscreen">
             <img src="img2/7_statusbars/3_icons/music-on.png" alt="music-on-off" onclick="toggleMusic()" id="music">
             <img src="img2/7_statusbars/3_icons/sound-on.png" alt="sounds-on-off" onclick="toggleSound()" id="sound">
         </div>
@@ -81,11 +82,12 @@
             <div class="upper-startscreen-right">
                 <h2>How to play</h2>
                 <p>As midnight descends on Halloween, the graveyard is roamed by evil zombies and monsters. &#129503;
-                Arm yourself with bombs &#128163; and throw them at your enemies to protect yourself and your loved ones.<br>
-                Don't forget to snatch up some candy &#127852; it's Halloween, after all!
-                But be aware: a mighty laser-shooting monster has been spotted. &#128064;
-                Throwing multiple bombs at it might be helpful. And now:
-                Good luck adventurer and happy trick-or-treating! &#128123;&#127875;<br>
+                    Arm yourself with bombs &#128163; and throw them at your enemies to protect yourself and your loved
+                    ones.<br>
+                    Don't forget to snatch up some candy &#127852; it's Halloween, after all!
+                    But be aware: a mighty laser-shooting monster has been spotted. &#128064;
+                    Throwing multiple bombs at it might be helpful. And now:
+                    Good luck adventurer and happy trick-or-treating! &#128123;&#127875;<br>
                 </p>
             </div>
         </div>
@@ -99,9 +101,13 @@
                 </div>
             </div>
             <div class="lower-startscreen-right">
-                <button id="startButton" onclick="startGame()"><p>Start Game</p></button>
+                <button id="startButton" onclick="startGame()">
+                    <p>Start Game</p>
+                </button>
             </div>
         </div>
+    </div>
+    <div class="endscreen d-none" id="endscreen">
     </div>
 
 </body>

@@ -103,6 +103,7 @@ class MovableObject extends DrawableObject {
         this.energy -= 20;
         if (this.energy <= 0) {
             this.hasDied = true;
+            endGame();
         } else {
             this.lastHit = new Date().getTime();
             console.log('Hit endboss!', this.energy);
