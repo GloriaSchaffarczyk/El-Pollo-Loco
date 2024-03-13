@@ -41,6 +41,7 @@ class MovableObject extends DrawableObject {
         this.energy -= 5;
         if (this.energy < 0) {
             this.energy = 0;
+            endGame(false);
         } else {
             this.lastHit = new Date().getTime();
         }
@@ -103,7 +104,7 @@ class MovableObject extends DrawableObject {
         this.energy -= 20;
         if (this.energy <= 0) {
             this.hasDied = true;
-            endGame();
+            endGame(true);
         } else {
             this.lastHit = new Date().getTime();
             console.log('Hit endboss!', this.energy);

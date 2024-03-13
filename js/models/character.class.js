@@ -184,6 +184,7 @@ class Character extends MovableObject {
                 animationSpeed = this.ANIMATION_SPEED_DEAD;
                 this.dying_sound.play();
                 this.hasDied = true;
+                endGame(false);
             }
         } else if (this.isThrowingBomb) {
             animationSpeed = this.ANIMATION_SPEED_THROWINGBOMBS;

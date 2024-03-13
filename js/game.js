@@ -33,7 +33,7 @@ function endGame(isVictory) {
         titleandcanvas.classList.add('d-none');
         symbols.classList.add('d-none');
         description.classList.add('d-none');
-    }, 4000);
+    }, 3000);
 }
 
 function restartGame() {
@@ -197,8 +197,8 @@ function showDefeatScreen() {
         <h2>You've been defeated!</h2>
         <p>Your valiant efforts in the eerie Halloween night have come to an end.
             Despite your bravery, the graveyard's darkness has overwhelmed you.
-            Remember, every hero faces setbacks, but it's not the end. Rest now, for next Halloween awaits your
-            return. Rise again, stronger and wiser, ready to conquer the shadows. &#128128;
+            Remember, every hero faces setbacks, but it's not the end. 
+            Rise again, stronger and wiser, ready to conquer the shadows. &#128128;
         </p>
         <button onclick="restartGame()" id="defeatButton" class="defeatButton">Try again</button>
     </div>
