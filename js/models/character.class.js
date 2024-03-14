@@ -190,7 +190,7 @@ class Character extends MovableObject {
             animationSpeed = this.ANIMATION_SPEED_THROWINGBOMBS;
         } else if (this.isHurt()) {
             this.playAnimation(this.IMAGES_HURT);
-            this.hurt_sound.play();
+            // this.hurt_sound.play();
         } else if (this.isAboveGround() && this.canDoubleJump) {
             this.playAnimation(this.IMAGES_DOUBLE_JUMP);
             animationSpeed = this.ANIMATION_SPEED_JUMP;

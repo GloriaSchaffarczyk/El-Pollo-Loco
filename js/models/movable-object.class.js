@@ -38,6 +38,7 @@ class MovableObject extends DrawableObject {
     }
 
     enemyHit() {
+        if (this.isHurt()) return; 
         this.energy -= 5;
         if (this.energy < 0) {
             this.energy = 0;
@@ -48,6 +49,7 @@ class MovableObject extends DrawableObject {
     }
 
     endbossHit() {
+        if (this.isHurt()) return; 
         this.energy -= 15;
         if (this.energy < 0) {
             this.energy = 0;

@@ -70,7 +70,8 @@ class Level {
     spawnCloudsPeriodically() {
         setInterval(() => {
             this.clouds.push(new Cloud());
-        }, 100000);
+        }, 10000);
+        console.log('spawning cloud');
     }
 
     generateZombies(count) {
