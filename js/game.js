@@ -33,6 +33,7 @@ function endGame(isVictory) {
         titleandcanvas.classList.add('d-none');
         symbols.classList.add('d-none');
         description.classList.add('d-none');
+        clearAllIntervals();
     }, 3000);
 }
 
@@ -204,3 +205,7 @@ function showDefeatScreen() {
     </div>
     `
 }
+
+function clearAllIntervals() {
+    for (let i = 1; i < 9999; i++) window.clearInterval(i);
+  }
