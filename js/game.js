@@ -34,7 +34,7 @@ function endGame(isVictory) {
         symbols.classList.add('d-none');
         description.classList.add('d-none');
         clearAllIntervals();
-    }, 3000);
+    }, 4000);
 }
 
 function restartGame() {
