@@ -15,9 +15,9 @@ function init() {
 function startGame() {
     initLevel();
     world = new World(canvas, keyboard);
-    startscreen.classList.add('hidden');
-    symbols.classList.remove('hidden'); 
-    description.classList.remove('hidden')
+    startscreen.classList.add('d-none');
+    symbols.classList.remove('d-none'); 
+    description.classList.remove('d-none');
     startscreen_sound.pause();
 }
 
@@ -30,7 +30,7 @@ function endGame(isVictory) {
         }
         endscreen.classList.remove('d-none');
         title.classList.add('d-none');
-        titleandcanvas.classList.add('d-none');
+        canvas.classList.add('d-none');
         symbols.classList.add('d-none');
         description.classList.add('d-none');
         clearAllIntervals();
@@ -140,7 +140,7 @@ function playSound() {
 }
 
 function toggleFullscreen() {
-    let titleAndFullscreen = document.getElementById('.titleandcanvas') || document.getElementById('canvas');
+    let titleAndFullscreen = document.getElementById('canvas');
 
     if (!document.fullscreenElement) {
         if (titleAndFullscreen.requestFullscreen) {

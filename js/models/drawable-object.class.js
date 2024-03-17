@@ -40,7 +40,7 @@ class DrawableObject {
             ctx.beginPath();
             ctx.lineWidth = '5';
             ctx.strokeStyle = 'blue'; // Setze die Farbe des Rahmens auf Blau
-            Berechne die Position und Größe des Rahmens basierend auf den Objekteigenschaften und deren Offset
+            // Berechne die Position und Größe des Rahmens basierend auf den Objekteigenschaften und deren Offset
             ctx.rect(
                 this.x + (this.offset ? this.offset.left : 0),
                 this.y + (this.offset ? this.offset.top : 0),
