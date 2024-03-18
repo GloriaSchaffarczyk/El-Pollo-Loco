@@ -10,13 +10,13 @@ function init() {
     canvas = document.getElementById('canvas');
     startscreen_sound.loop = true; 
     startscreen_sound.play();
+    mobile-buttons.classList.add('d-none');
 }
 
 function startGame() {
     initLevel();
     world = new World(canvas, keyboard);
     startscreen.classList.add('d-none');
-    symbols.classList.remove('d-none'); 
     description.classList.remove('d-none');
     startscreen_sound.pause();
 }
@@ -33,6 +33,7 @@ function endGame(isVictory) {
         canvas.classList.add('d-none');
         symbols.classList.add('d-none');
         description.classList.add('d-none');
+        symbols.classList.add('d-none'); 
         clearAllIntervals();
     }, 4000);
 }
