@@ -349,7 +349,7 @@ table td img {
     color: black;
 }
 
-.mobile-buttons {
+.mobilebuttons {
     width: 100%;
     position: absolute;
     bottom: 20px;
@@ -377,11 +377,11 @@ table td img {
         display: none !important;
     }
 
-    .mobile-buttons {
+    .mobilebuttons {
         display: flex;
     }
 
-    .mobile-buttons img {
+    .mobilebuttons img {
         height: 6vw;
         min-height: 20px; 
     }
@@ -416,11 +416,11 @@ table td img {
         display: none !important;
     }
 
-    .mobile-buttons {
-        display: flex; 
+    .mobilebuttons {
+        display: flex;
     }
 
-    .mobile-buttons img {
+    .mobilebuttons img {
         height: 6vw;
         min-height: 20px; 
     }
