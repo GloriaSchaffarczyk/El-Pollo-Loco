@@ -3,24 +3,27 @@ let world;
 let keyboard = new Keyboard();
 let isMusicOn = true;
 let isSoundOn = true;
+let gameState = 'init';
 startscreen_sound = new Audio('audio/475300__adnova__bell-cave.wav')
 startscreen_sound.loop = true;
 
 function init() {
     canvas = document.getElementById('canvas');
-    startscreen_sound.loop = true; 
+    startscreen_sound.loop = true;
     startscreen_sound.play();
-    mobilebuttons.classList.add('d-none');
     addMobileControls();
+    updateVisibility();
+    window.addEventListener('resize', updateVisibility);
 }
 
 function startGame() {
     initLevel();
     world = new World(canvas, keyboard);
     startscreen.classList.add('d-none');
-    description.classList.remove('d-none');
     startscreen_sound.pause();
-    symbols.classList.remove('d-none'); 
+    symbols.classList.remove('d-none');
+    gameState = 'playing';
+    updateVisibility();
 }
 
 function endGame(isVictory) {
@@ -31,11 +34,12 @@ function endGame(isVictory) {
             showDefeatScreen();
         }
         endscreen.classList.remove('d-none');
-        title.classList.add('d-none');
         canvas.classList.add('d-none');
         symbols.classList.add('d-none');
-        description.classList.add('d-none');
-        mobilebuttons.classList.add('d-none'); 
+        title.classList.add('d-none');
+        rotateDeviceMessage.remove('absolute');
+        gameState = 'end';
+        updateVisibility();
         clearAllIntervals();
     }, 4000);
 }
@@ -157,7 +161,37 @@ function showDefeatScreen() {
 
 function clearAllIntervals() {
     for (let i = 1; i < 9999; i++) window.clearInterval(i);
-  }
+}
+
+function updateVisibility() {
+    const isMobile = window.innerWidth < 720 || window.innerHeight < 480;
+    const isLandscape = window.innerWidth > window.innerHeight;
+    const mobileButtons = document.getElementById('mobilebuttons');
+    const description = document.getElementById('description');
+    const rotateDeviceMessage = document.getElementById('rotateDeviceMessage');
+
+    if (isMobile && !isLandscape) {
+        rotateDeviceMessage.classList.remove('d-none');
+    } else {
+        rotateDeviceMessage.classList.add('d-none');
+    }
+
+    if (gameState === 'playing') {
+        if (isMobile && isLandscape) {
+            mobileButtons.classList.remove('d-none');
+            description.classList.add('d-none');
+        } else {
+            mobileButtons.classList.add('d-none');
+            if (!isMobile) {
+                description.classList.remove('d-none');
+            }
+        }
+    } else {
+        mobileButtons.classList.add('d-none');
+        description.classList.add('d-none');
+    }
+}
+
 
 
 /* EVENT LISTENER */

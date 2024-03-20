@@ -33,7 +33,7 @@ class ThrowableObject extends MovableObject {
         this.loadImages(this.IMAGES_BOMBEXPLOSION);
         this.x = x;
         this.y = y;
-        this.direction = direction; // neu
+        this.direction = direction;
         this.width = 50;
         this.height = 50;
         this.bombAnimation();
@@ -66,16 +66,14 @@ class ThrowableObject extends MovableObject {
             let currentFrame = 0;
             let maxFrames = this.IMAGES_BOMBEXPLOSION.length;
     
-            // Setze das Intervall zur Anzeige jedes Explosionsbildes
             this.explosionInterval = setInterval(() => {
                 if (currentFrame < maxFrames) {
                     this.img = this.imageCache[this.IMAGES_BOMBEXPLOSION[currentFrame++]];
                 } else {
-                    clearInterval(this.explosionInterval); // Beendet die Explosionsanimation
+                    clearInterval(this.explosionInterval);
                 }
             }, this.ANIMATION_SPEED_EXPLOSION);
     
-            // Setze ein Timeout, um die Bombe als explodiert zu markieren und die Hauptanimation zu beenden
             setTimeout(() => {
                 console.log("Explosion wird abgespielt");
                 this.isExploded = true;

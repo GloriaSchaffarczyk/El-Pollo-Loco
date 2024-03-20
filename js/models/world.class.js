@@ -134,7 +134,7 @@ class World {
             });
         }
     
-        if (Array.isArray(this.level.monsters)) { // Korrigiert von this.level.monster zu this.level.monsters
+        if (Array.isArray(this.level.monsters)) {
             this.level.monsters.forEach((monster) => {
                 if (this.character.isColliding(monster) && !this.character.isAboveGround()) {
                     this.character.enemyHit();
