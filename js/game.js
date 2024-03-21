@@ -37,7 +37,7 @@ function endGame(isVictory) {
         canvas.classList.add('d-none');
         symbols.classList.add('d-none');
         title.classList.add('d-none');
-        rotateDeviceMessage.remove('absolute');
+        rotateDeviceMessage.classList.remove('absolute');
         gameState = 'end';
         updateVisibility();
         clearAllIntervals();
@@ -176,7 +176,7 @@ function updateVisibility() {
         rotateDeviceMessage.classList.add('d-none');
     }
 
-    if (gameState === 'playing') {
+    if (gameState === 'playing' || 'init') {
         if (isMobile && isLandscape) {
             mobileButtons.classList.remove('d-none');
             description.classList.add('d-none');
