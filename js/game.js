@@ -170,29 +170,23 @@ function updateVisibility() {
     const description = document.getElementById('description');
     const rotateDeviceMessage = document.getElementById('rotateDeviceMessage');
 
-    if (isMobile && !isLandscape) {
-        rotateDeviceMessage.classList.remove('d-none');
-    } else {
-        rotateDeviceMessage.classList.add('d-none');
-    }
+    rotateDeviceMessage.classList.toggle('d-none', isLandscape);
+    let showMobileButtons = false;
+    let showDescription = false;
 
-    if (gameState === 'playing' || 'init') {
-        if (isMobile && isLandscape) {
-            mobileButtons.classList.remove('d-none');
-            description.classList.add('d-none');
-        } else {
-            mobileButtons.classList.add('d-none');
-            if (!isMobile) {
-                description.classList.remove('d-none');
-            }
-        }
-    } else {
+    if (isMobile && gameState !== 'init' && gameState !== 'end') {
+        showMobileButtons = true;
+    }
+    if (!isMobile && gameState !== 'end' && gameState !== 'init') {
+        showDescription = true;
+    }
+    mobileButtons.classList.toggle('d-none', !showMobileButtons);
+    description.classList.toggle('d-none', !showDescription);
+    if (gameState === 'end') {
         mobileButtons.classList.add('d-none');
         description.classList.add('d-none');
     }
 }
-
-
 
 /* EVENT LISTENER */
 
