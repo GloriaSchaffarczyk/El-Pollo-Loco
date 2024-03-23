@@ -243,7 +243,7 @@ table td img {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -48%);
+    transform: translate(-50%, -50%);
     background-image: linear-gradient(180deg, rgba(2, 0, 36, 1) 15%, rgba(1, 29, 135, 1) 50%, rgba(21, 62, 122, 1) 70%, rgba(34, 64, 97, 1) 100%);
     align-content: center;
     justify-content: space-evenly;
@@ -482,9 +482,10 @@ canvas, #startscreen, #endscreen, #rotateDeviceMessage {
         padding: 1vw 2vw;
     }
 
-    .victory {
+    #victory {
         height: auto;
         width: 100%;
+        aspect-ratio: 720 / 480;
     }
 
     .upper-victory-screen {
@@ -499,6 +500,12 @@ canvas, #startscreen, #endscreen, #rotateDeviceMessage {
 
     .lower-victory-screen {
         height: auto;
+    }
+
+    #defeat {
+        height: auto;
+        width: 100%;
+        aspect-ratio: 720 / 480;
     }
 }
 
@@ -550,7 +557,7 @@ canvas, #startscreen, #endscreen, #rotateDeviceMessage {
         padding: 10px;
     }
     .defeat p {
-        padding: 0 200px 10px 200px;
+        padding: 0 60px 10px 60px;
     }
     #endscreen img {
         width: auto; 
@@ -560,11 +567,15 @@ canvas, #startscreen, #endscreen, #rotateDeviceMessage {
         font-size: 6vw;
         padding: 1vw 2vw;
     }
+    #victory {
+        height: auto;
+        aspect-ratio: 720 / 480;
+    }
 }
 
 @media only screen and (max-width: 420px) {
     .defeat p {
-        padding: 0 260px 10px 260px;
+        padding: 0 60px 10px 60px;
     }
 }
 

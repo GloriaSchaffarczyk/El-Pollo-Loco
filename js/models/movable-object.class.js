@@ -38,7 +38,9 @@ class MovableObject extends DrawableObject {
     }
 
     enemyHit() {
-        if (this.isHurt()) return; 
+        if (this.isHurt()) 
+        // console.log('is hurt');
+        return; 
         this.energy -= 5;
         if (this.energy < 0) {
             this.energy = 0;
@@ -61,7 +63,7 @@ class MovableObject extends DrawableObject {
     isHurt() {
         let timePassed = new Date().getTime() - this.lastHit;
         timePassed = timePassed / 1000;
-        return timePassed < 1;
+        return timePassed < 0.5;
     }
 
     isDead() {
