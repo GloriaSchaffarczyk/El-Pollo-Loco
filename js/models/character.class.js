@@ -1,5 +1,5 @@
 class Character extends MovableObject {
-    speed = 100;
+    speed = 60;
     offset = {
         top: 10,
         right: 40,
@@ -102,7 +102,7 @@ class Character extends MovableObject {
     ];
     ANIMATION_SPEED_IDLE = 400;
     ANIMATION_SPEED_LONG_IDLE = 400;
-    ANIMATION_SPEED_WALK = 25;
+    ANIMATION_SPEED_WALK = 40;
     ANIMATION_SPEED_JUMP = 150;
     ANIMATION_SPEED_HURT = 50;
     ANIMATION_SPEED_DEAD = 250;
