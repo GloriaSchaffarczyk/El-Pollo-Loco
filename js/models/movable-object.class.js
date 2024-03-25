@@ -79,6 +79,8 @@ class MovableObject extends DrawableObject {
         );
     }
 
+    //muss die neue Methode zur Kollisionsberechnung ausprobieren
+
     /* isColliding(obj) {
         return this.x + this.width >= obj.x &&
             this.x <= obj.x + obj.width &&
