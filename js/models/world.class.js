@@ -36,7 +36,7 @@ class World {
             this.checkJumpOnMonster();
             this.checkJumpOnZombie();
             this.triggerEnemyAttack();
-        }, 180)
+        }, 50) // hier hat Olli gesagt statt 180 lieber 50
     }
 
     checkThrowObjects() {
