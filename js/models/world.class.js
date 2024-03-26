@@ -41,11 +41,11 @@ class World {
 
     checkThrowObjects() {
         if (this.keyboard.W && this.character.ownedBombs > 0) {
-            this.character.throwBomb(); // Ruft die Bombenwurf-Animation auf
+            this.character.throwBomb();
             let direction = this.character.otherDirection ? 'left' : 'right';
             let bomb = new ThrowableObject(this.character.x + 30, this.character.y + -70, direction);
             this.throwableObjects.push(bomb);
-            this.keyboard.W = false; // Verhindert, dass die Aktion im nächsten Frame erneut ausgelöst wird
+            this.keyboard.W = false;
             this.character.idleTime = 0;
         }
     }
@@ -60,11 +60,11 @@ class World {
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.ctx.translate(this.camera_x, 0); // Kamera wird nach links verschoben
+        this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
 
-        this.ctx.translate(-this.camera_x, 0); // backwards
-        this.ctx.translate(this.camera_x, 0); //forwards
+        this.ctx.translate(-this.camera_x, 0);
+        this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.level.clouds);
         this.addToMap(this.character);
@@ -75,7 +75,7 @@ class World {
         this.addObjectsToMap(this.level.candy);
         this.addObjectsToMap(this.level.bombs);
 
-        this.ctx.translate(-this.camera_x, 0); // Kamera wird zurückgesetzt
+        this.ctx.translate(-this.camera_x, 0);
         this.statusBar.forEach(statusbar => {
             this.addToMap(statusbar);
         });
@@ -103,8 +103,8 @@ class World {
         }
 
         movableObject.draw(this.ctx);
-        movableObject.drawFrame(this.ctx);
-        movableObject.drawFrameBlue(this.ctx);
+        // movableObject.drawFrame(this.ctx);
+        // movableObject.drawFrameBlue(this.ctx);
 
         if (movableObject.otherDirection) {
             this.flipImageBack(movableObject);
@@ -129,32 +129,28 @@ class World {
                 if (this.character.isColliding(zombie) && !this.character.isAboveGround()) {
                     this.character.enemyHit();
                     this.statusBar[0].setPercentage(this.character.energy);
-                    console.log('Zombie collision detected, losing energy', this.character.energy);
                 }
             });
         }
-    
+
         if (Array.isArray(this.level.monsters)) {
             this.level.monsters.forEach((monster) => {
                 if (this.character.isColliding(monster) && !this.character.isAboveGround()) {
                     this.character.enemyHit();
                     this.statusBar[0].setPercentage(this.character.energy);
-                    console.log('Monster collision detected, losing energy', this.character.energy);
                 }
             });
         }
-    
+
         if (Array.isArray(this.level.endboss)) {
             this.level.endboss.forEach((endboss) => {
                 if (this.character.isColliding(endboss)) {
-                    console.log('Checking collision with endboss');
                     this.character.endbossHit();
                     this.statusBar[0].setPercentage(this.character.energy);
-                    console.log('Endboss collision detected, losing energy', this.character.energy);
                 }
             });
         }
-    
+
         this.throwableObjects.forEach((bomb) => {
             if (!bomb.hitEnemy) {
                 this.level.zombies.forEach((zombie) => {
@@ -165,7 +161,7 @@ class World {
                         bomb.bomb_explosion_sound.play();
                     }
                 });
-    
+
                 this.level.monsters.forEach((monster) => {
                     if (bomb.isColliding(monster)) {
                         monster.enemyHitByBomb();
@@ -174,7 +170,7 @@ class World {
                         bomb.bomb_explosion_sound.play();
                     }
                 });
-    
+
                 if (Array.isArray(this.level.endboss)) {
                     this.level.endboss.forEach((endboss) => {
                         if (bomb.isColliding(endboss)) {
@@ -192,7 +188,6 @@ class World {
     checkCollisionsCharacterCandy() {
         this.level.candy.forEach((candy) => {
             if (this.character.isColliding(candy) && this.character.candy < 100) {
-                console.log(`Character kollidiert mit Candy`);
                 candy.readyToRemove = true;
                 this.character.collectingCandy();
                 this.statusBar[2].setPercentage(this.character.candy);
@@ -204,7 +199,6 @@ class World {
     checkCollisionsCharacterBombs() {
         this.level.bombs.forEach((bomb) => {
             if (this.character.isColliding(bomb) && this.character.ownedBombs < 100) {
-                console.log(`Character kollidiert mit Bombe`);
                 bomb.readyToRemove = true;
                 this.character.collectingBombs();
                 this.statusBar[1].setPercentage(this.character.ownedBombs);
@@ -251,5 +245,5 @@ class World {
                 this.statusBarIcons.push(new StatusbarIcons(480, 22, 'ENDBOSS'));
             }
         });
-    }    
+    }
 }

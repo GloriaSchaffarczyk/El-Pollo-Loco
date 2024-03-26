@@ -1,10 +1,4 @@
 class MovableObject extends DrawableObject {
-    offset = {
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0
-    }
     speed = 0.15;
     otherDirection = false;
     speedY = 0;
@@ -30,7 +24,7 @@ class MovableObject extends DrawableObject {
     }
 
     isAboveGround() {
-        if (this instanceof ThrowableObject) { // throwable objects fall
+        if (this instanceof ThrowableObject) {
             return true;
         } else {
             return this.y < 290;
@@ -38,9 +32,7 @@ class MovableObject extends DrawableObject {
     }
 
     enemyHit() {
-        if (this.isHurt()) 
-        //console.log('is hurt');
-        return; 
+        if (this.isHurt()) return;
         this.energy -= 5;
         if (this.energy < 0) {
             this.energy = 0;
@@ -51,7 +43,7 @@ class MovableObject extends DrawableObject {
     }
 
     endbossHit() {
-        if (this.isHurt()) return; 
+        if (this.isHurt()) return;
         this.energy -= 15;
         if (this.energy < 0) {
             this.energy = 0;
@@ -70,29 +62,12 @@ class MovableObject extends DrawableObject {
         return this.energy == 0;
     }
 
-    // isColliding(mo) {
-    //     return (
-    //         this.x + this.width - this.offset.right >= mo.x + mo.offset.left &&
-    //         this.y + this.height - this.offset.bottom >= mo.y + mo.offset.top &&
-    //         this.x + this.offset.left <= mo.x + mo.width - mo.offset.right &&
-    //         this.y + this.offset.top <= mo.y + mo.height - mo.offset.bottom
-    //     );
-    // }
-
     isColliding(mo) {
         return (this.x + this.width - this.offset.right) >= (mo.x + mo.offset.left) &&
-               (this.x + this.offset.left) <= (mo.x + mo.width - mo.offset.right) &&
-               (this.y + this.height - this.offset.bottom) >= (mo.y + mo.offset.top) &&
-               (this.y + this.offset.top) <= (mo.y + mo.height - mo.offset.bottom);
-    }     
-
-    // Bessere Formel zur Kollisionsberechnung (Genauer)
-    /* isColliding(mo) {
-        return (this.x + this.width) >= mo.x && this.x <= (mo.x + mo.width) &&
-            (this.y + this.offsetX + this.height) >= mo.y &&
-            (this.y + this.offsetY) <= (mo.y + mo.height) 
-    } */
-    // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
+            (this.x + this.offset.left) <= (mo.x + mo.width - mo.offset.right) &&
+            (this.y + this.height - this.offset.bottom) >= (mo.y + mo.offset.top) &&
+            (this.y + this.offset.top) <= (mo.y + mo.height - mo.offset.bottom);
+    }
 
     enemyHitByBomb() {
         this.energy -= 20;
@@ -110,7 +85,6 @@ class MovableObject extends DrawableObject {
             endGame(true);
         } else {
             this.lastHit = new Date().getTime();
-            console.log('Hit endboss!', this.energy);
         }
     }
 
@@ -128,9 +102,9 @@ class MovableObject extends DrawableObject {
         }
     }
     reducingBombs() {
-        this.ownedBombs -= 20; // Reduziere um eine Bombe
+        this.ownedBombs -= 20;
         if (this.ownedBombs < 0) {
-            this.ownedBombs = 0; // Verhindere negative Werte
+            this.ownedBombs = 0;
         }
         this.world.statusBar[1].setPercentage(this.ownedBombs);
     }
@@ -173,7 +147,7 @@ class MovableObject extends DrawableObject {
 
     doubleJump() {
         this.speedY = 30;
-        this.speedX = this.otherDirection ? -5 : 5; 
+        this.speedX = this.otherDirection ? -5 : 5;
 
         if (this.horizontalMoveInterval) {
             clearInterval(this.horizontalMoveInterval);
@@ -187,7 +161,6 @@ class MovableObject extends DrawableObject {
             }
         }, 5000 / 60);
     }
-
 }
 
 // Aufgaben

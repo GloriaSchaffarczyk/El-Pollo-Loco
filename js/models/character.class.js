@@ -176,7 +176,7 @@ class Character extends MovableObject {
             clearInterval(this.animationInterval);
         }
 
-        let animationSpeed = this.ANIMATION_SPEED_IDLE;  // Defaultwert
+        let animationSpeed = this.ANIMATION_SPEED_IDLE;
 
         if (this.isDead()) {
             if (!this.hasDied) {
@@ -213,7 +213,7 @@ class Character extends MovableObject {
         }
 
         this.animationInterval = setInterval(() => {
-            this.setAnimationInterval();  // Bei jeder Ausführung wird das Intervall aktualisiert.
+            this.setAnimationInterval();
         }, animationSpeed);
     }
 
@@ -225,8 +225,8 @@ class Character extends MovableObject {
             if (this.currentImage >= this.IMAGES_THROWINGBOMBS.length) {
                 clearInterval(animationInterval);
                 this.isThrowingBomb = false;
-                this.currentImage = 0; // Zurücksetzen für nächste Animation
-                this.reducingBombs(); // Aufruf hier, Statusleiste wird in reducingBombs aktualisiert
+                this.currentImage = 0;
+                this.reducingBombs();
             }
         }, this.ANIMATION_SPEED_THROWINGBOMBS);
     }

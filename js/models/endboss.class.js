@@ -44,7 +44,7 @@ class Endboss extends MovableObject {
         'img2/4_boss/3_attack/boss_attack_07.png',
         'img2/4_boss/3_attack/boss_attack_08.png',
     ];
-    energy = 100; // energy of endboss is higher
+    energy = 100;
     endboss_dying_sound = new Audio('audio/607201__tomronaldmusic__defeated_ogre.wav');
     endboss_battle_music = new Audio('audio/573803__sami_hiltunen__boss-battle-music.wav');
 
@@ -95,8 +95,8 @@ class Endboss extends MovableObject {
             if (currentFrame < maxFrames) {
                 this.img = this.imageCache[this.ENDBOSS_DYING[currentFrame++]];
             } else {
-                clearInterval(this.dyingAnimationInterval); // Beendet die Sterbeanimation
-                this.readyToRemove = true; // Setze den Endboss als bereit zum Entfernen
+                clearInterval(this.dyingAnimationInterval); 
+                this.readyToRemove = true;
             }
         }, 400);
     }

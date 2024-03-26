@@ -28,7 +28,6 @@ class Zombie extends MovableObject {
     zombie_dying_sound = new Audio('audio/445983__breviceps__zombie-gargles.wav');
     energy = 20;
 
-
     constructor() {
         super().loadImage('img2/3_enemies/zombie/1_walk/zombie_walk_01.png');
         this.loadImages(this.ZOMBIE_WALKING);
@@ -42,14 +41,13 @@ class Zombie extends MovableObject {
         setInterval(() => {
             this.moveLeft();
         }, 1000 / 60);
-    
+
         setInterval(() => {
             if (!this.hasDied) {
                 this.playAnimation(this.ZOMBIE_WALKING);
-            } else if (!this.readyToRemove) { // Verwende readyToRemove direkt
+            } else if (!this.readyToRemove) {
                 this.playAnimationOnce(this.ZOMBIE_DYING);
             }
         }, 200);
-    }    
-    
+    }
 }

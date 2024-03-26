@@ -10,7 +10,8 @@
         /* Safari, Android, iOS */
 }
 
-body, html {
+body,
+html {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -401,7 +402,10 @@ table td img {
     width: 100%;
 }
 
-canvas, #startscreen, #endscreen, #rotateDeviceMessage {
+canvas,
+#startscreen,
+#endscreen,
+#rotateDeviceMessage {
     aspect-ratio: 720 / 480;
 }
 
@@ -433,29 +437,36 @@ canvas, #startscreen, #endscreen, #rotateDeviceMessage {
     }
 
     #startscreen h2 {
-        font-size: 4vw; 
+        font-size: 4vw;
     }
+
     #startscreen p {
-        font-size: 2vw; 
+        font-size: 2vw;
     }
+
     #startscreen img {
-        width: auto; 
+        width: auto;
         height: 8vw;
     }
+
     #startscreen table {
         font-size: 4vw;
     }
+
     #startscreen button {
         font-size: 8vw;
         padding: 1vw 2vw;
     }
+
     #startscreen button p {
         font-size: 4vw;
     }
+
     .upper-startscreen {
         height: auto;
         padding: 0px 20px 0px 20px;
     }
+
     .lower-startscreen {
         height: auto;
         padding: 0px 20px 0px 20px;
@@ -464,19 +475,24 @@ canvas, #startscreen, #endscreen, #rotateDeviceMessage {
     #endscreen {
         overflow-x: hidden;
     }
+
     #endscreen h2 {
-        font-size: 5vw; 
+        font-size: 5vw;
     }
+
     #endscreen p {
-        font-size: 2vw; 
+        font-size: 2vw;
     }
+
     .defeat p {
         padding: 10px 110px 10px 110px;
     }
+
     #endscreen img {
-        width: auto; 
+        width: auto;
         height: 28vw;
     }
+
     #endscreen button {
         font-size: 5vw;
         padding: 1vw 2vw;
@@ -518,28 +534,35 @@ canvas, #startscreen, #endscreen, #rotateDeviceMessage {
     }
 
     #startscreen h2 {
-        font-size: 6vw; 
+        font-size: 6vw;
     }
+
     #startscreen p {
-        font-size: 2vw; 
+        font-size: 2vw;
     }
+
     #startscreen img {
-        width: auto; 
+        width: auto;
         height: 5vw;
     }
+
     #startscreen table {
         font-size: 4vw;
     }
+
     #startscreen button {
         font-size: 4vw;
         padding: 1vw 2vw;
     }
+
     #startscreen button p {
         font-size: 4vw;
     }
+
     .upper-startscreen {
         height: auto;
     }
+
     .lower-startscreen {
         height: auto;
     }
@@ -547,26 +570,33 @@ canvas, #startscreen, #endscreen, #rotateDeviceMessage {
     #endscreen {
         overflow-x: hidden;
     }
+
     #endscreen h2 {
-        font-size: 5vw; 
+        font-size: 5vw;
     }
+
     #endscreen p {
-        font-size: 2vw; 
+        font-size: 2vw;
     }
+
     .defeat h2 {
         padding: 10px;
     }
+
     .defeat p {
         padding: 0 60px 10px 60px;
     }
+
     #endscreen img {
-        width: auto; 
+        width: auto;
         height: 110px;
     }
+
     #endscreen button {
         font-size: 6vw;
         padding: 1vw 2vw;
     }
+
     #victory {
         height: auto;
         aspect-ratio: 720 / 480;

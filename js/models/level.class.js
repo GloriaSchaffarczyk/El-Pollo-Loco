@@ -39,7 +39,7 @@ class Level {
             this.candy.push(new Candy());
         }
     }
-    
+
     generateBombs() {
         for (let i = 0; i < 40; i++) {
             this.bombs.push(new Bombs());
@@ -71,7 +71,6 @@ class Level {
         setInterval(() => {
             this.clouds.push(new Cloud());
         }, 10000);
-        console.log('spawning cloud');
     }
 
     generateZombies(count) {

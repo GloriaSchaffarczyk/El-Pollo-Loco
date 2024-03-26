@@ -1,11 +1,5 @@
 class ThrowableObject extends MovableObject {
     accelerationY = 3.5;
-    offset = {
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
-    };
     IMAGES_BOMBROTATION = [
         'img2/6_bombs/bomb_rotation/bomb-rotation_01.png',
         'img2/6_bombs/bomb_rotation/bomb-rotation_02.png',
@@ -24,7 +18,7 @@ class ThrowableObject extends MovableObject {
     ];
     hitEnemy = false;
     isExploded = false;
-    ANIMATION_SPEED_EXPLOSION = 100; 
+    ANIMATION_SPEED_EXPLOSION = 100;
     bomb_explosion_sound = new Audio('audio/404742__owlstorm__retro-video-game-sfx-explode-5.wav')
 
     constructor(x, y, direction) {
@@ -43,7 +37,7 @@ class ThrowableObject extends MovableObject {
 
     bombAnimation() {
         if (!this.animationInterval) {
-            this.speedY = 30; // Anfangsgeschwindigkeit nach oben
+            this.speedY = 30;
             this.speedX = this.direction === 'right' ? 10 : -10;
             this.applyGravity();
 
@@ -53,7 +47,7 @@ class ThrowableObject extends MovableObject {
                     this.speedX = 1;
                     this.speedY = 1;
                 } else {
-                    this.x += this.speedX; // Horizontale Bewegung
+                    this.x += this.speedX;
                     this.playAnimation(this.IMAGES_BOMBROTATION);
                 }
             }, 25);
@@ -65,7 +59,7 @@ class ThrowableObject extends MovableObject {
             this.isExploding = true;
             let currentFrame = 0;
             let maxFrames = this.IMAGES_BOMBEXPLOSION.length;
-    
+
             this.explosionInterval = setInterval(() => {
                 if (currentFrame < maxFrames) {
                     this.img = this.imageCache[this.IMAGES_BOMBEXPLOSION[currentFrame++]];
@@ -73,14 +67,13 @@ class ThrowableObject extends MovableObject {
                     clearInterval(this.explosionInterval);
                 }
             }, this.ANIMATION_SPEED_EXPLOSION);
-    
+
             setTimeout(() => {
-                console.log("Explosion wird abgespielt");
                 this.isExploded = true;
                 clearInterval(this.animationInterval);
                 this.animationInterval = null;
             }, maxFrames * this.ANIMATION_SPEED_EXPLOSION);
         }
     }
-    
+
 }

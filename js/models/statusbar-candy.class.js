@@ -7,30 +7,25 @@ class StatusbarCandy extends DrawableObject {
         'img2/7_statusbars/1_statusbar/1_statusbar_candy/statusbar-candy_05.png',
         'img2/7_statusbars/1_statusbar/1_statusbar_candy/statusbar-candy_06.png',
     ];
-
-    percentage = 0; 
+    percentage = 0;
 
     constructor() {
         super().loadImage('img2/7_statusbars/1_statusbar/1_statusbar_candy/statusbar-candy_01.png');
-        console.log('StatusBar Candy constructor called');
         this.loadImages(this.IMAGES_CANDY);
-        this.x = 20; 
+        this.x = 20;
         this.y = 35;
         this.width = 150;
         this.height = 35;
-        this.setPercentage(0); // müssen wir setzen
+        this.setPercentage(0);
     }
 
     setPercentage(percentage) {
-        console.log(`setPercentage called with value: ${percentage}`);
         this.percentage = percentage;
         let path = this.IMAGES_CANDY[this.resolveImageIndex()];
         this.img = this.imageCache[path];
-        console.log(`Image set to: ${path}`);
     }
 
     resolveImageIndex() {
-        console.log(`resolveImageIndex called with percentage: ${this.percentage}`);
         if (this.percentage == 100) {
             return 5;
         } else if (this.percentage >= 80) {
