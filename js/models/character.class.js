@@ -119,6 +119,7 @@ class Character extends MovableObject {
     idleTime = 0;
     ownedBombs = 0;
     canDoubleJump = false;
+    // Variable für Zustand
 
     constructor() {
         super().loadImage('img2/2_character/2_walk/biker_walk_01.png')
