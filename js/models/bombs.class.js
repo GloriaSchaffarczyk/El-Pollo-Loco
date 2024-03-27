@@ -11,7 +11,6 @@ class Bombs extends MovableObject {
     constructor() {
         super().loadImage(this.IMAGES_BOMBS[0]);
         this.loadImages(this.IMAGES_BOMBS);
-
         this.x = 50 + Math.random() * 15000;
         this.animate();
     }

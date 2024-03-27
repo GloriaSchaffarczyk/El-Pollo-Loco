@@ -1,4 +1,10 @@
 class MovableObject extends DrawableObject {
+    offset = {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0
+    }
     speed = 0.15;
     otherDirection = false;
     speedY = 0;
@@ -24,7 +30,7 @@ class MovableObject extends DrawableObject {
     }
 
     isAboveGround() {
-        if (this instanceof ThrowableObject) {
+        if (this instanceof ThrowableObject) { 
             return true;
         } else {
             return this.y < 290;
@@ -32,7 +38,8 @@ class MovableObject extends DrawableObject {
     }
 
     enemyHit() {
-        if (this.isHurt()) return;
+        if (this.isHurt()) 
+        return; 
         this.energy -= 5;
         if (this.energy < 0) {
             this.energy = 0;
@@ -43,7 +50,7 @@ class MovableObject extends DrawableObject {
     }
 
     endbossHit() {
-        if (this.isHurt()) return;
+        if (this.isHurt()) return; 
         this.energy -= 15;
         if (this.energy < 0) {
             this.energy = 0;
@@ -64,10 +71,10 @@ class MovableObject extends DrawableObject {
 
     isColliding(mo) {
         return (this.x + this.width - this.offset.right) >= (mo.x + mo.offset.left) &&
-            (this.x + this.offset.left) <= (mo.x + mo.width - mo.offset.right) &&
-            (this.y + this.height - this.offset.bottom) >= (mo.y + mo.offset.top) &&
-            (this.y + this.offset.top) <= (mo.y + mo.height - mo.offset.bottom);
-    }
+               (this.x + this.offset.left) <= (mo.x + mo.width - mo.offset.right) &&
+               (this.y + this.height - this.offset.bottom) >= (mo.y + mo.offset.top) &&
+               (this.y + this.offset.top) <= (mo.y + mo.height - mo.offset.bottom);
+    }     
 
     enemyHitByBomb() {
         this.energy -= 20;
@@ -102,9 +109,9 @@ class MovableObject extends DrawableObject {
         }
     }
     reducingBombs() {
-        this.ownedBombs -= 20;
+        this.ownedBombs -= 20; 
         if (this.ownedBombs < 0) {
-            this.ownedBombs = 0;
+            this.ownedBombs = 0; 
         }
         this.world.statusBar[1].setPercentage(this.ownedBombs);
     }
@@ -147,7 +154,7 @@ class MovableObject extends DrawableObject {
 
     doubleJump() {
         this.speedY = 30;
-        this.speedX = this.otherDirection ? -5 : 5;
+        this.speedX = this.otherDirection ? -5 : 5; 
 
         if (this.horizontalMoveInterval) {
             clearInterval(this.horizontalMoveInterval);
@@ -162,17 +169,3 @@ class MovableObject extends DrawableObject {
         }, 5000 / 60);
     }
 }
-
-// Aufgaben
-// Startscreen
-// Musik und Sounds
-// Coins einsammeln
-// Flaschen einsammeln
-// Flaschen nur werfen, wenn sie vorhanden sind
-// Kollision mit Gegnern
-// Endgegner besiegen
-// Game-Over-Screen
-// Fullscreen
-// Boss attackiert, wenn Charakter sich nähert
-// andere Musik
-// Character springt auf Gegner und sie sterben...?

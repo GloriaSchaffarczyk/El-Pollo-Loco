@@ -20,7 +20,7 @@ class DrawableObject {
         if (this.imageLoaded) { 
             ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
         } else {   
-            console.log('Image not loaded yet, cannot draw.');
+           // console.log('Image not loaded yet, cannot draw.');
         }
     }
 

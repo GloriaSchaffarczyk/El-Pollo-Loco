@@ -11,7 +11,6 @@ class Candy extends MovableObject {
     constructor() {
         super().loadImage(this.IMAGES_CANDY[0]);
         this.loadImages(this.IMAGES_CANDY);
-
         this.x = 50 + Math.random() * 30000;
         this.animate();
     }

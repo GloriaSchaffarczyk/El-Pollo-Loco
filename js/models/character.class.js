@@ -175,9 +175,9 @@ class Character extends MovableObject {
         if (this.animationInterval) {
             clearInterval(this.animationInterval);
         }
-
-        let animationSpeed = this.ANIMATION_SPEED_IDLE;
-
+    
+        let animationSpeed = this.ANIMATION_SPEED_IDLE; // Standardgeschwindigkeit für Idle
+    
         if (this.isDead()) {
             if (!this.hasDied) {
                 this.playAnimation(this.IMAGES_DEAD);
@@ -190,32 +190,25 @@ class Character extends MovableObject {
             animationSpeed = this.ANIMATION_SPEED_THROWINGBOMBS;
         } else if (this.isHurt()) {
             this.playAnimation(this.IMAGES_HURT);
-            // this.hurt_sound.play();
         } else if (this.isAboveGround() && this.canDoubleJump) {
             this.playAnimation(this.IMAGES_DOUBLE_JUMP);
             animationSpeed = this.ANIMATION_SPEED_JUMP;
         } else if (this.isAboveGround()) {
             this.playAnimation(this.IMAGES_JUMP);
             animationSpeed = this.ANIMATION_SPEED_JUMP;
+        } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+            this.playAnimation(this.IMAGES_WALK);
+            animationSpeed = this.ANIMATION_SPEED_WALK;
+        } else if (this.idleTime > 5000) {
+            this.playAnimation(this.IMAGES_LONG_IDLE);
+            animationSpeed = this.ANIMATION_SPEED_LONG_IDLE;
         } else {
-            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                this.playAnimation(this.IMAGES_WALK);
-                animationSpeed = this.ANIMATION_SPEED_WALK;
-            } else {
-                if (this.idleTime > 5000) {
-                    this.playAnimation(this.IMAGES_LONG_IDLE);
-                    animationSpeed = this.ANIMATION_SPEED_LONG_IDLE;
-                } else {
-                    this.playAnimation(this.IMAGES_IDLE);
-                    animationSpeed = this.ANIMATION_SPEED_IDLE;
-                }
-            }
+            this.playAnimation(this.IMAGES_IDLE);
         }
-
         this.animationInterval = setInterval(() => {
             this.setAnimationInterval();
         }, animationSpeed);
-    }
+    }    
 
     throwBomb() {
         this.currentImage = 0;
