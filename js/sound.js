@@ -7,7 +7,7 @@ const startscreenSound = new Audio1({
 });
 
 const endscreenSoundVictory = new Audio2({
-    tracks: ['audio/475300__adnova__bell-cave.wav'],
+    tracks: ['audio/364986__adnova__sweets.wav'],
     loop: false,
     singleMode: true,
     loadLimit: 1,
