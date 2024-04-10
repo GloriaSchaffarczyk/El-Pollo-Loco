@@ -4,13 +4,10 @@ let keyboard = new Keyboard();
 let isMusicOn = true;
 let isSoundOn = true;
 let gameState = 'init';
-startscreen_sound = new Audio('audio/475300__adnova__bell-cave.wav')
-startscreen_sound.loop = true;
 
 function init() {
     canvas = document.getElementById('canvas');
-    startscreen_sound.loop = true;
-    startscreen_sound.play();
+    sounds.startscreenSound.play();
     addMobileControls();
     updateVisibility();
     window.addEventListener('resize', updateVisibility);
@@ -20,7 +17,7 @@ function startGame() {
     initLevel();
     world = new World(canvas, keyboard);
     startscreen.classList.add('d-none');
-    startscreen_sound.pause();
+    sounds.startscreenSound.pause();
     symbols.classList.remove('d-none');
     gameState = 'playing';
     updateVisibility();

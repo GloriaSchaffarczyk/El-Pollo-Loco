@@ -202,7 +202,7 @@ class World {
                 bomb.readyToRemove = true;
                 this.character.collectingBombs();
                 this.statusBar[1].setPercentage(this.character.ownedBombs);
-                bomb.collecting_bombs_sound.play();
+                sounds.collectingBombsSound.play();
             }
         });
     }
