@@ -6,7 +6,6 @@ class Candy extends MovableObject {
         'img2/8_candy/candy_01.png',
         'img2/8_candy/candy_02.png'
     ];
-    collecting_candy_sound = new Audio('audio/644306__reincarnatedechoes__heart-collecthealing-retro.wav');
 
     constructor() {
         super().loadImage(this.IMAGES_CANDY[0]);

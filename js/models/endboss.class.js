@@ -45,8 +45,6 @@ class Endboss extends MovableObject {
         'img2/4_boss/3_attack/boss_attack_08.png',
     ];
     energy = 100;
-    endboss_dying_sound = new Audio('audio/607201__tomronaldmusic__defeated_ogre.wav');
-    endboss_battle_music = new Audio('audio/573803__sami_hiltunen__boss-battle-music.wav');
 
     constructor() {
         super().loadImage(this.ENDBOSS_IMAGES_WALKING[0]);
@@ -89,7 +87,7 @@ class Endboss extends MovableObject {
     handleDyingAnimation() {
         let currentFrame = 0;
         let maxFrames = this.ENDBOSS_DYING.length;
-        this.endboss_dying_sound.play();
+        sounds.endbossDyingSound.play();
 
         this.dyingAnimationInterval = setInterval(() => {
             if (currentFrame < maxFrames) {

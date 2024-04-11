@@ -107,19 +107,13 @@ class Character extends MovableObject {
     ANIMATION_SPEED_HURT = 50;
     ANIMATION_SPEED_DEAD = 250;
     ANIMATION_SPEED_THROWINGBOMBS = 45;
-    world;                       
-    walking_sound = new Audio('audio/659370__matrixxx__retro-footsteps.wav');
-    jumping_sound = new Audio('audio/678839__cartchaos__jump.wav');
-    background_music = new Audio('audio/363164__adnova__spooker.wav');
-    dying_sound = new Audio('audio/163442__under7dude__man-dying.wav');
-    hurt_sound = new Audio('audio/486943__matrixxx__human-aah.wav')
+    world;       
     animationInterval = null;
     hasDied = false;
     isThrowingBomb = false;
     idleTime = 0;
     ownedBombs = 0;
     canDoubleJump = false;
-    // Variable für Zustand
 
     constructor() {
         super().loadImage('img2/2_character/2_walk/biker_walk_01.png')
@@ -131,8 +125,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_THROWINGBOMBS);
-        this.background_music.play();
-        this.background_music.loop = true;
+        sounds.backgroundMusic.play();
         this.animate();
         this.applyGravity();
         this.lastAnimationState = null;
@@ -143,22 +136,22 @@ class Character extends MovableObject {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
-                this.walking_sound.playbackRate = 9;
-                this.walking_sound.play();
+                sounds.walkingSound.playbackRate = 9;
+                sounds.walkingSound.play();
                 this.idleTime = 0;
             }
 
             if (this.world.keyboard.LEFT && this.x > -650) {
                 this.moveLeft();
                 this.otherDirection = true;
-                this.walking_sound.playbackRate = 9;
-                this.walking_sound.play();
+                sounds.walkingSound.playbackRate = 9;
+                sounds.walkingSound.play();
                 this.idleTime = 0;
             }
 
             if (this.world.keyboard.SPACE && !this.isAboveGround()) {
                 this.jump();
-                this.jumping_sound.play();
+                sounds.jumpingSound.play();
                 this.idleTime = 0;
             }
 
@@ -183,7 +176,7 @@ class Character extends MovableObject {
             if (!this.hasDied) {
                 this.playAnimation(this.IMAGES_DEAD);
                 animationSpeed = this.ANIMATION_SPEED_DEAD;
-                this.dying_sound.play();
+                sounds.dyingSound.play();
                 this.hasDied = true;
                 endGame(false);
             }
@@ -232,10 +225,10 @@ class Character extends MovableObject {
     }
 
     playBackgroundMusic() {
-        if (this.background_music.paused) {
-            this.background_music.play()
+        if (sounds.backgroundMusic.paused) {
+            sounds.backgroundMusic.play()
                 .then(() => {
-                    this.background_music.loop = true;
+                    sounds.backgroundMusic.loop = true;
                 })
                 .catch((error) => {
                     console.log('Playback failed:', error);

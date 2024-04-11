@@ -6,7 +6,6 @@ class Bombs extends MovableObject {
         'img2/6_bombs/bomb_01.png',
         'img2/6_bombs/bomb_02.png'
     ];
-    collecting_bombs_sound = new Audio('audio/651515__1bob__grab-item.wav');
 
     constructor() {
         super().loadImage(this.IMAGES_BOMBS[0]);

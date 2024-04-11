@@ -25,7 +25,6 @@ class Monster extends MovableObject {
         'img2/3_enemies/monster/2_dead/monster_dead_06.png',
     ];
     animationSpeed;
-    monster_dying_sound = new Audio('audio/410524__meijstroaudio__monster-screeching.wav');
     energy = 20;
 
     constructor() {

@@ -19,7 +19,6 @@ class ThrowableObject extends MovableObject {
     hitEnemy = false;
     isExploded = false;
     ANIMATION_SPEED_EXPLOSION = 100;
-    bomb_explosion_sound = new Audio('audio/404742__owlstorm__retro-video-game-sfx-explode-5.wav')
 
     constructor(x, y, direction) {
         super().loadImage('img2/6_bombs/bomb_rotation/bomb-rotation_01.png',);

@@ -25,7 +25,6 @@ class Zombie extends MovableObject {
         'img2/3_enemies/zombie/2_dead/zombie_dead_06.png',
     ];
     animationSpeed;
-    zombie_dying_sound = new Audio('audio/445983__breviceps__zombie-gargles.wav');
     energy = 20;
 
     constructor() {

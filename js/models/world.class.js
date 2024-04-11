@@ -157,8 +157,8 @@ class World {
                     if (bomb.isColliding(zombie)) {
                         zombie.enemyHitByBomb();
                         bomb.hitEnemy = true;
-                        zombie.zombie_dying_sound.play();
-                        bomb.bomb_explosion_sound.play();
+                        sounds.zombieDyingSound.play();
+                        sounds.bombExplosionSound.play();
                     }
                 });
 
@@ -166,8 +166,8 @@ class World {
                     if (bomb.isColliding(monster)) {
                         monster.enemyHitByBomb();
                         bomb.hitEnemy = true;
-                        monster.monster_dying_sound.play();
-                        bomb.bomb_explosion_sound.play();
+                        sounds.monsterDyingSound.play();
+                        sounds.bombExplosionSound.play();
                     }
                 });
 
@@ -177,7 +177,7 @@ class World {
                             endboss.endbossHitByBomb();
                             bomb.hitEnemy = true;
                             this.statusBar[3].setPercentage(endboss.energy);
-                            bomb.bomb_explosion_sound.play();
+                            sounds.bombExplosionSound.play();
                         }
                     });
                 }
@@ -191,7 +191,7 @@ class World {
                 candy.readyToRemove = true;
                 this.character.collectingCandy();
                 this.statusBar[2].setPercentage(this.character.candy);
-                candy.collecting_candy_sound.play();
+                sounds.collectingCandySound.play();
             }
         });
     }
@@ -221,7 +221,7 @@ class World {
                 this.character.canDoubleJump = true;
                 this.character.doubleJump();
                 zombie.enemyHitByBomb();
-                zombie.zombie_dying_sound.play();
+                sounds.zombieDyingSound.play();
             }
         });
     }
@@ -232,7 +232,7 @@ class World {
                 this.character.canDoubleJump = true;
                 this.character.doubleJump();
                 monster.enemyHitByBomb();
-                monster.monster_dying_sound.play();
+                sounds.monsterDyingSound.play();
             }
         });
     }

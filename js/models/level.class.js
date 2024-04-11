@@ -21,10 +21,10 @@ class Level {
 
     generateBackground() {
         const layers = [
-            { imagePath: 'img2/5_background/layers/cemetary_background_night_02.png', depth: 0 },
-            { imagePath: 'img2/5_background/layers/3_third_layer/cemetary_thirdlayer_night_02.png', depth: 0 },
-            { imagePath: 'img2/5_background/layers/2_second_layer/cemetary_secondlayer_night_02.png', depth: 0 },
-            { imagePath: 'img2/5_background/layers/1_first_layer/cemetary_firstlayer_night_02.png', depth: 0 }
+            {imagePath: 'img2/5_background/layers/cemetary_background_night_02.png', depth: 0},
+            {imagePath: 'img2/5_background/layers/3_third_layer/cemetary_thirdlayer_night_02.png', depth: 0},
+            {imagePath: 'img2/5_background/layers/2_second_layer/cemetary_secondlayer_night_02.png', depth: 0},
+            {imagePath: 'img2/5_background/layers/1_first_layer/cemetary_firstlayer_night_02.png', depth: 0}
         ];
         const backgroundImageWidth = 854;
         for (let x = -backgroundImageWidth; x < this.level_end_x + backgroundImageWidth; x += backgroundImageWidth) {
