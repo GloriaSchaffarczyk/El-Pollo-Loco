@@ -25,7 +25,7 @@ class Zombie extends MovableObject {
         'img2/3_enemies/zombie/2_dead/zombie_dead_06.png',
     ];
     animationSpeed;
-    energy = 20;
+    energy = 20; //engery for Zombies is very low
 
     constructor() {
         super().loadImage('img2/3_enemies/zombie/1_walk/zombie_walk_01.png');
