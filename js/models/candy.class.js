@@ -7,6 +7,9 @@ class Candy extends MovableObject {
         'img2/8_candy/candy_02.png'
     ];
 
+        /**
+     * Constructs a new Candy instance, initializes its images, and sets a random x position.
+     */
     constructor() {
         super().loadImage(this.IMAGES_CANDY[0]);
         this.loadImages(this.IMAGES_CANDY);
@@ -14,20 +17,12 @@ class Candy extends MovableObject {
         this.animate();
     }
 
+        /**
+     * Starts an animation cycle for the candy by cycling through images at a defined interval.
+     */
     animate() {
         setInterval(() => {
             this.playAnimation(this.IMAGES_CANDY);
         }, 1050 / 2);
-    }
-
-    playAnimation(images) {
-        let i = this.currentImage % images.length;
-        let path = images[i];
-        this.img = this.imageCache[path];
-        this.currentImage++;
-    }
-
-    removeFromMap() {
-        this.x = -1000;
     }
 }

@@ -125,7 +125,6 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_THROWINGBOMBS);
-        sounds.backgroundMusic.play();
         this.animate();
         this.applyGravity();
         this.lastAnimationState = null;
@@ -136,16 +135,14 @@ class Character extends MovableObject {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
-                sounds.walkingSound.playbackRate = 9;
-                sounds.walkingSound.play();
+                sounds.walkingSound.play(5);
                 this.idleTime = 0;
-            }
+            } 
 
             if (this.world.keyboard.LEFT && this.x > -650) {
                 this.moveLeft();
                 this.otherDirection = true;
-                sounds.walkingSound.playbackRate = 9;
-                sounds.walkingSound.play();
+                sounds.walkingSound.play(5);
                 this.idleTime = 0;
             }
 
@@ -170,7 +167,7 @@ class Character extends MovableObject {
             clearInterval(this.animationInterval);
         }
     
-        let animationSpeed = this.ANIMATION_SPEED_IDLE; // Standardgeschwindigkeit für Idle
+        let animationSpeed = this.ANIMATION_SPEED_IDLE;
     
         if (this.isDead()) {
             if (!this.hasDied) {
@@ -216,23 +213,5 @@ class Character extends MovableObject {
                 this.reducingBombs();
             }
         }, this.ANIMATION_SPEED_THROWINGBOMBS);
-    }
-
-    initBackgroundMusic() {
-        document.addEventListener('click', () => {
-            this.playBackgroundMusic();
-        });
-    }
-
-    playBackgroundMusic() {
-        if (sounds.backgroundMusic.paused) {
-            sounds.backgroundMusic.play()
-                .then(() => {
-                    sounds.backgroundMusic.loop = true;
-                })
-                .catch((error) => {
-                    console.log('Playback failed:', error);
-                });
-        }
     }
 }

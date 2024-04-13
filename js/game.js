@@ -18,6 +18,7 @@ function startGame() {
     world = new World(canvas, keyboard);
     startscreen.classList.add('d-none');
     sounds.startscreenSound.pause();
+    sounds.backgroundMusic.play();
     symbols.classList.remove('d-none');
     gameState = 'playing';
     updateVisibility();
@@ -66,26 +67,28 @@ function toggleSound() {
 }
 
 function muteMusic() {
-    world.character.background_music.volume = 0;
+    sounds.backgroundMusic.sound.volume = 0;
     isMusicOn = false;
 }
 
 function playMusic() {
-    world.character.background_music.volume = 0.5;
+    if (sounds.backgroundMusic.sound.paused) {
+        sounds.backgroundMusic.sound.play();
+    }
     isMusicOn = true;
 }
 
 function muteSound() {
-    world.character.walking_sound.volume = 0;
-    world.character.jumping_sound.volume = 0;
-    world.character.dying_sound.volume = 0;
+    sounds.walkingSound.volume = 0;
+    sounds.jumpingSound.volume = 0;
+    sounds.dyingSound.volume = 0;
     isSoundOn = false;
 }
 
 function playSound() {
-    world.character.walking_sound.volume = 0.5;
-    world.character.jumping_sound.volume = 0.5;
-    world.character.dying_sound.volume = 0.5;
+    sounds.walkingSound.volume = 0.2;
+    sounds.jumpingSound.volume = 0.5;
+    sounds.dyingSound.volume = 0.5;
     isSoundOn = true;
 }
 

@@ -36,7 +36,7 @@ class World {
             this.checkJumpOnMonster();
             this.checkJumpOnZombie();
             this.triggerEnemyAttack();
-        }, 50) // hier hat Olli gesagt statt 180 lieber 50
+        }, 50)
     }
 
     checkThrowObjects() {
@@ -62,10 +62,8 @@ class World {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
-
         this.ctx.translate(-this.camera_x, 0);
         this.ctx.translate(this.camera_x, 0);
-
         this.addObjectsToMap(this.level.clouds);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.zombies);
@@ -74,7 +72,6 @@ class World {
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.candy);
         this.addObjectsToMap(this.level.bombs);
-
         this.ctx.translate(-this.camera_x, 0);
         this.statusBar.forEach(statusbar => {
             this.addToMap(statusbar);

@@ -7,6 +7,9 @@ class Bombs extends MovableObject {
         'img2/6_bombs/bomb_02.png'
     ];
 
+        /**
+     * Constructs a new Bomb instance, initializes its images and sets a random x position.
+     */
     constructor() {
         super().loadImage(this.IMAGES_BOMBS[0]);
         this.loadImages(this.IMAGES_BOMBS);
@@ -14,13 +17,12 @@ class Bombs extends MovableObject {
         this.animate();
     }
 
+        /**
+     * Starts an animation cycle for the bomb by cycling through images at a defined interval.
+     */
     animate() {
         setInterval(() => {
             this.playAnimation(this.IMAGES_BOMBS); 
         }, 1000 / 2);
-    }
-
-    removeFromMap() {
-        this.x = -1000;
     }
 }

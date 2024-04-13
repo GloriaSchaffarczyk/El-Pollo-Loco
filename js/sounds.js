@@ -1,4 +1,3 @@
-// Beispiel für sounds.js
 const sounds = {
     startscreenSound: {
         sound: new Audio('audio/475300__adnova__bell-cave.wav'),
@@ -48,8 +47,9 @@ const sounds = {
     },
     walkingSound: {
         sound: new Audio('audio/659370__matrixxx__retro-footsteps.wav'),
-        play: function() {
-            this.sound.volume = 0.5;
+        play: function(rate = 1) {
+            this.sound.volume = 0.2;
+            this.sound.playbackRate = rate;
             this.sound.play();
         },
         pause: function() {
