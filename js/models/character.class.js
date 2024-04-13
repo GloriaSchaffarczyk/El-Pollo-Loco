@@ -153,11 +153,11 @@ class Character extends MovableObject {
             }
 
             if (!(this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.SPACE)) {
-                this.idleTime += 2000 / 60;
+                this.idleTime += 1000 / 60;
             }
 
             this.world.camera_x = -this.x + 100;
-        }, 5000 / 60);
+        }, 7000 / 60);
 
         this.setAnimationInterval();
     }

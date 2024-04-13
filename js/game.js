@@ -245,37 +245,30 @@ window.addEventListener('keyup', (event) => {
 });
 
 function addMobileControls() {
+    const options = { passive: true };
     document.getElementById('go-left').addEventListener('touchstart', (e) => {
-        e.preventDefault();
         keyboard.LEFT = true;
-    });
+    }, options);
     document.getElementById('go-right').addEventListener('touchstart', (e) => {
-        e.preventDefault();
         keyboard.RIGHT = true;
-    });
+    }, options);
     document.getElementById('jump').addEventListener('touchstart', (e) => {
-        e.preventDefault();
         keyboard.SPACE = true;
-    });
+    }, options);
     document.getElementById('throw').addEventListener('touchstart', (e) => {
-        e.preventDefault();
         keyboard.W = true;
-    });
+    }, options);
 
     document.getElementById('go-left').addEventListener('touchend', (e) => {
-        e.preventDefault();
         keyboard.LEFT = false;
-    });
+    }, options);
     document.getElementById('go-right').addEventListener('touchend', (e) => {
-        e.preventDefault();
         keyboard.RIGHT = false;
-    });
+    }, options);
     document.getElementById('jump').addEventListener('touchend', (e) => {
-        e.preventDefault();
         keyboard.SPACE = false;
-    });
+    }, options);
     document.getElementById('throw').addEventListener('touchend', (e) => {
-        e.preventDefault();
         keyboard.W = false;
-    });
+    }, options);
 }
