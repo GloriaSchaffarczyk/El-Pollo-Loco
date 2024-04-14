@@ -1,5 +1,5 @@
 class Character extends MovableObject {
-    speed = 60;
+    speed = 55;
     offset = {
         top: 10,
         right: 40,
@@ -107,7 +107,7 @@ class Character extends MovableObject {
     ANIMATION_SPEED_HURT = 50;
     ANIMATION_SPEED_DEAD = 250;
     ANIMATION_SPEED_THROWINGBOMBS = 45;
-    world;       
+    world;
     animationInterval = null;
     hasDied = false;
     isThrowingBomb = false;
@@ -130,19 +130,22 @@ class Character extends MovableObject {
         this.lastAnimationState = null;
     }
 
+        /**
+     * Initiates and manages the animation loop and game state updates based on user input.
+     */
     animate() {
         setInterval(() => {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
-                sounds.walkingSound.play(5);
+                sounds.walkingSound.play(5.5);
                 this.idleTime = 0;
-            } 
+            }
 
             if (this.world.keyboard.LEFT && this.x > -650) {
                 this.moveLeft();
                 this.otherDirection = true;
-                sounds.walkingSound.play(5);
+                sounds.walkingSound.play(5.5);
                 this.idleTime = 0;
             }
 
@@ -162,45 +165,79 @@ class Character extends MovableObject {
         this.setAnimationInterval();
     }
 
+        /**
+     * Configures and manages animation intervals based on the character's current state.
+     */
     setAnimationInterval() {
-        if (this.animationInterval) {
-            clearInterval(this.animationInterval);
-        }
-    
-        let animationSpeed = this.ANIMATION_SPEED_IDLE;
-    
-        if (this.isDead()) {
-            if (!this.hasDied) {
-                this.playAnimation(this.IMAGES_DEAD);
-                animationSpeed = this.ANIMATION_SPEED_DEAD;
-                sounds.dyingSound.play();
-                this.hasDied = true;
-                endGame(false);
-            }
-        } else if (this.isThrowingBomb) {
-            animationSpeed = this.ANIMATION_SPEED_THROWINGBOMBS;
-        } else if (this.isHurt()) {
-            this.playAnimation(this.IMAGES_HURT);
-        } else if (this.isAboveGround() && this.canDoubleJump) {
-            this.playAnimation(this.IMAGES_DOUBLE_JUMP);
-            animationSpeed = this.ANIMATION_SPEED_JUMP;
-        } else if (this.isAboveGround()) {
-            this.playAnimation(this.IMAGES_JUMP);
-            animationSpeed = this.ANIMATION_SPEED_JUMP;
-        } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-            this.playAnimation(this.IMAGES_WALK);
-            animationSpeed = this.ANIMATION_SPEED_WALK;
-        } else if (this.idleTime > 5000) {
-            this.playAnimation(this.IMAGES_LONG_IDLE);
-            animationSpeed = this.ANIMATION_SPEED_LONG_IDLE;
-        } else {
-            this.playAnimation(this.IMAGES_IDLE);
-        }
+        clearInterval(this.animationInterval);
+
+        let animationSpeed = this.determineAnimationSpeed();
+        this.playAppropriateAnimation();
+        
         this.animationInterval = setInterval(() => {
             this.setAnimationInterval();
         }, animationSpeed);
-    }    
+    }
 
+        /**
+     * Determines the appropriate animation speed based on the current state of the character.
+     * @returns {number} The milliseconds duration for the current animation frame rate.
+     */
+    determineAnimationSpeed() {
+        if (this.isDead() && !this.hasDied) return this.ANIMATION_SPEED_DEAD;
+        if (this.isThrowingBomb) return this.ANIMATION_SPEED_THROWINGBOMBS;
+        if (this.isHurt()) return this.ANIMATION_SPEED_HURT;
+        if (this.isAboveGround()) return this.ANIMATION_SPEED_JUMP;
+        if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) return this.ANIMATION_SPEED_WALK;
+        if (this.idleTime > 5000) return this.ANIMATION_SPEED_LONG_IDLE;
+        return this.ANIMATION_SPEED_IDLE;
+    }
+
+        /**
+     * Plays the appropriate animation based on the character's current state.
+     */
+    playAppropriateAnimation() {
+        if (this.isDead() && !this.hasDied) {
+            this.handleDeath();
+        } else if (this.isThrowingBomb) {
+            this.playAnimation(this.IMAGES_THROWINGBOMBS);
+        } else if (this.isHurt()) {
+            this.playAnimation(this.IMAGES_HURT);
+        } else if (this.isAboveGround()) {
+            this.playJumpAnimation();
+        } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+            this.playAnimation(this.IMAGES_WALK);
+        } else if (this.idleTime > 5000) {
+            this.playAnimation(this.IMAGES_LONG_IDLE);
+        } else {
+            this.playAnimation(this.IMAGES_IDLE);
+        }
+    }
+
+        /**
+     * Handles character death, plays death animation, and ends the game.
+     */
+    handleDeath() {
+        this.playAnimation(this.IMAGES_DEAD);
+        sounds.dyingSound.play();
+        this.hasDied = true;
+        endGame(false);
+    }
+
+        /**
+     * Chooses between jumping and double jumping animations based on the ability to double jump.
+     */
+    playJumpAnimation() {
+        if (this.canDoubleJump) {
+            this.playAnimation(this.IMAGES_DOUBLE_JUMP);
+        } else {
+            this.playAnimation(this.IMAGES_JUMP);
+        }
+    }
+
+        /**
+     * Initiates the bomb throwing animation and manages bomb inventory.
+     */
     throwBomb() {
         this.currentImage = 0;
         this.isThrowingBomb = true;
