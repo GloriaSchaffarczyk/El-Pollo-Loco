@@ -115,6 +115,9 @@ class Character extends MovableObject {
     ownedBombs = 0;
     canDoubleJump = false;
 
+    /**
+ * Loading necessary images and initializing animation and physics.
+ */
     constructor() {
         super().loadImage('img2/2_character/2_walk/biker_walk_01.png')
         this.loadImages(this.IMAGES_IDLE);
@@ -127,12 +130,11 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_THROWINGBOMBS);
         this.animate();
         this.applyGravity();
-        this.lastAnimationState = null;
     }
 
-        /**
-     * Initiates and manages the animation loop and game state updates based on user input.
-     */
+    /**
+ * Initiates and manages the animation loop and game state updates based on user input.
+ */
     animate() {
         setInterval(() => {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
@@ -165,24 +167,24 @@ class Character extends MovableObject {
         this.setAnimationInterval();
     }
 
-        /**
-     * Configures and manages animation intervals based on the character's current state.
-     */
+    /**
+ * Configures and manages animation intervals based on the character's current state.
+ */
     setAnimationInterval() {
         clearInterval(this.animationInterval);
 
         let animationSpeed = this.determineAnimationSpeed();
         this.playAppropriateAnimation();
-        
+
         this.animationInterval = setInterval(() => {
             this.setAnimationInterval();
         }, animationSpeed);
     }
 
-        /**
-     * Determines the appropriate animation speed based on the current state of the character.
-     * @returns {number} The milliseconds duration for the current animation frame rate.
-     */
+    /**
+ * Determines the appropriate animation speed based on the current state of the character.
+ * @returns {number} The milliseconds duration for the current animation frame rate.
+ */
     determineAnimationSpeed() {
         if (this.isDead() && !this.hasDied) return this.ANIMATION_SPEED_DEAD;
         if (this.isThrowingBomb) return this.ANIMATION_SPEED_THROWINGBOMBS;
@@ -193,9 +195,9 @@ class Character extends MovableObject {
         return this.ANIMATION_SPEED_IDLE;
     }
 
-        /**
-     * Plays the appropriate animation based on the character's current state.
-     */
+    /**
+ * Plays the appropriate animation based on the character's current state.
+ */
     playAppropriateAnimation() {
         if (this.isDead() && !this.hasDied) {
             this.handleDeath();
@@ -214,9 +216,9 @@ class Character extends MovableObject {
         }
     }
 
-        /**
-     * Handles character death, plays death animation, and ends the game.
-     */
+    /**
+ * Handles character death, plays death animation, and ends the game.
+ */
     handleDeath() {
         this.playAnimation(this.IMAGES_DEAD);
         sounds.dyingSound.play();
@@ -224,9 +226,9 @@ class Character extends MovableObject {
         endGame(false);
     }
 
-        /**
-     * Chooses between jumping and double jumping animations based on the ability to double jump.
-     */
+    /**
+ * Chooses between jumping and double jumping animations based on the ability to double jump.
+ */
     playJumpAnimation() {
         if (this.canDoubleJump) {
             this.playAnimation(this.IMAGES_DOUBLE_JUMP);
@@ -235,9 +237,9 @@ class Character extends MovableObject {
         }
     }
 
-        /**
-     * Initiates the bomb throwing animation and manages bomb inventory.
-     */
+    /**
+ * Initiates the bomb throwing animation and manages bomb inventory.
+ */
     throwBomb() {
         this.currentImage = 0;
         this.isThrowingBomb = true;

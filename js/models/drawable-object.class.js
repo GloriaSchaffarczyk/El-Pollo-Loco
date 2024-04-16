@@ -8,6 +8,10 @@ class DrawableObject {
     currentImage = 0;
     imageLoaded = false;
 
+    /**
+ * Loads an image from a given path and sets it up for rendering.
+ * @param {string} path - The path to the image file.
+ */
     loadImage(path) {
         this.img = new Image();
         this.img.addEventListener('load', () => {
@@ -16,14 +20,22 @@ class DrawableObject {
         this.img.src = path;
     }
 
+    /**
+ * Draws the image on the given canvas context if the image has been loaded.
+ * @param {CanvasRenderingContext2D} ctx - The canvas rendering context where the image will be drawn.
+ */
     draw(ctx) {
-        if (this.imageLoaded) { 
+        if (this.imageLoaded) {
             ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-        } else {   
-           // console.log('Image not loaded yet, cannot draw.');
+        } else {
+            // console.log('Image not loaded yet, cannot draw.');
         }
     }
 
+    /**
+ * Draws a red frame around the object if it's an instance of certain game entities.
+ * @param {CanvasRenderingContext2D} ctx - The canvas rendering context to draw the frame on.
+ */
     drawFrame(ctx) {
         if (this instanceof Character || this instanceof Zombie || this instanceof Monster || this instanceof Endboss || this instanceof Candy || this instanceof Bombs) {
             ctx.beginPath();
@@ -34,6 +46,10 @@ class DrawableObject {
         }
     }
 
+    /**
+ * Draws a blue frame around the object, accounting for offsets if they exist, for specific game entities.
+ * @param {CanvasRenderingContext2D} ctx - The canvas rendering context to draw the frame on.
+ */
     drawFrameBlue(ctx) {
         if (this instanceof Character || this instanceof Zombie || this instanceof Monster || this instanceof Endboss || this instanceof Candy || this instanceof Bombs) {
             ctx.beginPath();
@@ -47,7 +63,7 @@ class DrawableObject {
             );
             ctx.stroke();
         }
-    }    
+    }
 
     /**
     * 
