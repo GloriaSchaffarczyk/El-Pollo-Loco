@@ -36,6 +36,9 @@ class Monster extends MovableObject {
         this.animate();
     }
 
+    /**
+     * Manages continuous movement and animation cycles of the monsters.
+     */
     animate() {
         setInterval(() => {
             this.moveLeft();

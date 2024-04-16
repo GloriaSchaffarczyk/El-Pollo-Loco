@@ -36,6 +36,9 @@ class Zombie extends MovableObject {
         this.animate();
     }
 
+        /**
+     * Manages continuous movement and animation cycles of the zombies.
+     */
     animate() {
         setInterval(() => {
             this.moveLeft();
