@@ -9,6 +9,9 @@ class StatusbarCandy extends DrawableObject {
     ];
     percentage = 0;
 
+    /**
+     * Constructs the status bar for candy, displaying the amount of candy collected as an image based on a percentage.
+     */
     constructor() {
         super().loadImage('img2/7_statusbars/1_statusbar/1_statusbar_candy/statusbar-candy_01.png');
         this.loadImages(this.IMAGES_CANDY);
@@ -19,12 +22,20 @@ class StatusbarCandy extends DrawableObject {
         this.setPercentage(0);
     }
 
+    /**
+     * Sets the percentage of candy collected and updates the status bar image accordingly.
+     * @param {number} percentage - The current percentage of candy collected.
+     */
     setPercentage(percentage) {
         this.percentage = percentage;
         let path = this.IMAGES_CANDY[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
 
+    /**
+     * Determines the index of the image to display based on the current percentage of candy collected.
+     * @returns {number} The index of the image in the IMAGES_CANDY array.
+     */
     resolveImageIndex() {
         if (this.percentage == 100) {
             return 5;
