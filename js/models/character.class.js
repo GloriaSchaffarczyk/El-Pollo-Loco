@@ -104,8 +104,8 @@ class Character extends MovableObject {
     ANIMATION_SPEED_LONG_IDLE = 400;
     ANIMATION_SPEED_WALK = 40;
     ANIMATION_SPEED_JUMP = 150;
-    ANIMATION_SPEED_HURT = 50;
-    ANIMATION_SPEED_DEAD = 250;
+    ANIMATION_SPEED_HURT = 500;
+    ANIMATION_SPEED_DEAD = 500;
     ANIMATION_SPEED_THROWINGBOMBS = 45;
     world;
     animationInterval = null;
@@ -114,6 +114,7 @@ class Character extends MovableObject {
     idleTime = 0;
     ownedBombs = 0;
     canDoubleJump = false;
+    dyingAnimationPlayed = false;
 
     /**
  * Loading necessary images and initializing animation and physics.
@@ -137,6 +138,12 @@ class Character extends MovableObject {
  */
     animate() {
         setInterval(() => {
+            if (this.hasDied && !this.dyingAnimationPlayed) {
+                this.handleDyingAnimation();
+            }
+
+            if (this.hasDied) return;
+
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
@@ -200,7 +207,7 @@ class Character extends MovableObject {
  */
     playAppropriateAnimation() {
         if (this.isDead() && !this.hasDied) {
-            this.handleDeath();
+            this.handleDeath();      
         } else if (this.isThrowingBomb) {
             this.playAnimation(this.IMAGES_THROWINGBOMBS);
         } else if (this.isHurt()) {
@@ -216,14 +223,32 @@ class Character extends MovableObject {
         }
     }
 
+handleDyingAnimation() {
+    if (this.dyingAnimationPlayed) return;  // Verhindert, dass die Animation mehrfach startet
+
+    let currentFrame = 0;
+    const maxFrames = this.IMAGES_DEAD.length;
+    const intervalTime = 400; // Geschwindigkeit der Animation anpassen
+
+    this.dyingAnimationPlayed = true;
+    this.animationInterval = setInterval(() => {
+        if (currentFrame < maxFrames) {
+            this.img = this.imageCache[this.IMAGES_DEAD[currentFrame++]];
+        } else {
+            clearInterval(this.animationInterval);
+            this.animationInterval = null; // Beendet das Intervall
+        }
+    }, intervalTime);
+}
+
     /**
  * Handles character death, plays death animation, and ends the game.
  */
     handleDeath() {
-        this.playAnimation(this.IMAGES_DEAD);
-        sounds.dyingSound.play();
+        if (this.hasDied) return;
         this.hasDied = true;
-        endGame(false);
+        sounds.dyingSound.play();
+        this.handleDyingAnimation(); // Startet die Todesanimation
     }
 
     /**

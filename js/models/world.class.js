@@ -23,10 +23,16 @@ class World {
         this.loadStatusbarIcons();
     }
 
+    /**
+     * Sets up the initial state and associations needed for the game world.
+     */
     setWorld() {
         this.character.world = this;
     }
 
+    /**
+     * Starts the game loop, managing continuous game updates.
+     */
     run() {
         setInterval(() => {
             this.checkCollisions();
@@ -39,6 +45,9 @@ class World {
         }, 50)
     }
 
+    /**
+     * Handles the logic for throwing objects in the game.
+     */
     checkThrowObjects() {
         if (this.keyboard.W && this.character.ownedBombs > 0) {
             this.character.throwBomb();
@@ -50,6 +59,9 @@ class World {
         }
     }
 
+    /**
+     * Loads icons for various statuses like health, candy, and bombs.
+     */
     loadStatusbarIcons() {
         this.statusBarIcons = [
             new StatusbarIcons(15, 15, 'HEALTH'),
@@ -58,6 +70,9 @@ class World {
         ];
     }
 
+    /**
+     * Main drawing loop for the game, updating the canvas continuously.
+     */
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
@@ -86,6 +101,10 @@ class World {
         requestAnimationFrame(() => this.draw());
     }
 
+    /**
+     * Adds game objects to the canvas.
+     * @param {Array} objects - Game objects to be added to the canvas.
+     */
     addObjectsToMap(objects) {
         if (objects && Array.isArray(objects)) {
             objects.forEach(object => {
@@ -94,6 +113,10 @@ class World {
         }
     }
 
+    /**
+     * Adds a movable object to the game canvas, handling direction for proper rendering.
+     * @param {MovableObject} movableObject - The object to be drawn on the canvas.
+     */
     addToMap(movableObject) {
         if (movableObject.otherDirection) {
             this.flipImage(movableObject);
@@ -108,6 +131,10 @@ class World {
         }
     }
 
+    /**
+     * Flips the image of a movable object horizontally on the canvas.
+     * @param {MovableObject} movableObject - The object whose image is to be flipped.
+     */
     flipImage(movableObject) {
         this.ctx.save();
         this.ctx.translate(movableObject.width, 0);
@@ -115,73 +142,114 @@ class World {
         movableObject.x = movableObject.x * -1;
     }
 
+    /**
+     * Restores the original orientation of a flipped image of a movable object on the canvas.
+     * @param {MovableObject} movableObject - The object whose image was flipped and needs to be restored.
+     */
     flipImageBack(movableObject) {
         movableObject.x = movableObject.x * -1;
         this.ctx.restore();
     }
 
+    /**
+     * Handles object collisions to update game state or interactions.
+     */
     checkCollisions() {
-        if (Array.isArray(this.level.zombies)) {
-            this.level.zombies.forEach((zombie) => {
-                if (this.character.isColliding(zombie) && !this.character.isAboveGround()) {
-                    this.character.enemyHit();
-                    this.statusBar[0].setPercentage(this.character.energy);
-                }
-            });
-        }
+        this.checkCollisionsWithZombies();
+        this.checkCollisionsWithMonsters();
+        this.checkCollisionsWithEndboss();
+        this.checkCollisionsWithBombs();
+    }
 
-        if (Array.isArray(this.level.monsters)) {
-            this.level.monsters.forEach((monster) => {
-                if (this.character.isColliding(monster) && !this.character.isAboveGround()) {
-                    this.character.enemyHit();
-                    this.statusBar[0].setPercentage(this.character.energy);
-                }
-            });
-        }
-
-        if (Array.isArray(this.level.endboss)) {
-            this.level.endboss.forEach((endboss) => {
-                if (this.character.isColliding(endboss)) {
-                    this.character.endbossHit();
-                    this.statusBar[0].setPercentage(this.character.energy);
-                }
-            });
-        }
-
-        this.throwableObjects.forEach((bomb) => {
-            if (!bomb.hitEnemy) {
-                this.level.zombies.forEach((zombie) => {
-                    if (bomb.isColliding(zombie)) {
-                        zombie.enemyHitByBomb();
-                        bomb.hitEnemy = true;
-                        sounds.zombieDyingSound.play();
-                        sounds.bombExplosionSound.play();
-                    }
-                });
-
-                this.level.monsters.forEach((monster) => {
-                    if (bomb.isColliding(monster)) {
-                        monster.enemyHitByBomb();
-                        bomb.hitEnemy = true;
-                        sounds.monsterDyingSound.play();
-                        sounds.bombExplosionSound.play();
-                    }
-                });
-
-                if (Array.isArray(this.level.endboss)) {
-                    this.level.endboss.forEach((endboss) => {
-                        if (bomb.isColliding(endboss)) {
-                            endboss.endbossHitByBomb();
-                            bomb.hitEnemy = true;
-                            this.statusBar[3].setPercentage(endboss.energy);
-                            sounds.bombExplosionSound.play();
-                        }
-                    });
-                }
+    /**
+     * Checks and handles collisions between the character and zombies.
+     */
+    checkCollisionsWithZombies() {
+        this.level.zombies.forEach(zombie => {
+            if (this.character.isColliding(zombie) && !this.character.isAboveGround()) {
+                this.character.enemyHit();
+                this.updateHealthStatusBar();
             }
         });
     }
 
+    /**
+     * Checks and handles collisions between the character and monsters.
+     */
+    checkCollisionsWithMonsters() {
+        this.level.monsters.forEach(monster => {
+            if (this.character.isColliding(monster) && !this.character.isAboveGround()) {
+                this.character.enemyHit();
+                this.updateHealthStatusBar();
+            }
+        });
+    }
+
+    /**
+     * Checks and handles collisions between the character and the endboss.
+     */
+    checkCollisionsWithEndboss() {
+        this.level.endboss.forEach(endboss => {
+            if (this.character.isColliding(endboss)) {
+                this.character.endbossHit();
+                this.updateHealthStatusBar();
+            }
+        });
+    }
+
+    /**
+     * Checks and handles collisions involving throwable bombs.
+     */
+    checkCollisionsWithBombs() {
+        this.throwableObjects.forEach(bomb => {
+            this.level.zombies.concat(this.level.monsters, this.level.endboss).forEach(enemy => {
+                if (bomb.isColliding(enemy)) {
+                    this.handleBombCollision(bomb, enemy);
+                }
+            });
+        });
+    }
+
+    /**
+     * Handles the effects of a bomb colliding with an enemy.
+     * @param {ThrowableObject} bomb - The bomb involved in the collision.
+     * @param {MovableObject} enemy - The enemy hit by the bomb.
+     */
+    handleBombCollision(bomb, enemy) {
+        enemy.enemyHitByBomb();
+        bomb.hitEnemy = true;
+        this.playExplosionSounds();
+        this.updateEndbossStatusBarIfNeeded(enemy);
+    }
+
+    /**
+     * Plays sounds associated with a bomb explosion.
+     */
+    playExplosionSounds() {
+        sounds.zombieDyingSound.play();
+        sounds.bombExplosionSound.play();
+    }
+
+    /**
+     * Updates the health status bar.
+     */
+    updateHealthStatusBar() {
+        this.statusBar[0].setPercentage(this.character.energy);
+    }
+
+    /**
+     * Updates the endboss status bar if the enemy is an endboss.
+     * @param {MovableObject} enemy - The enemy to check if it's an endboss.
+     */
+    updateEndbossStatusBarIfNeeded(enemy) {
+        if (enemy instanceof Endboss) {
+            this.statusBar[3].setPercentage(enemy.energy);
+        }
+    }
+
+    /**
+     * Specific collision checks for character interactions with candy.
+     */
     checkCollisionsCharacterCandy() {
         this.level.candy.forEach((candy) => {
             if (this.character.isColliding(candy) && this.character.candy < 100) {
@@ -193,6 +261,9 @@ class World {
         });
     }
 
+    /**
+     * Specific collision checks for character interactions with bombs.
+     */
     checkCollisionsCharacterBombs() {
         this.level.bombs.forEach((bomb) => {
             if (this.character.isColliding(bomb) && this.character.ownedBombs < 100) {
@@ -204,6 +275,9 @@ class World {
         });
     }
 
+    /**
+     * Cleans up objects that are no longer active in the game world.
+     */
     removeObjects() {
         this.level.zombies = this.level.zombies.filter(zombie => !zombie.readyToRemove);
         this.level.monsters = this.level.monsters.filter(monster => !monster.readyToRemove);
@@ -212,6 +286,9 @@ class World {
         this.level.bombs = this.level.bombs.filter(bomb => !bomb.readyToRemove);
     }
 
+    /**
+     * Checks for special conditions like a character jumping on a zombie.
+     */
     checkJumpOnZombie() {
         this.level.zombies.forEach(zombie => {
             if (this.character.isColliding(zombie) && this.character.speedY < 0 && this.character.isAboveGround()) {
@@ -223,6 +300,9 @@ class World {
         });
     }
 
+    /**
+     * Checks for special conditions like a character jumping on a monster.
+     */
     checkJumpOnMonster() {
         this.level.monsters.forEach(monster => {
             if (this.character.isColliding(monster) && this.character.speedY < 0 && this.character.isAboveGround()) {
@@ -234,12 +314,17 @@ class World {
         });
     }
 
+    /**
+     * Triggers enemy attacks based on the proximity of the character.
+     */
     triggerEnemyAttack() {
         this.level.endboss.forEach(endboss => {
             if (this.character.x > 4640 && !endboss.characterIsCloseToEndboss) {
                 endboss.characterIsCloseToEndboss = true;
                 this.statusBar.push(new StatusbarEndboss());
                 this.statusBarIcons.push(new StatusbarIcons(480, 22, 'ENDBOSS'));
+                sounds.endbossBattleMusic.play();
+                sounds.backgroundMusic.pause();
             }
         });
     }

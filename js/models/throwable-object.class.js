@@ -20,6 +20,9 @@ class ThrowableObject extends MovableObject {
     isExploded = false;
     ANIMATION_SPEED_EXPLOSION = 100;
 
+    /**
+     * Constructs a throwable object in the game, such as a bomb, with capabilities for animations of rotation and explosion.
+     */
     constructor(x, y, direction) {
         super().loadImage('img2/6_bombs/bomb_rotation/bomb-rotation_01.png',);
         this.loadImages(this.IMAGES_BOMBROTATION);
@@ -34,6 +37,9 @@ class ThrowableObject extends MovableObject {
         this.exploding = false;
     }
 
+    /**
+     * Manages the animation of the bomb's movement and triggers the explosion sequence upon collision.
+     */
     bombAnimation() {
         if (!this.animationInterval) {
             this.speedY = 30;
@@ -53,6 +59,9 @@ class ThrowableObject extends MovableObject {
         }
     }
 
+    /**
+     * Handles the explosion animation of the bomb when it hits an enemy.
+     */
     handleExplosion() {
         if (!this.isExploding) {
             this.isExploding = true;
@@ -74,5 +83,4 @@ class ThrowableObject extends MovableObject {
             }, maxFrames * this.ANIMATION_SPEED_EXPLOSION);
         }
     }
-
 }

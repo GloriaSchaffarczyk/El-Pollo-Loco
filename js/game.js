@@ -5,6 +5,9 @@ let isMusicOn = true;
 let isSoundOn = true;
 let gameState = 'init';
 
+/**
+ * Initializes the game environment, sets up canvas, and starts game music.
+ */
 function init() {
     canvas = document.getElementById('canvas');
     sounds.startscreenSound.play();
@@ -13,6 +16,9 @@ function init() {
     window.addEventListener('resize', updateVisibility);
 }
 
+/**
+ * Starts the game by initializing the level, hiding the start screen, and playing background music.
+ */
 function startGame() {
     initLevel();
     world = new World(canvas, keyboard);
@@ -24,13 +30,22 @@ function startGame() {
     updateVisibility();
 }
 
+/**
+ * Ends the game and displays either the victory or defeat screen based on the outcome.
+ * @param {boolean} isVictory - Determines if the end scenario is a victory or defeat.
+ */
 function endGame(isVictory) {
     setTimeout(() => {
         if (isVictory) {
             showVictoryScreen();
+            sounds.victorySound.play();
         } else {
             showDefeatScreen();
+            sounds.defeatSound.play();
         }
+        sounds.endbossBattleMusic.pause();
+        sounds.backgroundMusic.pause();
+        sounds.startscreenSound.pause();
         endscreen.classList.remove('d-none');
         canvas.classList.add('d-none');
         symbols.classList.add('d-none');
@@ -42,10 +57,16 @@ function endGame(isVictory) {
     }, 4000);
 }
 
+/**
+ * Reloads the page to restart the game.
+ */
 function restartGame() {
     location.reload();
 }
 
+/**
+ * Toggles the background music on or off.
+ */
 function toggleMusic() {
     if (isMusicOn) {
         muteMusic();
@@ -56,6 +77,9 @@ function toggleMusic() {
     }
 }
 
+/**
+ * Toggles sound effects on or off.
+ */
 function toggleSound() {
     if (isSoundOn) {
         muteSound();
@@ -66,11 +90,17 @@ function toggleSound() {
     }
 }
 
+/**
+ * Mutes the game music.
+ */
 function muteMusic() {
     sounds.backgroundMusic.sound.volume = 0;
     isMusicOn = false;
 }
 
+/**
+ * Plays the game music if it was paused.
+ */
 function playMusic() {
     if (sounds.backgroundMusic.sound.paused) {
         sounds.backgroundMusic.sound.play();
@@ -78,6 +108,9 @@ function playMusic() {
     isMusicOn = true;
 }
 
+/**
+ * Mutes all game sound effects.
+ */
 function muteSound() {
     sounds.walkingSound.volume = 0;
     sounds.jumpingSound.volume = 0;
@@ -85,6 +118,9 @@ function muteSound() {
     isSoundOn = false;
 }
 
+/**
+ * Sets the volume for various game sound effects.
+ */
 function playSound() {
     sounds.walkingSound.volume = 0.2;
     sounds.jumpingSound.volume = 0.5;
@@ -92,6 +128,9 @@ function playSound() {
     isSoundOn = true;
 }
 
+/**
+ * Toggles fullscreen mode for the game.
+ */
 function toggleFullscreen() {
     let titleAndFullscreen = document.getElementById('canvas');
 
@@ -118,6 +157,9 @@ function toggleFullscreen() {
     }
 }
 
+/**
+ * Displays the victory screen upon winning the game.
+ */
 function showVictoryScreen() {
     endscreen.innerHTML = `
     <div class="victory" id="victory">
@@ -145,6 +187,9 @@ function showVictoryScreen() {
     `
 }
 
+/**
+ * Displays the defeat screen upon losing the game.
+ */
 function showDefeatScreen() {
     endscreen.innerHTML = `
     <div class="defeat" id="defeat">
@@ -159,10 +204,16 @@ function showDefeatScreen() {
     `
 }
 
+/**
+ * Clears all intervals to stop ongoing processes when the game ends.
+ */
 function clearAllIntervals() {
     for (let i = 1; i < 9999; i++) window.clearInterval(i);
 }
 
+/**
+ * Updates visibility of game elements based on device orientation and screen size.
+ */
 function updateVisibility() {
     const isMobile = window.innerWidth < 720 || window.innerHeight < 480;
     const isLandscape = window.innerWidth > window.innerHeight;
@@ -244,6 +295,9 @@ window.addEventListener('keyup', (event) => {
     }
 });
 
+/**
+ * Adds mobile control listeners to facilitate gameplay on mobile devices.
+ */
 function addMobileControls() {
     const options = { passive: true };
     document.getElementById('go-left').addEventListener('touchstart', (e) => {

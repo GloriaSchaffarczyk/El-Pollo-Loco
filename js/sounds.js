@@ -3,7 +3,7 @@ const sounds = {
         sound: new Audio('audio/475300__adnova__bell-cave.wav'),
         play: function() {
             this.sound.loop = true;
-            this.sound.volume = 1;
+            this.sound.volume = 0.5;
             this.sound.play();
         },
         pause: function() {
@@ -15,7 +15,31 @@ const sounds = {
         sound: new Audio('audio/363164__adnova__spooker.wav'),
         play: function() {
             this.sound.loop = true;
-            this.sound.volume = 0.5;
+            this.sound.volume = 0.3;
+            this.sound.play();
+        },
+        pause: function() {
+            this.sound.pause();
+            this.sound.currentTime = 0;
+        }
+    },
+    defeatSound: {
+        sound: new Audio('audio/407471__loyalty_freak_music__victory.mp3'),
+        play: function() {
+            this.sound.loop = true;
+            this.sound.volume = 0.1;
+            this.sound.play();
+        },
+        pause: function() {
+            this.sound.pause();
+            this.sound.currentTime = 0;
+        }
+    },
+    victorySound: {
+        sound: new Audio('audio/364986__adnova__sweets.wav'), 
+         play: function() {
+            this.sound.loop = true;
+            this.sound.volume = 0.2;
             this.sound.play();
         },
         pause: function() {
@@ -37,7 +61,7 @@ const sounds = {
     collectingCandySound: {
         sound: new Audio('audio/644306__reincarnatedechoes__heart-collecthealing-retro.wav'),
         play: function() {
-            this.sound.volume = 0.5;
+            this.sound.volume = 0.2;
             this.sound.play();
         },
         pause: function() {
@@ -48,7 +72,7 @@ const sounds = {
     walkingSound: {
         sound: new Audio('audio/659370__matrixxx__retro-footsteps.wav'),
         play: function(rate = 1) {
-            this.sound.volume = 0.2;
+            this.sound.volume = 0.1;
             this.sound.playbackRate = rate;
             this.sound.play();
         },
@@ -116,7 +140,7 @@ const sounds = {
         sound: new Audio('audio/573803__sami_hiltunen__boss-battle-music.wav'),
         play: function() {
             this.sound.loop = true;
-            this.sound.volume = 0.5;
+            this.sound.volume = 0.2;
             this.sound.play();
         },
         pause: function() {

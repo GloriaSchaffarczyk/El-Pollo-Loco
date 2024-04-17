@@ -27,6 +27,9 @@ class Zombie extends MovableObject {
     animationSpeed;
     energy = 20;
 
+    /**
+     * Constructs a zombie character in the game, capable of walking and dying animations.
+     */
     constructor() {
         super().loadImage('img2/3_enemies/zombie/1_walk/zombie_walk_01.png');
         this.loadImages(this.ZOMBIE_WALKING);
@@ -36,7 +39,7 @@ class Zombie extends MovableObject {
         this.animate();
     }
 
-        /**
+    /**
      * Manages continuous movement and animation cycles of the zombies.
      */
     animate() {
