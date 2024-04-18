@@ -49,7 +49,7 @@ class World {
      * Handles the logic for throwing objects in the game.
      */
     checkThrowObjects() {
-        if (this.keyboard.W && this.character.ownedBombs > 0) {
+        if (this.keyboard.W && this.character.ownedBombs > 0 && !this.character.hasDied) {
             this.character.throwBomb();
             let direction = this.character.otherDirection ? 'left' : 'right';
             let bomb = new ThrowableObject(this.character.x + 30, this.character.y + -70, direction);
@@ -169,6 +169,7 @@ class World {
             if (this.character.isColliding(zombie) && !this.character.isAboveGround()) {
                 this.character.enemyHit();
                 this.updateHealthStatusBar();
+                sounds.hurtSound.play();
             }
         });
     }
@@ -181,6 +182,7 @@ class World {
             if (this.character.isColliding(monster) && !this.character.isAboveGround()) {
                 this.character.enemyHit();
                 this.updateHealthStatusBar();
+                sounds.hurtSound.play();
             }
         });
     }
@@ -193,6 +195,7 @@ class World {
             if (this.character.isColliding(endboss)) {
                 this.character.endbossHit();
                 this.updateHealthStatusBar();
+                sounds.hurtSound.play();
             }
         });
     }
