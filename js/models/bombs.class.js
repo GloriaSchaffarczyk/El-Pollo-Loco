@@ -7,7 +7,7 @@ class Bombs extends MovableObject {
         'img2/6_bombs/bomb_02.png'
     ];
 
-        /**
+    /**
      * Constructs a new Bomb instance, initializes its images and sets a random x position.
      */
     constructor() {
@@ -17,7 +17,7 @@ class Bombs extends MovableObject {
         this.animate();
     }
 
-        /**
+    /**
      * Starts an animation cycle for the bomb by cycling through images at a defined interval.
      */
     animate() {

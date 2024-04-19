@@ -27,6 +27,9 @@ class Monster extends MovableObject {
     animationSpeed;
     energy = 20;
 
+    /**
+     * Constructs a monster in the game, capable of walking and dying animations.
+     */
     constructor() {
         super().loadImage('img2/3_enemies/monster/1_walk/monster_walk_01.png');
         this.loadImages(this.MONSTER_WALKING);

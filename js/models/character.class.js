@@ -115,6 +115,10 @@ class Character extends MovableObject {
     ownedBombs = 0;
     canDoubleJump = false;
 
+    /**
+     * Constructs a playable character in the game, extending the capabilities of a MovableObject.
+     * Manages all character-related animations, movements, and interactions within the game world.
+     */
     constructor() {
         super().loadImage('img2/2_character/2_walk/biker_walk_01.png')
         this.loadImages(this.IMAGES_IDLE);
@@ -130,6 +134,10 @@ class Character extends MovableObject {
         this.lastAnimationState = null;
     }
 
+    /**
+     * Initiates and controls the main animation loop of the character.
+     * This method sets an interval for character actions and animation updates based on user inputs.
+     */
     animate() {
         setInterval(() => {
             if (this.hasDied) {
@@ -167,6 +175,9 @@ class Character extends MovableObject {
         this.setAnimationInterval();
     }
 
+    /**
+     * Updates the character's animation state at intervals based on the current activity or state.
+     */
     setAnimationInterval() {
         if (this.animationInterval) {
             clearInterval(this.animationInterval);
@@ -204,6 +215,9 @@ class Character extends MovableObject {
         }, animationSpeed);
     }    
 
+    /**
+     * Handles the bomb throwing mechanism for the character, managing the animation and gameplay effects.
+     */
     throwBomb() {
         this.currentImage = 0;
         this.isThrowingBomb = true;

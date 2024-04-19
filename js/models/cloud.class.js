@@ -4,9 +4,9 @@ class Cloud extends MovableObject {
     width = 780;
 
     /**
- * Constructs a Cloud object, initializing its image and starting its animation.
- * The cloud is given a random x-coordinate to vary its starting position across the game screen.
- */
+     * Constructs a Cloud object, initializing its image and starting its animation.
+     * The cloud is given a random x-coordinate to vary its starting position across the game screen.
+     */
     constructor() {
         super().loadImage('img2/5_background/layers/4_clouds/clouds_01.png');
 
@@ -14,7 +14,7 @@ class Cloud extends MovableObject {
         this.animate();
     }
 
-        /**
+    /**
      * Initiates the cloud's movement across the screen. This method sets an interval that continually
      * moves the cloud to the left, simulating a floating effect in the game's background.
      */

@@ -24,6 +24,9 @@ class Level {
         this.endboss = [new Endboss()];
     }
 
+    /**
+     * Generates continous background.
+     */
     generateBackground() {
         const layers = [
             { imagePath: 'img2/5_background/layers/cemetary_background_night_02.png', depth: 0 },

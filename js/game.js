@@ -90,11 +90,12 @@ function toggleSound() {
     }
 }
 
-/**
+/** 
  * Mutes the game music.
  */
 function muteMusic() {
-    sounds.backgroundMusic.sound.volume = 0;
+    sounds.backgroundMusic.pause();
+    sounds.endbossDyingSound.pause();
     isMusicOn = false;
 }
 
@@ -103,7 +104,8 @@ function muteMusic() {
  */
 function playMusic() {
     if (sounds.backgroundMusic.sound.paused) {
-        sounds.backgroundMusic.sound.play();
+        sounds.backgroundMusic.play();
+        sounds.endbossDyingSound.play();
     }
     isMusicOn = true;
 }
@@ -112,19 +114,33 @@ function playMusic() {
  * Mutes all game sound effects.
  */
 function muteSound() {
-    sounds.walkingSound.volume = 0;
-    sounds.jumpingSound.volume = 0;
-    sounds.dyingSound.volume = 0;
+    sounds.walkingSound.sound.volume = 0;
+    sounds.jumpingSound.sound.volume = 0;
+    sounds.dyingSound.sound.volume = 0;
+    sounds.collectingBombsSound.sound.volume = 0;
+    sounds.collectingCandySound.sound.volume = 0;
+    sounds.hurtSound.sound.volume = 0;
+    sounds.bombExplosionSound.sound.volume = 0;
+    sounds.endbossDyingSound.sound.volume = 0;
+    sounds.monsterDyingSound.sound.volume = 0;
+    sounds.zombieDyingSound.sound.volume = 0;
     isSoundOn = false;
 }
 
 /**
- * Sets the volume for various game sound effects.
+ * Starts various game sound effects.
  */
 function playSound() {
-    sounds.walkingSound.volume = 0.2;
-    sounds.jumpingSound.volume = 0.5;
-    sounds.dyingSound.volume = 0.5;
+    sounds.walkingSound.sound.volume = 1;
+    sounds.jumpingSound.sound.volume = 1;
+    sounds.dyingSound.sound.volume = 1;
+    sounds.collectingBombsSound.sound.volume = 1;
+    sounds.collectingCandySound.sound.volume = 1;
+    sounds.hurtSound.sound.volume = 1;
+    sounds.bombExplosionSound.sound.volume = 1;
+    sounds.endbossDyingSound.sound.volume = 1;
+    sounds.monsterDyingSound.sound.volume = 1;
+    sounds.zombieDyingSound.sound.volume = 1;
     isSoundOn = true;
 }
 

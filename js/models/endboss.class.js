@@ -47,9 +47,9 @@ class Endboss extends MovableObject {
     energy = 100;
 
     /**
- * Constructs the end boss character in the game, managing its behavior, animations, and interactions.
- * @extends MovableObject
- */
+     * Constructs the end boss character in the game, managing its behavior, animations, and interactions.
+     * @extends MovableObject
+     */
     constructor() {
         super().loadImage(this.ENDBOSS_IMAGES_WALKING[0]);
         this.loadImages(this.ENDBOSS_IMAGES_WALKING);
@@ -62,7 +62,7 @@ class Endboss extends MovableObject {
         this.characterIsCloseToEndboss = false;
     }
 
-        /**
+    /**
      * Manages animation states for walking and attacking based on the proximity of the main character.
      */
     animate() {
@@ -91,7 +91,7 @@ class Endboss extends MovableObject {
         }, 200);
     }
 
-        /**
+    /**
      * Handles the animation sequence for the dying animation of the end boss.
      */
     handleDyingAnimation() {

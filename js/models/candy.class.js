@@ -7,7 +7,7 @@ class Candy extends MovableObject {
         'img2/8_candy/candy_02.png'
     ];
 
-        /**
+    /**
      * Constructs a new Candy instance, initializes its images, and sets a random x position.
      */
     constructor() {
@@ -17,7 +17,7 @@ class Candy extends MovableObject {
         this.animate();
     }
 
-        /**
+    /**
      * Starts an animation cycle for the candy by cycling through images at a defined interval.
      */
     animate() {
