@@ -183,7 +183,7 @@ class Character extends MovableObject {
             clearInterval(this.animationInterval);
         }
     
-        let animationSpeed = this.ANIMATION_SPEED_IDLE;
+        // let animationSpeed = this.ANIMATION_SPEED_IDLE;
     
         if (this.isDead()) {
             if (!this.hasDied) {
@@ -192,27 +192,27 @@ class Character extends MovableObject {
                 endGame(false);
             }
         } else if (this.isThrowingBomb) {
-            animationSpeed = this.ANIMATION_SPEED_THROWINGBOMBS;
+            // animationSpeed = this.ANIMATION_SPEED_THROWINGBOMBS;
         } else if (this.isHurt()) {
             this.playAnimation(this.IMAGES_HURT);
         } else if (this.isAboveGround() && this.canDoubleJump) {
             this.playAnimation(this.IMAGES_DOUBLE_JUMP);
-            animationSpeed = this.ANIMATION_SPEED_JUMP;
+            // animationSpeed = this.ANIMATION_SPEED_JUMP;
         } else if (this.isAboveGround()) {
             this.playAnimation(this.IMAGES_JUMP);
-            animationSpeed = this.ANIMATION_SPEED_JUMP;
+            // animationSpeed = this.ANIMATION_SPEED_JUMP;
         } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
             this.playAnimation(this.IMAGES_WALK);
-            animationSpeed = this.ANIMATION_SPEED_WALK;
+            // animationSpeed = this.ANIMATION_SPEED_WALK;
         } else if (this.idleTime > 5000) {
             this.playAnimation(this.IMAGES_LONG_IDLE);
-            animationSpeed = this.ANIMATION_SPEED_LONG_IDLE;
+            // animationSpeed = this.ANIMATION_SPEED_LONG_IDLE;
         } else {
             this.playAnimation(this.IMAGES_IDLE);
         }
         this.animationInterval = setInterval(() => {
             this.setAnimationInterval();
-        }, animationSpeed);
+        }, 80);
     }    
 
     /**
@@ -232,8 +232,8 @@ class Character extends MovableObject {
         }, this.ANIMATION_SPEED_THROWINGBOMBS);
     }
 
-            /**
-     * Handles the animation sequence for the dying animation of the end boss.
+    /**
+     * Handles the animation sequence for the dying animation of the character.
      */
             handleDyingAnimation() {
                 let currentFrame = 0;
