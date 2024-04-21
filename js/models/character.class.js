@@ -100,14 +100,14 @@ class Character extends MovableObject {
         'img2/2_character/6_throw/biker_throw_05.png',
         'img2/2_character/6_throw/biker_throw_06.png',
     ];
-    ANIMATION_SPEED_IDLE = 400;
-    ANIMATION_SPEED_LONG_IDLE = 400;
-    ANIMATION_SPEED_WALK = 40;
-    ANIMATION_SPEED_JUMP = 150;
+    ANIMATION_SPEED_IDLE = 40;
+    ANIMATION_SPEED_LONG_IDLE = 40;
+    ANIMATION_SPEED_WALK = 50;
+    ANIMATION_SPEED_JUMP = 55;
     ANIMATION_SPEED_HURT = 50;
     ANIMATION_SPEED_DEAD = 40;
     ANIMATION_SPEED_THROWINGBOMBS = 45;
-    world;       
+    world;
     animationInterval = null;
     hasDied = false;
     isThrowingBomb = false;
@@ -131,7 +131,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_THROWINGBOMBS);
         this.animate();
         this.applyGravity();
-        this.lastAnimationState = null;
+        // this.lastAnimationState = null;
     }
 
     /**
@@ -139,52 +139,34 @@ class Character extends MovableObject {
      * This method sets an interval for character actions and animation updates based on user inputs.
      */
     animate() {
-        setInterval(() => {
-            if (this.hasDied) {
-                clearInterval(this.interval);
-                return;
-            }
-
-            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-                this.moveRight();
-                this.otherDirection = false;
-                sounds.walkingSound.play(5);
-                this.idleTime = 0;
-            } 
-
-            if (this.world.keyboard.LEFT && this.x > -650) {
-                this.moveLeft();
-                this.otherDirection = true;
-                sounds.walkingSound.play(5);
-                this.idleTime = 0;
-            }
-
-            if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-                this.jump();
-                sounds.jumpingSound.play();
-                this.idleTime = 0;
-            }
-
-            if (!(this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.SPACE)) {
-                this.idleTime += 1000 / 60;
-            }
-
-            this.world.camera_x = -this.x + 100;
-        }, 6000 / 60);
-
-        this.setAnimationInterval();
+        this.animationInterval = setInterval(() => {
+            this.updateState();
+            this.updateAnimation();
+        }, 100); // 60 mal pro Sekunde aktualisieren
     }
-
-    /**
-     * Updates the character's animation state at intervals based on the current activity or state.
-     */
-    setAnimationInterval() {
-        if (this.animationInterval) {
-            clearInterval(this.animationInterval);
+    
+    updateState() {
+        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+            this.moveRight();
+            this.otherDirection = false;
+            sounds.walkingSound.play(5);
+            this.idleTime = 0;
+        } else if (this.world.keyboard.LEFT && this.x > -650) {
+            this.moveLeft();
+            this.otherDirection = true;
+            sounds.walkingSound.play(5);
+            this.idleTime = 0;
+        } else if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+            this.jump();
+            sounds.jumpingSound.play();
+            this.idleTime = 0;
+        } else if (!(this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.SPACE)) {
+            this.idleTime += 1000 / 60;
         }
+        this.world.camera_x = -this.x + 100;
+    }
     
-        // let animationSpeed = this.ANIMATION_SPEED_IDLE;
-    
+    updateAnimation() {
         if (this.isDead()) {
             if (!this.hasDied) {
                 this.handleDyingAnimation();
@@ -192,28 +174,22 @@ class Character extends MovableObject {
                 endGame(false);
             }
         } else if (this.isThrowingBomb) {
-            // animationSpeed = this.ANIMATION_SPEED_THROWINGBOMBS;
+            this.playAnimation(this.IMAGES_THROWINGBOMBS);
         } else if (this.isHurt()) {
             this.playAnimation(this.IMAGES_HURT);
         } else if (this.isAboveGround() && this.canDoubleJump) {
             this.playAnimation(this.IMAGES_DOUBLE_JUMP);
-            // animationSpeed = this.ANIMATION_SPEED_JUMP;
         } else if (this.isAboveGround()) {
             this.playAnimation(this.IMAGES_JUMP);
-            // animationSpeed = this.ANIMATION_SPEED_JUMP;
         } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
             this.playAnimation(this.IMAGES_WALK);
-            // animationSpeed = this.ANIMATION_SPEED_WALK;
         } else if (this.idleTime > 5000) {
             this.playAnimation(this.IMAGES_LONG_IDLE);
-            // animationSpeed = this.ANIMATION_SPEED_LONG_IDLE;
         } else {
             this.playAnimation(this.IMAGES_IDLE);
         }
-        this.animationInterval = setInterval(() => {
-            this.setAnimationInterval();
-        }, 80);
-    }    
+    }
+    
 
     /**
      * Handles the bomb throwing mechanism for the character, managing the animation and gameplay effects.
@@ -235,15 +211,15 @@ class Character extends MovableObject {
     /**
      * Handles the animation sequence for the dying animation of the character.
      */
-            handleDyingAnimation() {
-                let currentFrame = 0;
-                let maxFrames = this.IMAGES_DEAD.length;
-                sounds.hurtSound.pause();
-                sounds.dyingSound.play();
-        
-                this.dyingAnimationInterval = setInterval(() => {
-                    if (currentFrame < maxFrames)
-                        this.img = this.imageCache[this.IMAGES_DEAD[currentFrame++]];
-                }, 100);
-            }
+    handleDyingAnimation() {
+        let currentFrame = 0;
+        let maxFrames = this.IMAGES_DEAD.length;
+        sounds.hurtSound.pause();
+        sounds.dyingSound.play();
+
+        this.dyingAnimationInterval = setInterval(() => {
+            if (currentFrame < maxFrames)
+                this.img = this.imageCache[this.IMAGES_DEAD[currentFrame++]];
+        }, 100);
+    }
 }
