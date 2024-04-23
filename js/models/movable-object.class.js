@@ -108,6 +108,7 @@ class MovableObject extends DrawableObject {
     enemyHitByBomb() {
         this.energy -= 20;
         if (this.energy <= 0) {
+            this.energy = 0;
             this.hasDied = true;
         } else {
             this.lastHit = new Date().getTime();
@@ -120,6 +121,7 @@ class MovableObject extends DrawableObject {
     endbossHitByBomb() {
         this.energy -= 20;
         if (this.energy <= 0) {
+            this.energy = 0;
             this.hasDied = true;
             endGame(true);
         } else {

@@ -221,10 +221,14 @@ class World {
      * @param {MovableObject} enemy - The enemy hit by the bomb.
      */
     handleBombCollision(bomb, enemy) {
-        enemy.enemyHitByBomb();
-        bomb.hitEnemy = true;
-        this.playExplosionSounds();
-        this.updateEndbossStatusBarIfNeeded(enemy);
+        if (!bomb.isExploded) {
+            bomb.hitEnemy = true;
+            bomb.isExploded = true;
+            enemy.enemyHitByBomb();
+            console.log(`Bomb hit ${enemy.type}, new energy level: ${enemy.energy}`);
+            this.playExplosionSounds();
+            this.updateEndbossStatusBarIfNeeded(enemy);
+        }
     }
 
     /**
