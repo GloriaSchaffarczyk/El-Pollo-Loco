@@ -54,16 +54,10 @@ class Character extends MovableObject {
     ];
     IMAGES_WALK = [
         'img2/2_character/2_walk/biker_walk_01.png',
-        'img2/2_character/2_walk/biker_walk_01.png',
-        'img2/2_character/2_walk/biker_walk_02.png',
         'img2/2_character/2_walk/biker_walk_02.png',
         'img2/2_character/2_walk/biker_walk_03.png',
-        'img2/2_character/2_walk/biker_walk_03.png',
-        'img2/2_character/2_walk/biker_walk_04.png',
         'img2/2_character/2_walk/biker_walk_04.png',
         'img2/2_character/2_walk/biker_walk_05.png',
-        'img2/2_character/2_walk/biker_walk_05.png',
-        'img2/2_character/2_walk/biker_walk_06.png',
         'img2/2_character/2_walk/biker_walk_06.png',
     ];
     IMAGES_JUMP = [
