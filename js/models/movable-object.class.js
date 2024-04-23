@@ -9,7 +9,7 @@ class MovableObject extends DrawableObject {
     otherDirection = false;
     speedY = 0;
     accelerationY = 3.5;
-    energy = 20;
+    energy = 100;
     lastHit = 0;
     readyToRemove = false;
     bombs = 0;
