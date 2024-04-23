@@ -102,7 +102,7 @@ class Character extends MovableObject {
     ];
     ANIMATION_SPEED_IDLE = 250;
     ANIMATION_SPEED_LONG_IDLE = 80;
-    ANIMATION_SPEED_WALK = 120;
+    ANIMATION_SPEED_WALK = 85;
     ANIMATION_SPEED_JUMP = 120;
     ANIMATION_SPEED_HURT = 250;
     ANIMATION_SPEED_DEAD = 200;
@@ -130,9 +130,10 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_THROWINGBOMBS);
         this.currentAnimationSpeed = this.ANIMATION_SPEED_IDLE;
+        this.lastThrown = 0;
+        this.throwCooldown = 500; 
         this.animate();
         this.applyGravity();
-        // this.lastAnimationState = null;
     }
 
     /**
@@ -166,9 +167,6 @@ class Character extends MovableObject {
             this.jump();
             sounds.jumpingSound.play();
             this.idleTime = 0;
-        } if (this.world.keyboard.W && !this.isThrowingBomb) {
-            this.throwBomb();
-            this.world.keyboard.W = false; 
         } if (!(this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.SPACE)) {
             this.idleTime += 1000 / 60;
         }
@@ -186,6 +184,8 @@ class Character extends MovableObject {
                 this.hasDied = true;
                 endGame(false);
             }
+        } else if (this.isThrowingBomb) {
+            this.playAnimation(this.IMAGES_THROWINGBOMBS);
         } else if (this.isHurt()) {
             this.playAnimation(this.IMAGES_HURT);
             this.updateIntervalSpeed(this.ANIMATION_SPEED_HURT);
@@ -208,10 +208,10 @@ class Character extends MovableObject {
     }
 
     /**
-    * Adjusts the speed of the animation interval.
-    * This method updates the interval timing based on the new speed required for the current animation state.
-    * @param {number} newSpeed - The new speed for the animation interval in milliseconds.
-    */
+     * Adjusts the speed of the animation interval.
+     * This method updates the interval timing based on the new speed required for the current animation state.
+     * @param {number} newSpeed - The new speed for the animation interval in milliseconds.
+     */
     updateIntervalSpeed(newSpeed) {
         if (this.currentAnimationSpeed !== newSpeed) {
             this.currentAnimationSpeed = newSpeed;
@@ -227,20 +227,18 @@ class Character extends MovableObject {
      * Handles the bomb throwing mechanism for the character, managing the animation and gameplay effects.
      */
     throwBomb() {
-        if (this.ownedBombs > 0 && !this.isThrowingBomb) {
-            this.isThrowingBomb = true;
-            this.currentImage = 0;
-            const animationInterval = setInterval(() => {
-                this.playAnimation(this.IMAGES_THROWINGBOMBS);
-                if (this.currentImage >= this.IMAGES_THROWINGBOMBS.length) {
-                    clearInterval(animationInterval);
-                    this.isThrowingBomb = false;
-                    this.currentImage = 0;
-                    this.reducingBombs();
-                }
-            }, 100);
-        }
-    }    
+        this.currentImage = 0;
+        this.isThrowingBomb = true;
+        const animationInterval = setInterval(() => {
+            this.playAnimation(this.IMAGES_THROWINGBOMBS);
+            if (this.currentImage >= this.IMAGES_THROWINGBOMBS.length) {
+                clearInterval(animationInterval);
+                this.isThrowingBomb = false;
+                this.currentImage = 0;
+                this.reducingBombs();
+            }
+        }, 100);
+    }
 
     /**
      * Handles the animation sequence for the dying animation of the character.

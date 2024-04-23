@@ -49,12 +49,14 @@ class World {
      * Handles the logic for throwing objects in the game.
      */
     checkThrowObjects() {
-        if (this.keyboard.W && this.character.ownedBombs > 0 && !this.character.hasDied) {
+        const now = Date.now();
+        if (this.keyboard.W && this.character.ownedBombs > 0 && !this.character.hasDied && !this.character.isThrowingBomb && now - this.character.lastThrown > this.character.throwCooldown) {
             this.character.throwBomb();
             let direction = this.character.otherDirection ? 'left' : 'right';
             let bomb = new ThrowableObject(this.character.x + 30, this.character.y + -70, direction);
             this.throwableObjects.push(bomb);
-            this.keyboard.W = false;
+            this.keyboard.W = false; 
+            this.character.lastThrown = now;
             this.character.idleTime = 0;
         }
     }
