@@ -225,7 +225,6 @@ class World {
             bomb.hitEnemy = true;
             bomb.isExploded = true;
             enemy.enemyHitByBomb();
-            console.log(`Bomb hit ${enemy.type}, new energy level: ${enemy.energy}`);
             this.playExplosionSounds();
             this.updateEndbossStatusBarIfNeeded(enemy);
         }
