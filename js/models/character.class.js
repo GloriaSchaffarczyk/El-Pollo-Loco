@@ -95,7 +95,7 @@ class Character extends MovableObject {
         'img2/2_character/6_throw/biker_throw_06.png',
     ];
     ANIMATION_SPEED_IDLE = 250;
-    ANIMATION_SPEED_LONG_IDLE = 80;
+    ANIMATION_SPEED_LONG_IDLE = 250;
     ANIMATION_SPEED_WALK = 85;
     ANIMATION_SPEED_JUMP = 120;
     ANIMATION_SPEED_HURT = 250;
