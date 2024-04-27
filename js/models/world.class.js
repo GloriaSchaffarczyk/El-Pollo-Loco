@@ -55,7 +55,7 @@ class World {
             let direction = this.character.otherDirection ? 'left' : 'right';
             let bomb = new ThrowableObject(this.character.x + 30, this.character.y + -70, direction);
             this.throwableObjects.push(bomb);
-            this.keyboard.W = false; 
+            this.keyboard.W = false;
             this.character.lastThrown = now;
             this.character.idleTime = 0;
         }
@@ -207,35 +207,51 @@ class World {
      */
     checkCollisionsWithBombs() {
         this.throwableObjects.forEach(bomb => {
-            this.level.zombies.concat(this.level.monsters, this.level.endboss).forEach(enemy => {
-                if (bomb.isColliding(enemy)) {
-                    this.handleBombCollision(bomb, enemy);
-                }
-            });
+            if (!bomb.hitEnemy) {
+                this.checkBombCollision(bomb, this.level.zombies, sounds.zombieDyingSound);
+                this.checkBombCollision(bomb, this.level.monsters, sounds.monsterDyingSound);
+                this.checkBombCollision(bomb, this.level.endboss, sounds.bombExplosionSound);
+            }
         });
     }
 
     /**
-     * Handles the effects of a bomb colliding with an enemy.
-     * @param {ThrowableObject} bomb - The bomb involved in the collision.
-     * @param {MovableObject} enemy - The enemy hit by the bomb.
+     * Helper method to process bomb collisions with a specific type of enemies.
+     * @param {ThrowableObject} bomb - The bomb to check for collisions.
+     * @param {Array} enemies - Array of enemies to check against the bomb.
+     * @param {Sound} sound - Sound to play when a collision occurs.
      */
-    handleBombCollision(bomb, enemy) {
-        if (!bomb.isExploded) {
-            bomb.hitEnemy = true;
-            bomb.isExploded = true;
-            enemy.enemyHitByBomb();
-            this.playExplosionSounds();
-            this.updateEndbossStatusBarIfNeeded(enemy);
-        }
+    checkBombCollision(bomb, enemies, sound) {
+        enemies.forEach(enemy => {
+            if (bomb.isColliding(enemy)) {
+                this.handleBombEffects(bomb, enemy, sound);
+            }
+        });
     }
 
     /**
-     * Plays sounds associated with a bomb explosion.
+     * Handles the effects when a bomb collides with an enemy.
+     * @param {ThrowableObject} bomb - The bomb involved in the collision.
+     * @param {MovableObject} enemy - The enemy hit by the bomb.
+     * @param {Sound} sound - Sound to play when the bomb hits an enemy.
      */
-    playExplosionSounds() {
-        sounds.zombieDyingSound.play();
+    handleBombEffects(bomb, enemy, sound) {
+        enemy.enemyHitByBomb();
+        bomb.hitEnemy = true;
+        sound.play();
         sounds.bombExplosionSound.play();
+        this.updateEndbossStatusBarIfNeeded(enemy);
+    }
+
+    /**
+     * Updates the endboss status bar if the enemy is an endboss.
+     * @param {MovableObject} enemy - The enemy to check if it's an endboss.
+     */
+    updateEndbossStatusBarIfNeeded(enemy) {
+        if (enemy instanceof Endboss) {
+            this.statusBar[3].setPercentage(enemy.energy);
+            sounds.bombExplosionSound.play();
+        }
     }
 
     /**
