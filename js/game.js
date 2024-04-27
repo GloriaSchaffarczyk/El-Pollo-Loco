@@ -70,7 +70,7 @@ function restartGame() {
 function toggleMusic() {
     isMusicOn = !isMusicOn;
     if (isMusicOn) {
-        playMusic(); 
+        playMusic();
         document.getElementById('music').src = 'img/7_statusbars/3_icons/music-on.png';
     } else {
         muteMusic();
@@ -149,30 +149,43 @@ function playSound() {
 }
 
 /**
- * Toggles fullscreen mode for the game.
+ * Listens for changes in fullscreen status and updates the icon accordingly.
+ */
+document.addEventListener('fullscreenchange', updateFullscreenIcons);
+
+/**
+ * Updates the icon based on the fullscreen status.
+ * - If in fullscreen mode, it changes the icon to a 'close' image.
+ * - If not in fullscreen mode, it changes back to the 'maximize' image.
+ */
+function updateFullscreenIcons() {
+    let fullscreenIcon = document.getElementById('fullscreenToggle');
+    if (document.fullscreenElement) {
+        fullscreenIcon.src = 'img/7_statusbars/3_icons/close.png';
+    } else {
+        fullscreenIcon.src = 'img/7_statusbars/3_icons/maximize_02.png';
+    }
+}
+
+/**
+ * Toggles fullscreen mode for the document.
+ * - If not currently in fullscreen, requests fullscreen mode.
+ * - If in fullscreen, exits fullscreen mode.
  */
 function toggleFullscreen() {
-    let titleAndFullscreen = document.getElementById('canvas');
+    let doc = document.documentElement;
 
     if (!document.fullscreenElement) {
-        if (titleAndFullscreen.requestFullscreen) {
-            titleAndFullscreen.requestFullscreen();
-        } else if (titleAndFullscreen.webkitRequestFullscreen) { // Safari
-            titleAndFullscreen.webkitRequestFullscreen();
-        } else if (titleAndFullscreen.mozRequestFullScreen) { // Firefox
-            titleAndFullscreen.mozRequestFullScreen();
-        } else if (titleAndFullscreen.msRequestFullscreen) { // IE
-            titleAndFullscreen.msRequestFullscreen();
+        if (doc.requestFullscreen) {
+            doc.requestFullscreen().catch(err => {
+                console.error(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+            });
         }
     } else {
         if (document.exitFullscreen) {
-            document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) { // Safari
-            document.webkitExitFullscreen();
-        } else if (document.mozCancelFullScreen) { // Firefox
-            document.mozCancelFullScreen();
-        } else if (document.msExitFullscreen) { // IE
-            document.msExitFullscreen();
+            document.exitFullscreen().catch(err => {
+                console.error(`Error attempting to exit full-screen mode: ${err.message} (${err.name})`);
+            });
         }
     }
 }
@@ -235,7 +248,7 @@ function clearAllIntervals() {
  * Updates visibility of game elements based on device orientation and screen size.
  */
 function updateVisibility() {
-    const isMobile = window.innerWidth < 720 || window.innerHeight < 480;
+    const isMobile = window.innerWidth < 720 || window.innerHeight < 510;
     const isLandscape = window.innerWidth > window.innerHeight;
     const mobileButtons = document.getElementById('mobilebuttons');
     const description = document.getElementById('description');
