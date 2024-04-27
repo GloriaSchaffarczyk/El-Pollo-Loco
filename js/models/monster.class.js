@@ -9,20 +9,20 @@ class Monster extends MovableObject {
         left: 10
     }
     MONSTER_WALKING = [
-        'img2/3_enemies/monster/1_walk/monster_walk_06.png',
-        'img2/3_enemies/monster/1_walk/monster_walk_05.png',
-        'img2/3_enemies/monster/1_walk/monster_walk_04.png',
-        'img2/3_enemies/monster/1_walk/monster_walk_03.png',
-        'img2/3_enemies/monster/1_walk/monster_walk_02.png',
-        'img2/3_enemies/monster/1_walk/monster_walk_01.png',
+        'img/3_enemies/monster/1_walk/monster_walk_06.png',
+        'img/3_enemies/monster/1_walk/monster_walk_05.png',
+        'img/3_enemies/monster/1_walk/monster_walk_04.png',
+        'img/3_enemies/monster/1_walk/monster_walk_03.png',
+        'img/3_enemies/monster/1_walk/monster_walk_02.png',
+        'img/3_enemies/monster/1_walk/monster_walk_01.png',
     ];
     MONSTER_DYING = [
-        'img2/3_enemies/monster/2_dead/monster_dead_01.png',
-        'img2/3_enemies/monster/2_dead/monster_dead_02.png',
-        'img2/3_enemies/monster/2_dead/monster_dead_03.png',
-        'img2/3_enemies/monster/2_dead/monster_dead_04.png',
-        'img2/3_enemies/monster/2_dead/monster_dead_05.png',
-        'img2/3_enemies/monster/2_dead/monster_dead_06.png',
+        'img/3_enemies/monster/2_dead/monster_dead_01.png',
+        'img/3_enemies/monster/2_dead/monster_dead_02.png',
+        'img/3_enemies/monster/2_dead/monster_dead_03.png',
+        'img/3_enemies/monster/2_dead/monster_dead_04.png',
+        'img/3_enemies/monster/2_dead/monster_dead_05.png',
+        'img/3_enemies/monster/2_dead/monster_dead_06.png',
     ];
     animationSpeed;
     energy = 20;
@@ -31,7 +31,7 @@ class Monster extends MovableObject {
      * Constructs a monster in the game, capable of walking and dying animations.
      */
     constructor() {
-        super().loadImage('img2/3_enemies/monster/1_walk/monster_walk_01.png');
+        super().loadImage('img/3_enemies/monster/1_walk/monster_walk_01.png');
         this.loadImages(this.MONSTER_WALKING);
         this.loadImages(this.MONSTER_DYING);
         this.x = 570 + Math.random() * 10000;

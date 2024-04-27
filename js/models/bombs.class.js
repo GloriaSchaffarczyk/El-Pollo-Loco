@@ -3,8 +3,8 @@ class Bombs extends MovableObject {
     width = 50;
     height = 50;
     IMAGES_BOMBS = [
-        'img2/6_bombs/bomb_01.png',
-        'img2/6_bombs/bomb_02.png'
+        'img/6_bombs/bomb_01.png',
+        'img/6_bombs/bomb_02.png'
     ];
 
     /**

@@ -1,20 +1,20 @@
 class ThrowableObject extends MovableObject {
     accelerationY = 3.5;
     IMAGES_BOMBROTATION = [
-        'img2/6_bombs/bomb_rotation/bomb-rotation_01.png',
-        'img2/6_bombs/bomb_rotation/bomb-rotation_02.png',
-        'img2/6_bombs/bomb_rotation/bomb-rotation_03.png',
-        'img2/6_bombs/bomb_rotation/bomb-rotation_04.png',
+        'img/6_bombs/bomb_rotation/bomb-rotation_01.png',
+        'img/6_bombs/bomb_rotation/bomb-rotation_02.png',
+        'img/6_bombs/bomb_rotation/bomb-rotation_03.png',
+        'img/6_bombs/bomb_rotation/bomb-rotation_04.png',
     ];
     IMAGES_BOMBEXPLOSION = [
-        'img2/6_bombs/bomb_explosion/bomb-explosion_01.png',
-        'img2/6_bombs/bomb_explosion/bomb-explosion_02.png',
-        'img2/6_bombs/bomb_explosion/bomb-explosion_03.png',
-        'img2/6_bombs/bomb_explosion/bomb-explosion_04.png',
-        'img2/6_bombs/bomb_explosion/bomb-explosion_05.png',
-        'img2/6_bombs/bomb_explosion/bomb-explosion_06.png',
-        'img2/6_bombs/bomb_explosion/bomb-explosion_07.png',
-        'img2/6_bombs/bomb_explosion/bomb-explosion_08.png',
+        'img/6_bombs/bomb_explosion/bomb-explosion_01.png',
+        'img/6_bombs/bomb_explosion/bomb-explosion_02.png',
+        'img/6_bombs/bomb_explosion/bomb-explosion_03.png',
+        'img/6_bombs/bomb_explosion/bomb-explosion_04.png',
+        'img/6_bombs/bomb_explosion/bomb-explosion_05.png',
+        'img/6_bombs/bomb_explosion/bomb-explosion_06.png',
+        'img/6_bombs/bomb_explosion/bomb-explosion_07.png',
+        'img/6_bombs/bomb_explosion/bomb-explosion_08.png',
     ];
     hitEnemy = false;
     isExploded = false;
@@ -24,7 +24,7 @@ class ThrowableObject extends MovableObject {
      * Constructs a throwable object in the game, such as a bomb, with capabilities for animations of rotation and explosion.
      */
     constructor(x, y, direction) {
-        super().loadImage('img2/6_bombs/bomb_rotation/bomb-rotation_01.png',);
+        super().loadImage('img/6_bombs/bomb_rotation/bomb-rotation_01.png',);
         this.loadImages(this.IMAGES_BOMBROTATION);
         this.loadImages(this.IMAGES_BOMBEXPLOSION);
         this.x = x;

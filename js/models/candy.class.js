@@ -3,8 +3,8 @@ class Candy extends MovableObject {
     width = 50;
     height = 50;
     IMAGES_CANDY = [
-        'img2/8_candy/candy_01.png',
-        'img2/8_candy/candy_02.png'
+        'img/8_candy/candy_01.png',
+        'img/8_candy/candy_02.png'
     ];
 
     /**

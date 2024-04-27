@@ -1,11 +1,11 @@
 class StatusbarEndboss extends DrawableObject {
     IMAGES_STATUSBAR_ENDBOSS = [
-        'img2/7_statusbars/2_statusbar_endboss/statusbar-endboss_01.png',
-        'img2/7_statusbars/2_statusbar_endboss/statusbar-endboss_02.png',
-        'img2/7_statusbars/2_statusbar_endboss/statusbar-endboss_03.png',
-        'img2/7_statusbars/2_statusbar_endboss/statusbar-endboss_04.png',
-        'img2/7_statusbars/2_statusbar_endboss/statusbar-endboss_05.png',
-        'img2/7_statusbars/2_statusbar_endboss/statusbar-endboss_06.png',
+        'img/7_statusbars/2_statusbar_endboss/statusbar-endboss_01.png',
+        'img/7_statusbars/2_statusbar_endboss/statusbar-endboss_02.png',
+        'img/7_statusbars/2_statusbar_endboss/statusbar-endboss_03.png',
+        'img/7_statusbars/2_statusbar_endboss/statusbar-endboss_04.png',
+        'img/7_statusbars/2_statusbar_endboss/statusbar-endboss_05.png',
+        'img/7_statusbars/2_statusbar_endboss/statusbar-endboss_06.png',
     ];
     percentage = 100;
 
@@ -13,7 +13,7 @@ class StatusbarEndboss extends DrawableObject {
      * Constructs the status bar for the end boss, displaying the boss's health as an image based on a percentage.
      */
     constructor() {
-        super().loadImage('img2/7_statusbars/2_statusbar_endboss/statusbar-endboss_01.png');
+        super().loadImage('img/7_statusbars/2_statusbar_endboss/statusbar-endboss_01.png');
         this.loadImages(this.IMAGES_STATUSBAR_ENDBOSS);
         this.x = 480;
         this.y = 20;

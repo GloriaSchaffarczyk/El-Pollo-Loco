@@ -8,7 +8,7 @@ class Cloud extends MovableObject {
      * The cloud is given a random x-coordinate to vary its starting position across the game screen.
      */
     constructor() {
-        super().loadImage('img2/5_background/layers/4_clouds/clouds_01.png');
+        super().loadImage('img/5_background/layers/4_clouds/clouds_01.png');
 
         this.x = Math.random() * 6000;
         this.animate();

@@ -71,10 +71,10 @@ function toggleMusic() {
     isMusicOn = !isMusicOn;
     if (isMusicOn) {
         playMusic(); 
-        document.getElementById('music').src = 'img2/7_statusbars/3_icons/music-on.png';
+        document.getElementById('music').src = 'img/7_statusbars/3_icons/music-on.png';
     } else {
         muteMusic();
-        document.getElementById('music').src = 'img2/7_statusbars/3_icons/music-off.png';
+        document.getElementById('music').src = 'img/7_statusbars/3_icons/music-off.png';
     }
 }
 
@@ -85,10 +85,10 @@ function toggleSound() {
     isSoundOn = !isSoundOn;
     if (isSoundOn) {
         playSound();
-        document.getElementById('sound').src = 'img2/7_statusbars/3_icons/sound-on.png';
+        document.getElementById('sound').src = 'img/7_statusbars/3_icons/sound-on.png';
     } else {
         muteSound();
-        document.getElementById('sound').src = 'img2/7_statusbars/3_icons/sound-off_02.png';
+        document.getElementById('sound').src = 'img/7_statusbars/3_icons/sound-off_02.png';
     }
 }
 
@@ -185,7 +185,7 @@ function showVictoryScreen() {
     <div class="victory" id="victory">
         <div class="upper-victory-screen">
             <div class="upper-victory-screen-left">
-                <img src="img2/9_intro_outro_screens/game_over/victory.gif" alt="victory-gif">
+                <img src="img/9_intro_outro_screens/game_over/victory.gif" alt="victory-gif">
             </div>
             <div class="upper-victory-screen-right">
                 <h2>Congratulations, adventurer!</h2>

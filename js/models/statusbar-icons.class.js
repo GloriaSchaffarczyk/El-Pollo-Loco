@@ -1,10 +1,10 @@
 class StatusbarIcons extends DrawableObject {
     icons;
     category;
-    ICON_HEALTH = 'img2/7_statusbars/3_icons/health_02.png';
-    ICON_CANDY = 'img2/7_statusbars/3_icons/candy_02.png';
-    ICON_BOMBS = 'img2/7_statusbars/3_icons/bomb_02.png';
-    ICON_ENDBOSS = 'img2/7_statusbars/3_icons/skull.png';
+    ICON_HEALTH = 'img/7_statusbars/3_icons/health_02.png';
+    ICON_CANDY = 'img/7_statusbars/3_icons/candy_02.png';
+    ICON_BOMBS = 'img/7_statusbars/3_icons/bomb_02.png';
+    ICON_ENDBOSS = 'img/7_statusbars/3_icons/skull.png';
 
     /**
      * Creates an instance of an icon for the status bar.

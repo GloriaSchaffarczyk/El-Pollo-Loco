@@ -1,11 +1,11 @@
 class StatusbarHealth extends DrawableObject {
     IMAGES_HEALTH = [
-        'img2/7_statusbars/1_statusbar/2_statusbar_health/statusbar-health_01.png',
-        'img2/7_statusbars/1_statusbar/2_statusbar_health/statusbar-health_02.png',
-        'img2/7_statusbars/1_statusbar/2_statusbar_health/statusbar-health_03.png',
-        'img2/7_statusbars/1_statusbar/2_statusbar_health/statusbar-health_04.png',
-        'img2/7_statusbars/1_statusbar/2_statusbar_health/statusbar-health_05.png',
-        'img2/7_statusbars/1_statusbar/2_statusbar_health/statusbar-health_06.png',
+        'img/7_statusbars/1_statusbar/2_statusbar_health/statusbar-health_01.png',
+        'img/7_statusbars/1_statusbar/2_statusbar_health/statusbar-health_02.png',
+        'img/7_statusbars/1_statusbar/2_statusbar_health/statusbar-health_03.png',
+        'img/7_statusbars/1_statusbar/2_statusbar_health/statusbar-health_04.png',
+        'img/7_statusbars/1_statusbar/2_statusbar_health/statusbar-health_05.png',
+        'img/7_statusbars/1_statusbar/2_statusbar_health/statusbar-health_06.png',
     ];
     percentage = 100;
 
@@ -13,7 +13,7 @@ class StatusbarHealth extends DrawableObject {
      * Constructs the health status bar in the game, displaying the characters health as an image based on a percentage.
      */
     constructor() {
-        super().loadImage('img2/7_statusbars/1_statusbar/2_statusbar_health/statusbar-health_01.png');
+        super().loadImage('img/7_statusbars/1_statusbar/2_statusbar_health/statusbar-health_01.png');
         this.loadImages(this.IMAGES_HEALTH);
         this.x = 20;
         this.y = 10;

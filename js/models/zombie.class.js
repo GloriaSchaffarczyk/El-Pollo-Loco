@@ -9,20 +9,20 @@ class Zombie extends MovableObject {
         left: 20,
     }
     ZOMBIE_WALKING = [
-        'img2/3_enemies/zombie/1_walk/zombie_walk_01.png',
-        'img2/3_enemies/zombie/1_walk/zombie_walk_02.png',
-        'img2/3_enemies/zombie/1_walk/zombie_walk_03.png',
-        'img2/3_enemies/zombie/1_walk/zombie_walk_04.png',
-        'img2/3_enemies/zombie/1_walk/zombie_walk_05.png',
-        'img2/3_enemies/zombie/1_walk/zombie_walk_06.png',
+        'img/3_enemies/zombie/1_walk/zombie_walk_01.png',
+        'img/3_enemies/zombie/1_walk/zombie_walk_02.png',
+        'img/3_enemies/zombie/1_walk/zombie_walk_03.png',
+        'img/3_enemies/zombie/1_walk/zombie_walk_04.png',
+        'img/3_enemies/zombie/1_walk/zombie_walk_05.png',
+        'img/3_enemies/zombie/1_walk/zombie_walk_06.png',
     ];
     ZOMBIE_DYING = [
-        'img2/3_enemies/zombie/2_dead/zombie_dead_01.png',
-        'img2/3_enemies/zombie/2_dead/zombie_dead_02.png',
-        'img2/3_enemies/zombie/2_dead/zombie_dead_03.png',
-        'img2/3_enemies/zombie/2_dead/zombie_dead_04.png',
-        'img2/3_enemies/zombie/2_dead/zombie_dead_05.png',
-        'img2/3_enemies/zombie/2_dead/zombie_dead_06.png',
+        'img/3_enemies/zombie/2_dead/zombie_dead_01.png',
+        'img/3_enemies/zombie/2_dead/zombie_dead_02.png',
+        'img/3_enemies/zombie/2_dead/zombie_dead_03.png',
+        'img/3_enemies/zombie/2_dead/zombie_dead_04.png',
+        'img/3_enemies/zombie/2_dead/zombie_dead_05.png',
+        'img/3_enemies/zombie/2_dead/zombie_dead_06.png',
     ];
     animationSpeed;
     energy = 20;
@@ -31,7 +31,7 @@ class Zombie extends MovableObject {
      * Constructs a zombie character in the game, capable of walking and dying animations.
      */
     constructor() {
-        super().loadImage('img2/3_enemies/zombie/1_walk/zombie_walk_01.png');
+        super().loadImage('img/3_enemies/zombie/1_walk/zombie_walk_01.png');
         this.loadImages(this.ZOMBIE_WALKING);
         this.loadImages(this.ZOMBIE_DYING);
         this.x = 570 + Math.random() * 10000;

@@ -1,11 +1,11 @@
 class StatusbarBombs extends DrawableObject {
     IMAGES_BOMBS = [
-        'img2/7_statusbars/1_statusbar/3_statusbar_bombs/statusbar-bombs_01.png',
-        'img2/7_statusbars/1_statusbar/3_statusbar_bombs/statusbar-bombs_02.png',
-        'img2/7_statusbars/1_statusbar/3_statusbar_bombs/statusbar-bombs_03.png',
-        'img2/7_statusbars/1_statusbar/3_statusbar_bombs/statusbar-bombs_04.png',
-        'img2/7_statusbars/1_statusbar/3_statusbar_bombs/statusbar-bombs_05.png',
-        'img2/7_statusbars/1_statusbar/3_statusbar_bombs/statusbar-bombs_06.png',
+        'img/7_statusbars/1_statusbar/3_statusbar_bombs/statusbar-bombs_01.png',
+        'img/7_statusbars/1_statusbar/3_statusbar_bombs/statusbar-bombs_02.png',
+        'img/7_statusbars/1_statusbar/3_statusbar_bombs/statusbar-bombs_03.png',
+        'img/7_statusbars/1_statusbar/3_statusbar_bombs/statusbar-bombs_04.png',
+        'img/7_statusbars/1_statusbar/3_statusbar_bombs/statusbar-bombs_05.png',
+        'img/7_statusbars/1_statusbar/3_statusbar_bombs/statusbar-bombs_06.png',
     ];
     percentage = 0;
 
@@ -14,7 +14,7 @@ class StatusbarBombs extends DrawableObject {
      * 
      */
     constructor() {
-        super().loadImage('img2/7_statusbars/1_statusbar/3_statusbar_bombs/statusbar-bombs_01.png');
+        super().loadImage('img/7_statusbars/1_statusbar/3_statusbar_bombs/statusbar-bombs_01.png');
         this.loadImages(this.IMAGES_BOMBS);
         this.x = 20;
         this.y = 60;

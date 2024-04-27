@@ -1,11 +1,11 @@
 class StatusbarCandy extends DrawableObject {
     IMAGES_CANDY = [
-        'img2/7_statusbars/1_statusbar/1_statusbar_candy/statusbar-candy_01.png',
-        'img2/7_statusbars/1_statusbar/1_statusbar_candy/statusbar-candy_02.png',
-        'img2/7_statusbars/1_statusbar/1_statusbar_candy/statusbar-candy_03.png',
-        'img2/7_statusbars/1_statusbar/1_statusbar_candy/statusbar-candy_04.png',
-        'img2/7_statusbars/1_statusbar/1_statusbar_candy/statusbar-candy_05.png',
-        'img2/7_statusbars/1_statusbar/1_statusbar_candy/statusbar-candy_06.png',
+        'img/7_statusbars/1_statusbar/1_statusbar_candy/statusbar-candy_01.png',
+        'img/7_statusbars/1_statusbar/1_statusbar_candy/statusbar-candy_02.png',
+        'img/7_statusbars/1_statusbar/1_statusbar_candy/statusbar-candy_03.png',
+        'img/7_statusbars/1_statusbar/1_statusbar_candy/statusbar-candy_04.png',
+        'img/7_statusbars/1_statusbar/1_statusbar_candy/statusbar-candy_05.png',
+        'img/7_statusbars/1_statusbar/1_statusbar_candy/statusbar-candy_06.png',
     ];
     percentage = 0;
 
@@ -13,7 +13,7 @@ class StatusbarCandy extends DrawableObject {
      * Constructs the status bar for candy, displaying the amount of candy collected as an image based on a percentage.
      */
     constructor() {
-        super().loadImage('img2/7_statusbars/1_statusbar/1_statusbar_candy/statusbar-candy_01.png');
+        super().loadImage('img/7_statusbars/1_statusbar/1_statusbar_candy/statusbar-candy_01.png');
         this.loadImages(this.IMAGES_CANDY);
         this.x = 20;
         this.y = 35;
