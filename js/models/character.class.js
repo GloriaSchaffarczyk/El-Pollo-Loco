@@ -147,6 +147,9 @@ class Character extends MovableObject {
      * It also adjusts the camera's x-position based on the character's position.
      */
     updateState() {
+        if (this.hasDied) {
+            return;
+        }
         if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
             this.moveRight();
             this.otherDirection = false;

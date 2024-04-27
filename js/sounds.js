@@ -168,6 +168,7 @@ const sounds = {
         volume: 0.5,
         play: function () {
             if (isSoundOn) {
+                this.sound.loop = false;
             this.sound.volume = this.volume;
             this.sound.play();
             }

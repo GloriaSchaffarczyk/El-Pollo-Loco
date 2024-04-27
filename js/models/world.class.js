@@ -168,7 +168,7 @@ class World {
      */
     checkCollisionsWithZombies() {
         this.level.zombies.forEach(zombie => {
-            if (this.character.isColliding(zombie) && !this.character.isAboveGround()) {
+            if (this.character.isColliding(zombie) && !this.character.isAboveGround() && !this.character.hasDied) {
                 this.character.enemyHit();
                 this.updateHealthStatusBar();
                 sounds.hurtSound.play();
@@ -181,7 +181,7 @@ class World {
      */
     checkCollisionsWithMonsters() {
         this.level.monsters.forEach(monster => {
-            if (this.character.isColliding(monster) && !this.character.isAboveGround()) {
+            if (this.character.isColliding(monster) && !this.character.isAboveGround()&& !this.character.hasDied) {
                 this.character.enemyHit();
                 this.updateHealthStatusBar();
                 sounds.hurtSound.play();
@@ -194,7 +194,7 @@ class World {
      */
     checkCollisionsWithEndboss() {
         this.level.endboss.forEach(endboss => {
-            if (this.character.isColliding(endboss)) {
+            if (this.character.isColliding(endboss) && !this.character.hasDied) {
                 this.character.endbossHit();
                 this.updateHealthStatusBar();
                 sounds.hurtSound.play();
