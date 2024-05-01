@@ -254,7 +254,7 @@ function updateVisibility() {
     const description = document.getElementById('description');
     const rotateDeviceMessage = document.getElementById('rotateDeviceMessage');
 
-    rotateDeviceMessage.classList.toggle('d-none', isLandscape);
+    rotateDeviceMessage.classList.toggle('d-none', !(isMobile && !isLandscape));
     let showMobileButtons = false;
     let showDescription = false;
 
