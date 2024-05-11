@@ -220,7 +220,7 @@ function showVictoryScreen() {
     `
 }
 
-// comment to test git
+// comment to test git 2
 
 /**
  * Displays the defeat screen upon losing the game.
